@@ -4,9 +4,9 @@ public class CityMap {
     public int width;
     public int height;
 
-    public(int new_width, int new_height){
+    public Main(int new_width, int new_height){
      width = new_width;
-     height = this.height;
+     height = new_height;
     }
     public static void main(Stringargs[])
 
