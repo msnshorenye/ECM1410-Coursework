@@ -1,3 +1,4 @@
+import java.util.Arrays;
 package cityrescue;
 
 public class CityMap {
@@ -9,16 +10,16 @@ public class CityMap {
     CityMap(int width, int height){
      this.width = width;
      this.height = height;
-     String[][] grid = grid;
+     this.grid = new String[height][width];
     }
 
-    public new int[] getGridSize(){
+    public int [] getGridSize(){
 
     return new int [] {this.width, this.height};
     }
-    public newcreategrid(){
+    public String[][] newcreategrid(){
         this.grid = new String[this.height][this.width];
-        system.out.println(this.grid);
+        System.out.println(this.grid);
         return this.grid;
         // for (int i = 0; i<= this.height; i++){
         //     for (int y = 0; y<= this.width; y++){
@@ -26,11 +27,16 @@ public class CityMap {
         //     }
         //     system.out.println(this.grid)
         }
+
     
     public static void main(String[] args) {
-          the_city_map = new CityMap(args[0],args[1]);
+          int width = Integer.parseInt(args[0]);
+          int height = Integer.parseInt(args[1]);
+        
+          CityMap the_city_map = new CityMap(width, height);
           int[] size = the_city_map.getGridSize();
-          system.out.println(size);
+          
+          System.out.println(size);
     }
           
 
