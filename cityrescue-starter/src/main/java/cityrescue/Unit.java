@@ -2,20 +2,44 @@ package cityrescue;
 
 abstract class Unit {
     int ticks = 0;
-    string TYPE
+    String TYPE;
+    int xloc;
+    int yloc;
+    String STATUS;
+    int INCIDENT=-1;
+    int WORK;
 
-    
-    public abstract boolean canHandle(IncidentType type);
+    public void main(String[] args) {
+        System.out.println(TYPE+ticks);
+    }
+    //public abstract boolean canHandle(IncidentType type);
 }
 
-class Ambulance extends Unit{
-    int ticks = 2;
+class AMBULANCE extends Unit{
+    AMBULANCE(){
+    this.ticks = 2;
+    this.TYPE = "Ambulance";
+    }
     
 }
 
 class POLICE_CAR extends Unit{
-    int ticks = 3;
+    POLICE_CAR(){
+    this.ticks = 3;
+    this.TYPE = "POLICE_CAR";
+    }
 }
-abstract class FIRE_ENGINE extends Unit{
-    int ticks = 4;
+class FIRE_ENGINE extends Unit{
+    FIRE_ENGINE(){
+    this.ticks = 4;
+    this.TYPE = "FIRE_ENGINE";
+    }
+    public void main(String[] args) {
+        FIRE_ENGINE fire = new FIRE_ENGINE();
+        fire.get_data();
+    }
+    public void get_data(){
+        System.out.println(TYPE+ticks);
+    }
+
 }
