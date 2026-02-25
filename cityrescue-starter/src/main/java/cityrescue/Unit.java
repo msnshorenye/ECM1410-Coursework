@@ -2,7 +2,7 @@ package cityrescue;
 
 abstract class Unit {
     int ticks = 0;
-    String TYPE;
+    private UnitType type;
     int xloc;
     int yloc;
     String STATUS;
@@ -12,24 +12,24 @@ abstract class Unit {
     public void main(String[] args) {
         System.out.println(TYPE+ticks);
     }
+
     //public abstract boolean canHandle(IncidentType type);
 }
 
-class AMBULANCE extends Unit{
-    AMBULANCE(){
-    this.ticks = 2;
-    this.TYPE = "Ambulance";
+class Ambulance extends Unit{
+    public void main(String[] args) {
+        System.out.println("hello");
     }
     
 }
 
-class POLICE_CAR extends Unit{
+class police_car extends Unit{
     POLICE_CAR(){
     this.ticks = 3;
     this.TYPE = "POLICE_CAR";
     }
 }
-class FIRE_ENGINE extends Unit{
+class fire_engine extends Unit{
     FIRE_ENGINE(){
     this.ticks = 4;
     this.TYPE = "FIRE_ENGINE";

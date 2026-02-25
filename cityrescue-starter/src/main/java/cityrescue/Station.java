@@ -15,16 +15,39 @@ public class Station{
         this.y = y;
         this.stationname = stationname;
         this.stationmaxcapacity = 10;
+        
         this.id = NextId++;
         this.currentcapacity = 0;
 
     }
-    public int getId(){
+    public int GetId(){
         return this.id;
+    }
     
-    public int [] addunit(){
+    public bool AddUnit(){
+        if (this.currentcapacity >= this.station){
+            return false;
+        }
+        else{
+            this.currentcapacity += 1;
+            return true;
+        }
+    }
+    
+    public int RemoveUnit(){
+        this.currentcapacity -= 1;
+        return this.currentcapacity;
+    }
+    
+    public bool setCapacity(int capacity){
+        if (capacity >= 0){
+            this.stationmaxcapacity = capacity;
+            return true;
+        }
+        else{
+            return false;
+        }
         
     }
     }
 
-}

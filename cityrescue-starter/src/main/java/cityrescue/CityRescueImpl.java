@@ -64,6 +64,20 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public int addUnit(int stationId, UnitType type) throws IDNotRecognisedException, InvalidUnitException, IllegalStateException {
         // TODO: implement
+        switch(type) {
+        case AMBULANCE:
+            Ambulance unit = new Ambulance(stationId);
+            System.out.println(unit);
+            break;
+        case FIRE_ENGINE:
+            FIRE_ENGINE unit = new main(int stationId);
+            System.out.println(unit);
+            break;
+        case POLICE_CAR:
+            POLICE_CAR unit = new main(int stationId);
+            System.out.println(unit);
+            break;
+        }
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
