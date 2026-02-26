@@ -24,7 +24,7 @@ public class Station{
         return this.id;
     }
     
-    public bool AddUnit(){
+    public boolean AddUnit(){
         if (this.currentcapacity >= this.station){
             return false;
         }
@@ -39,7 +39,7 @@ public class Station{
         return this.currentcapacity;
     }
     
-    public bool setCapacity(int capacity){
+    public boolean setCapacity(int capacity){
         if (capacity >= 0){
             this.stationmaxcapacity = capacity;
             return true;
@@ -47,7 +47,10 @@ public class Station{
         else{
             return false;
         }
+    
+    public int [] GetCoords(){
         
+    }
     }
     }
 

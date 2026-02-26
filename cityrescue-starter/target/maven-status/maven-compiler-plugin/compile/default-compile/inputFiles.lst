@@ -1,6 +1,7 @@
 /workspaces/ECM1410-Coursework/cityrescue-starter/src/main/java/cityrescue/CityMap.java
 /workspaces/ECM1410-Coursework/cityrescue-starter/src/main/java/cityrescue/CityRescue.java
 /workspaces/ECM1410-Coursework/cityrescue-starter/src/main/java/cityrescue/CityRescueImpl.java
+/workspaces/ECM1410-Coursework/cityrescue-starter/src/main/java/cityrescue/Incident.java
 /workspaces/ECM1410-Coursework/cityrescue-starter/src/main/java/cityrescue/Station.java
 /workspaces/ECM1410-Coursework/cityrescue-starter/src/main/java/cityrescue/Unit.java
 /workspaces/ECM1410-Coursework/cityrescue-starter/src/main/java/cityrescue/enums/IncidentStatus.java

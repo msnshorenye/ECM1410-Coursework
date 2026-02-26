@@ -8,31 +8,43 @@ abstract class Unit {
     String STATUS;
     int INCIDENT=-1;
     int WORK;
-
-    public void main(String[] args) {
-        System.out.println(TYPE+ticks);
-    }
-
+    public int UnitID = 1;
+    int Stationid;
     //public abstract boolean canHandle(IncidentType type);
 }
 
 class Ambulance extends Unit{
-    public void main(String[] args) {
-        System.out.println("hello");
+    AMBULANCE(int Stationid){
+        this.UnitID = UnitID++;
+        this.ticks = 3;
+        this.TYPE = UnitType.POLICE_CAR;
+        this.Stationid = Stationid;
+        this.STATUS = "IDLE"
+    }   
+    public void set_station(int StatID){
+        this.Stationid = StatID;
     }
-    
 }
 
-class police_car extends Unit{
-    POLICE_CAR(){
-    this.ticks = 3;
-    this.TYPE = "POLICE_CAR";
+class Police_car extends Unit{
+    POLICE_CAR(int Stationid){
+        this.UnitID = UnitID++;
+        this.ticks = 3;
+        this.TYPE = UnitType.POLICE_CAR;
+        this.Stationid = Stationid;
+        this.STATUS = "IDLE";
+    }
+    public void set_station(int StatID){
+        this.Stationid = StatID;
     }
 }
-class fire_engine extends Unit{
-    FIRE_ENGINE(){
-    this.ticks = 4;
-    this.TYPE = "FIRE_ENGINE";
+class Fire_engine extends Unit{
+    FIRE_ENGINE(int Stationid){
+        this.UnitID = UnitID++;
+        this.ticks = 4;
+        this.TYPE = UnitType.FIRE_ENGINE; 
+        this.Stationid = Stationid;
+        this.STATUS = "IDLE"
     }
     public void main(String[] args) {
         FIRE_ENGINE fire = new FIRE_ENGINE();
@@ -41,5 +53,8 @@ class fire_engine extends Unit{
     public void get_data(){
         System.out.println(TYPE+ticks);
     }
-
+    public void set_station(int StatID){
+        this.Stationid = StatID;
+    }
+    
 }
