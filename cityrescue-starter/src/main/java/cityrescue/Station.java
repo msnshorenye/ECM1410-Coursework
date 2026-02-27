@@ -48,9 +48,6 @@ public class Station{
             return false;
         }
     
-    public int [] GetCoords(){
-        
-    }
     }
     }
 

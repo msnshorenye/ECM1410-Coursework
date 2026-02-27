@@ -8,27 +8,32 @@ abstract class Unit {
     String STATUS;
     int INCIDENT=-1;
     int WORK;
-    public int UnitID = 1;
+    public final int UnitID;
+    public static int NextID = 1;
     int Stationid;
     //public abstract boolean canHandle(IncidentType type);
 }
 
 class Ambulance extends Unit{
     AMBULANCE(int Stationid){
-        this.UnitID = UnitID++;
+        this.UnitID = NextID++;
         this.ticks = 3;
         this.TYPE = UnitType.POLICE_CAR;
         this.Stationid = Stationid;
-        this.STATUS = "IDLE"
+        this.STATUS = "IDLE";
+
     }   
     public void set_station(int StatID){
         this.Stationid = StatID;
+    }
+     public int get_unit_id(){
+        return this.UnitID;
     }
 }
 
 class Police_car extends Unit{
     POLICE_CAR(int Stationid){
-        this.UnitID = UnitID++;
+        this.UnitID = NextID++;
         this.ticks = 3;
         this.TYPE = UnitType.POLICE_CAR;
         this.Stationid = Stationid;
@@ -37,14 +42,17 @@ class Police_car extends Unit{
     public void set_station(int StatID){
         this.Stationid = StatID;
     }
+     public int get_unit_id(){
+        return this.UnitID;
+    }
 }
 class Fire_engine extends Unit{
     FIRE_ENGINE(int Stationid){
-        this.UnitID = UnitID++;
+        this.UnitID = NextID++;
         this.ticks = 4;
         this.TYPE = UnitType.FIRE_ENGINE; 
         this.Stationid = Stationid;
-        this.STATUS = "IDLE"
+        this.STATUS = "IDLE";
     }
     public void main(String[] args) {
         FIRE_ENGINE fire = new FIRE_ENGINE();
@@ -56,5 +64,9 @@ class Fire_engine extends Unit{
     public void set_station(int StatID){
         this.Stationid = StatID;
     }
+    public int get_unit_id(){
+        return this.UnitID;
+    }
+
     
 }
