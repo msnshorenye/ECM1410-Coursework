@@ -25,7 +25,8 @@ public class Station{
     }
     
     public boolean AddUnit(){
-        if (this.currentcapacity >= this.station){
+        if (this.currentcapacity >= this
+            .stationId){
             return false;
         }
         else{

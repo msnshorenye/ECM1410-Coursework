@@ -1,13 +1,16 @@
 package cityrescue;
-
 import cityrescue.enums.*;
 import cityrescue.exceptions.*;
-import CityMap.Citymap;
-import Station.Station;
-import Unit.*;
-import Incident.Incident;
+import cityrescue.CityMap;
+import cityrescue.Station;
+import cityrescue.Unit;
+import cityrescue.Incident;
 import java.util.Arrays;
 import java.util.Dictionary;
+import cityrescue.Ambulance;
+import cityrescue.Police_car;
+import cityrescue.Fire_engine;
+import java.util.Comparator;
 /**
  * CityRescueImpl (Starter)
  *
@@ -34,13 +37,7 @@ public class CityRescueImpl implements CityRescue {
     public CityRescueImpl(int width, int height){
         this.Stationarray = new Station[Max_Stations];
         this.Incidentarray = new Incident[Max_incidents];
-        this.Unitarray = new Unit[Max_units];
-    
-
-
-
-
-        
+        this.Unitarray = new Unit[Max_units]; 
     }
 
     @Override
@@ -48,13 +45,13 @@ public class CityRescueImpl implements CityRescue {
 
 
         // TODO: implement
-        this.tick = 0;
+        this.ticks = 0;
         this.TheMap = new CityMap(width, height);
         this.Obstaclearray = new String[width][height];
         
         
         TheMap.newcreategrid();
-        Rescue_map = this.TheMap.grid;
+        String[][]Rescue_map = this.TheMap.grid;
 
 
         throw new UnsupportedOperationException("Not implemented yet");
@@ -67,7 +64,7 @@ public class CityRescueImpl implements CityRescue {
 
         return Gridsize;
 
-        throw new UnsupportedOperationException("Not implemented yet");
+        //throw new UnsupportedOperationException("Not implemented yet");
     }
 
     @Override
@@ -87,14 +84,16 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public int addStation(String name, int x, int y) throws InvalidNameException, InvalidLocationException {
         // TODO: implement
-         for(i=0;i=Incidentarray.length;i++){
-            if (Incidendarray[i].isequal(null)){
+         for(int i=0;i<=this.Incidentarray.length;i++){
+            if (this.Incidentarray[i].equals(null)){
+                int length = i;
+                Station Newstation = new Station(x,y,name);
+                this.Stationarray[length] = Newstation;
+                
+
                 break;
             }
-        Station Newstation = new Station(x,y,name);
-        this.Stationarray[i] = Newstation;
-
-        
+        }
         
         throw new UnsupportedOperationException("Not implemented yet");
 
@@ -103,9 +102,9 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public void removeStation(int stationId) throws IDNotRecognisedException, IllegalStateException {
         // TODO: implement
-        for (int x = 0; x<=this.Stationarray.length; i++){
-            if (this.Stationarray[i].getid() == stationId){
-                this.Stationarray[i] = null;
+        for (int x = 0; x<=this.Stationarray.length; x++){
+            if (this.Stationarray[x].GetId() == stationId){
+                this.Stationarray[x] = null;
             }
         }
         
@@ -115,9 +114,10 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public void setStationCapacity(int stationId, int maxUnits) throws IDNotRecognisedException, InvalidCapacityException {
         // TODO: implement
-        for (int x = 0; x<=this.Stationarray.length; i++){
-            if (this.Stationarray[i].getid() == stationId){
-                this.Stationarray[i].stationmaxcapacity = maxUnits;
+        for (int x = 0; x<=this.Stationarray.length; x++){
+
+            if (this.Stationarray[x].GetId() == stationId){
+                this.Stationarray[x].stationmaxcapacity = maxUnits;
             }
         }
         throw new UnsupportedOperationException("Not implemented yet");
@@ -127,8 +127,8 @@ public class CityRescueImpl implements CityRescue {
     public int[] getStationIds() {
         int [] stationIdlist = new int[this.Stationarray.length];
         for (int i = 0; i <= this.Stationarray.length; i++){
-            current_station = Stationarray[i];
-            stationIdlist[i] = current_station.getid();
+            Station current_station = Stationarray[i];
+            stationIdlist[i] = current_station.GetId();
         }
             
         // TODO: implement
@@ -139,53 +139,59 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public int addUnit(int stationId, UnitType type) throws IDNotRecognisedException, InvalidUnitException, IllegalStateException {
         // TODO: implement
-        for(i=0;i=Unitarray.length;i++){
-            if (Unitarray[i].isequal(null)){
+        for(int i=0;i<=Unitarray.length;i++){
+            if (Unitarray[i].equals(null)){
+                int length = i;
+                switch(type) {
+                    case UnitType.AMBULANCE:
+                        this.Unitarray[length] = new Ambulance(stationId);
+                        System.out.println("HE::O");
+                        break;
+                    case UnitType.FIRE_ENGINE:
+                        this.Unitarray[length] = new Fire_engine(stationId);
+                        System.out.println("HE::O");
+                        break;
+                    case UnitType.POLICE_CAR:
+                        this.Unitarray[length] = new Police_car(stationId);
+                        System.out.println("HE::O");
+                        break;
+                }
                 break;
             }
         }
-        int length = i;
-        switch(type) {
-        case AMBULANCE:
-            this.Unitarray[length+1] = new Ambulance(stationId);
-            System.out.println("HE::O");
-            break;
-        case FIRE_ENGINE:
-            this.Unitarray[length+1] = new Fire_engine(stationId);
-            System.out.println("HE::O");
-            break;
-        case POLICE_CAR:
-            this.Unitarray[length+1] = new POLICE_CAR(stationId);
-            System.out.println("HE::O");
-            break;
-        }
+        
+
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
     @Override
     public void decommissionUnit(int unitId) throws IDNotRecognisedException, IllegalStateException {
         // TODO: implement
-    for (int x = 0; x=this.Unitarray.length; x++){
-            if (this.Unitarray[x].equals(unitId)){
-                String status = Unitarray[unitId].STATUS;
+    for (int x = 0; x<=this.Unitarray.length; x++){
+            if (this.Unitarray[x] == null){
+                UnitStatus status = this.Unitarray[unitId].STATUS;
+            if (!status.equals(UnitStatus.EN_ROUTE) && !status.equals(UnitStatus.AT_SCENE)){
+            this.Unitarray[unitId] = null;
+        }
                 break;
             }
         }
 
-        if (!status.equals("EN_ROUTE") || !status.equals("AT_SCENE")){
-            this.unitarray[unitId] = null;
-        }
+        
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
     @Override
     public void transferUnit(int unitId, int newStationId) throws IDNotRecognisedException, IllegalStateException {
         // TODO: implement
-        for (int x = 0; x=this.Unitarray.length; x++){
-            if (this.Unitarray[x].getid() == unitId){
-                this.Unitarray[x].Stationid = newStationId;
+        for (int x = 0; x<=this.Unitarray.length; x++){
+            if (this.Unitarray[x] == null){
+                if (this.Unitarray[x].UnitID == unitId){
+                    this.Unitarray[x].Stationid = newStationId;
+                }
             }
         }
+        
 
         throw new UnsupportedOperationException("Not implemented yet");
     }
@@ -195,13 +201,13 @@ public class CityRescueImpl implements CityRescue {
     public void setUnitOutOfService(int unitId, boolean outOfService) throws IDNotRecognisedException, IllegalStateException {
         //TODO:implement
         if (outOfService == true){
-            for (int x = 0; x=this.Unitarray.length; x++){
-                if (this.Unitarray[x].get_unit_id() == unitId && this.Unitarray[x].STATUS == UnitStatus.IDLE){
+            for (int x = 0; x<=this.Unitarray.length; x++){
+                if (this.Unitarray[x].UnitID == unitId && this.Unitarray[x].STATUS == UnitStatus.IDLE){
                     this.Unitarray[x].STATUS = UnitStatus.OUT_OF_SERVICE;}
                 }}
         else{
-            for (int x = 0; x=this.Unitarray.length; x++){
-                if (this.Unitarray[x].get_unit_id() == unitId){
+            for (int x = 0; x<= this.Unitarray.length; x++){
+                if (this.Unitarray[x].UnitID == unitId){
                     this.Unitarray[x].STATUS = UnitStatus.IDLE;
                 }
             }
@@ -212,12 +218,12 @@ public class CityRescueImpl implements CityRescue {
     }
 
     @Override
-    public int[] getUnitIds() {
+    public int[] getUnitIds(int type) {
         // TODO: implement
-        int [] UNitIdlist = new int[this.UNitIdlist.length];
+        int [] UNitIdlist = new int[this.Unitarray.length];
         for (int i = 0; i <= this.Unitarray.length; i++){
-            Unit current_unit = Unitarray[i];
-            UNitIdlist[i] = current_unit.getid();
+            int length = i;
+            UNitIdlist[i] = this.Unitarray[i].get_unit_id();
         }
             
         // TODO: implement
@@ -235,22 +241,23 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public int reportIncident(IncidentType type, int severity, int x, int y) throws InvalidSeverityException, InvalidLocationException {
         // TODO: implement
-        for(i=0;i=Incidentarray.length;i++){
-            if (Incidendarray[i].equals(null)){
+        for(int i=0;i<=Incidentarray.length;i++){
+            if (Incidentarray[i].equals(null)){
+                int length = i;
+                this.Incidentarray[length] = new Incident(x,y,type,severity);
+                return this.Incidentarray[length].getincidentid();
                 break;
             }
         }
-        this.Incidentarray[i] = new Incident(x,y,type,severity);
-        return i;
         //throw new UnsupportedOperationException("Not implemented yet");
     }
 
     @Override
     public void cancelIncident(int incidentId) throws IDNotRecognisedException, IllegalStateException {
         // TODO: implement
-        for (int x = 0; x<=this.length; x++){
-            if (this.Incidentarray[i].getid() == incidentId){
-                this.Incidentarray[i].cancelIncident(IncidentStatus.CANCELLED);
+        for (int x = 0; x<=this.Incidentarray.length; x++){
+            if ((this.Incidentarray[x].getincidentid()).equals(incidentId)){
+                this.Incidentarray[x].CancelIncidentstatus(IncidentStatus.CANCELLED);
             }
         }
 
@@ -260,14 +267,15 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public void escalateIncident(int incidentId, int newSeverity) throws IDNotRecognisedException, InvalidSeverityException, IllegalStateException {
         // TODO: implement
-        for(i=0;i=Incidentarray.length;i++){
-            if (Incidendarray[i].isequal(incidentId)){
+        for(int i=0;i<=Incidentarray.length;i++){
+            if (this.Incidentdarray[i].getincidentid.equals(incidentId)){
                 this.Incidentarray[i].severity = newSeverity;
                 break;
             }
-        
+        }
         throw new UnsupportedOperationException("Not implemented yet");
     }
+
 
     @Override
     public int[] getIncidentIds() {
@@ -275,13 +283,14 @@ public class CityRescueImpl implements CityRescue {
         int [] Incidentidlist = new int[this.Incidentarray.length];
         for (int i = 0; i <= this.Incidentarray.length; i++){
             Incident current_Incident = Incidentarray[i];
-            IncidentIdlist[i] = current_Incident.getincidentid();
+            Incidentidlist[i] = current_Incident.getincidentid();
+
                    
         }
-         Arrays.sort(Incidentidlist, Comparator.nullsLast(Comparator.naturalOrder()));
+         Incidentidlist = Arrays.sort(Incidentidlist, Comparator.nullsLast(Comparator.naturalOrder()));
 
         // TODO: implement
-        return incidentIdlist;
+        return Incidentidlist;
         
         throw new UnsupportedOperationException("Not implemented yet");
     }
@@ -289,17 +298,18 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public String viewIncident(int incidentId) throws IDNotRecognisedException {
         // TODO: implement
-        for (i=0;i=this.Incidentarray.length;i++){
+        for (int i=0;i<=this.Incidentarray.length;i++){
                 System.err.println(Incidentarray[i].incidentview());
             }
-        }
+        
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
     @Override
     public void dispatch() {
         // TODO: implement
-        Incidentlist = getincidentid();
+        //Incidentlist = getIncidentIds();
+        
         
 
         throw new UnsupportedOperationException("Not implemented yet");

@@ -19,7 +19,7 @@ public class Incident {
         this.Type = Type;
         this.IncidentID = NextIncidentID++;
         this.severity = severity;
-        this.UnitID = null;
+        
 
 
     }
@@ -40,7 +40,7 @@ public class Incident {
         return this.severity;
 
     }
-    public getincidentid(){
+    public int getincidentid(){
         return this.IncidentID;
 
     }
@@ -52,4 +52,4 @@ public class Incident {
     }
 
 
-}
+
