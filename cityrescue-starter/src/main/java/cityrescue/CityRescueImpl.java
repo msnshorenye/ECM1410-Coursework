@@ -143,16 +143,20 @@ public class CityRescueImpl implements CityRescue {
             if (Unitarray[i].equals(null)){
                 int length = i;
                 switch(type) {
-                    case UnitType.AMBULANCE:
-                        this.Unitarray[length] = new Ambulance(stationId);
+                    case AMBULANCE:
+                        Ambulance ambulance = new Ambulance(stationId);
+                        this.Unitarray[length] = ambulance;
+
                         System.out.println("HE::O");
                         break;
-                    case UnitType.FIRE_ENGINE:
-                        this.Unitarray[length] = new Fire_engine(stationId);
+                    case FIRE_ENGINE:
+                        Fire_engine fire_engine = new Fire_engine(stationId);
+                        this.Unitarray[length] = fire_engine;
                         System.out.println("HE::O");
                         break;
-                    case UnitType.POLICE_CAR:
-                        this.Unitarray[length] = new Police_car(stationId);
+                    case POLICE_CAR:
+                        Police_car police = new Police_car(stationId);
+                        this.Unitarray[length] = police;
                         System.out.println("HE::O");
                         break;
                 }
@@ -218,12 +222,31 @@ public class CityRescueImpl implements CityRescue {
     }
 
     @Override
-    public int[] getUnitIds(int type) {
+    public int[] getUnitIds() {
         // TODO: implement
         int [] UNitIdlist = new int[this.Unitarray.length];
         for (int i = 0; i <= this.Unitarray.length; i++){
             int length = i;
-            UNitIdlist[i] = this.Unitarray[i].get_unit_id();
+                switch(this.UNitIdlist[length].TYPE) {
+                    case AMBULANCE:
+                        Ambulance ambulance = new Ambulance(stationId);
+                        this.Unitarray[length] = ambulance;
+
+                        System.out.println("HE::O");
+                        break;
+                    case FIRE_ENGINE:
+                        Fire_engine fire_engine = new Fire_engine(stationId);
+                        this.Unitarray[length] = fire_engine;
+                        System.out.println("HE::O");
+                        break;
+                    case POLICE_CAR:
+                        Police_car police = new Police_car(stationId);
+                        this.Unitarray[length] = police;
+                        System.out.println("HE::O");
+                        break;
+                }
+            int neededid = currentid.get_unit_id();
+            UNitIdlist[i] = neededid;
         }
             
         // TODO: implement
@@ -244,11 +267,12 @@ public class CityRescueImpl implements CityRescue {
         for(int i=0;i<=Incidentarray.length;i++){
             if (Incidentarray[i].equals(null)){
                 int length = i;
-                this.Incidentarray[length] = new Incident(x,y,type,severity);
-                return this.Incidentarray[length].getincidentid();
+                Incident newinci = new Incident(x,y,type,severity);
+                this.Incidentarray[length] = newinci;
                 break;
             }
         }
+        return 0;
         //throw new UnsupportedOperationException("Not implemented yet");
     }
 
@@ -256,7 +280,7 @@ public class CityRescueImpl implements CityRescue {
     public void cancelIncident(int incidentId) throws IDNotRecognisedException, IllegalStateException {
         // TODO: implement
         for (int x = 0; x<=this.Incidentarray.length; x++){
-            if ((this.Incidentarray[x].getincidentid()).equals(incidentId)){
+            if ((this.Incidentarray[x].getincidentid()) == incidentId){
                 this.Incidentarray[x].CancelIncidentstatus(IncidentStatus.CANCELLED);
             }
         }
@@ -267,8 +291,9 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public void escalateIncident(int incidentId, int newSeverity) throws IDNotRecognisedException, InvalidSeverityException, IllegalStateException {
         // TODO: implement
-        for(int i=0;i<=Incidentarray.length;i++){
-            if (this.Incidentdarray[i].getincidentid.equals(incidentId)){
+        for(int i=0;i<=this.Incidentarray.length;i++){
+            int needid = this.Incidentdarray[i].getincidentid();
+            if (needid == incidentId){
                 this.Incidentarray[i].severity = newSeverity;
                 break;
             }

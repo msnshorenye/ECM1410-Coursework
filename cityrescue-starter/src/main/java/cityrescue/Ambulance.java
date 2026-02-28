@@ -3,7 +3,7 @@ import cityrescue.Unit;
 import cityrescue.enums.UnitType;
 import cityrescue.enums.UnitStatus;
 class Ambulance extends Unit{
-    void AMBULANCE(int Stationid){
+    public Ambulance(int Stationid){
         this.UnitID = NextID++;
         this.ticks = 3;
         this.TYPE = UnitType.POLICE_CAR;
