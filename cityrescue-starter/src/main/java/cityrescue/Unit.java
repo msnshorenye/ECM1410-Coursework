@@ -5,10 +5,10 @@ import cityrescue.enums.UnitStatus;
 abstract class Unit {
     int ticks = 0;
     public UnitType TYPE;
-    int xloc;
-    int yloc;
+    public int xloc;
+    public int yloc;
     public UnitStatus STATUS;
-    int INCIDENT=-1;
+    public int AssignedIncidentId=-1;
     int WORK;
     public int UnitID;
     public static int NextID = 1;

@@ -7,7 +7,7 @@ public class CityMap {
     public String[][] grid;
     
     
-    CityMap(int width, int height){
+    public CityMap(int width, int height){
      this.width = width;
      this.height = height;
      this.grid = new String[height][width];

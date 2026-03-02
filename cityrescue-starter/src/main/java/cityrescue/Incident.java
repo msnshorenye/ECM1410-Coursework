@@ -11,6 +11,7 @@ public class Incident {
     private static int NextIncidentID = 1;
     private final int IncidentID;
     public int severity;
+    public int Unitid;
     
     public Incident(int x, int y, IncidentType Type, int severity ){
         this.x = x;
@@ -19,6 +20,7 @@ public class Incident {
         this.Type = Type;
         this.IncidentID = NextIncidentID++;
         this.severity = severity;
+        this.Unitid = 0;
         
 
 
@@ -45,7 +47,7 @@ public class Incident {
 
     }
     public String incidentview(){
-        String view_string = "Incident" + this.IncidentID + " TYPE=" + this.Type + " SEV=" + this.severity + "LOC=(" + this.x +"," + this.y + ") STATUS=" + this.status +"UNIT=" + this.UnitID;
+        String view_string = "I# " + this.IncidentID + " TYPE=" + this.Type + " SEV=" + this.severity + "LOC=(" + this.x +"," + this.y + ") STATUS=" + this.status +"UNIT=" + this.Unitid;
         return view_string;
     }
         

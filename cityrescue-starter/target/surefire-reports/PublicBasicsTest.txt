@@ -1,0 +1,20 @@
+-------------------------------------------------------------------------------
+Test set: PublicBasicsTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.066 s <<< FAILURE! -- in PublicBasicsTest
+PublicBasicsTest.addObstacle_outOfBounds_throws_andStateUnchanged -- Time elapsed: 0.031 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <cityrescue.exceptions.InvalidLocationException> but was: <java.lang.ArrayIndexOutOfBoundsException>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at PublicBasicsTest.addObstacle_outOfBounds_throws_andStateUnchanged(PublicBasicsTest.java:40)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+Caused by: java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 5
+	at cityrescue.CityRescueImpl.addObstacle(CityRescueImpl.java:84)
+	at PublicBasicsTest.lambda$addObstacle_outOfBounds_throws_andStateUnchanged$0(PublicBasicsTest.java:40)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	... 6 more
+

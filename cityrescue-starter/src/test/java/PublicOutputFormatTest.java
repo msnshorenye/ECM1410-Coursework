@@ -17,6 +17,7 @@ public class PublicOutputFormatTest {
     @Test
     void getStatus_containsRequiredHeadings() throws Exception {
         String s = cr.getStatus();
+        //System.out.println(s);
         assertTrue(s.contains("TICK="));
         assertTrue(s.contains("INCIDENTS"));
         assertTrue(s.contains("UNITS"));
@@ -30,6 +31,9 @@ public class PublicOutputFormatTest {
 
         // Output prefix must match the coursework specification examples
         // (e.g., "U#2 ..." and "I#1 ...").
+        System.out.println(cr.viewUnit(u));
+        System.out.println(cr.viewIncident(i));
+        System.out.println(i);
         assertTrue(cr.viewUnit(u).startsWith("U#"));
         assertTrue(cr.viewIncident(i).startsWith("I#"));
     }

@@ -9,11 +9,14 @@ class Fire_engine extends Unit{
         this.TYPE = UnitType.FIRE_ENGINE; 
         this.Stationid = Stationid;
         this.STATUS = UnitStatus.IDLE;
+        this.xloc =-1;
+        this.yloc =-1;
+        this.AssignedIncidentId =-1;
     }
-    public void main(String[] args) {
-        Fire_engine fire = new Fire_engine();
-        fire.get_data();
-    }
+    // public void main(String[] args) {
+    //     Fire_engine fire = new Fire_engine();
+    //     fire.get_data();
+    // }
     public void get_data(){
         System.out.println(this.TYPE+ " " +this.ticks);
     }
@@ -24,5 +27,8 @@ class Fire_engine extends Unit{
         return this.UnitID;
     }
 
-    
+    public String unitview(){
+        String view_string = "U#" + this.UnitID + " TYPE=" + this.TYPE + " HOME=" + this.Stationid + " LOC=(" + this.xloc +"," + this.yloc + ") STATUS=" + this.STATUS +" INCIDENT=" + this.AssignedIncidentId;
+        return view_string;
+    }
 }

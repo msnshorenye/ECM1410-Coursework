@@ -7,10 +7,10 @@ public class Station{
     public int stationmaxcapacity;
     public int currentcapacity;
     public String stationname;
-    private static int NextId = 1;
-    private final int id;
+    public static int NextId = 1;
+    public int id;
 
-    public Station(int x, int y, String stationname){
+    public Station(String stationname,int x, int y){
         this.x = x;
         this.y = y;
         this.stationname = stationname;
