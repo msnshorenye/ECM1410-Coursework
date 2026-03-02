@@ -46,6 +46,7 @@ public class Incident {
         return this.IncidentID;
 
     }
+  
     public String incidentview(){
         String view_string = "I# " + this.IncidentID + " TYPE=" + this.Type + " SEV=" + this.severity + "LOC=(" + this.x +"," + this.y + ") STATUS=" + this.status +"UNIT=" + this.Unitid;
         return view_string;

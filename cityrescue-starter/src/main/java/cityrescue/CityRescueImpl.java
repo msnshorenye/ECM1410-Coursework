@@ -11,6 +11,7 @@ import cityrescue.Ambulance;
 import cityrescue.Police_car;
 import cityrescue.Fire_engine;
 import java.util.Comparator;
+import java.lang.Math;
 /**
  * CityRescueImpl (Starter)
  *
@@ -146,7 +147,7 @@ public class CityRescueImpl implements CityRescue {
             Station current_station = Stationarray[i];
             stationIdlist[i] = current_station.GetId();
         }
-            
+            Arrays.sort(stationIdlist, Comparator.nullsLast(String::compareTo));
         // TODO: implement
         return stationIdlist;
         //throw new UnsupportedOperationException("Not implemented yet");
@@ -299,7 +300,7 @@ public class CityRescueImpl implements CityRescue {
                 }
         }
             
-        // TODO: implement
+        Arrays.sort(UNitIdlist, Comparator.nullsLast(String::compareTo));
         return UNitIdlist;
         //throw new UnsupportedOperationException("Not implemented yet");
     }
@@ -345,6 +346,8 @@ public class CityRescueImpl implements CityRescue {
                 Incident newinci = new Incident(x,y,type,severity);
                 this.Incidentarray[length] = newinci;
                 this.current_incident_num += 1;
+
+            
 
                 return this.current_incident_num;
                 
@@ -392,7 +395,7 @@ public class CityRescueImpl implements CityRescue {
 
                    
         }
-        Arrays.sort(Incidentidlist);
+        Arrays.sort(Incidentidlist, Comparator.nullsLast(String::compareTo));
 
         // TODO: implement
         return Incidentidlist;
@@ -427,16 +430,151 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public void dispatch() {
         // TODO: implement
-        //Incidentlist = getIncidentIds();
+        int [] Incidentidlist = getIncidentIds();
+        for (int i = 0; i< Incidentidlist.length; i++){
+            int current_incident = Incidentidlist[i];
+            if (current_incident == null){
+                break; 
+            }
+            for (int x = 0; x< this.Incidentarray.length; x++){
+                
+                Incident Current_Incident = this.Incidentarray[x];
+                
+                if (Current_Incident.getincidentid() == current_id){
+                    int Incident_x = Current_Incident.x;
+                    int Incident_y = Current_Incident.y;
+                    int ChosenUnitId = -1;
+                    int SmallestDistance = -1;
+                    int ChosenHomeStationId = -1;
+                    for (int y = 0; y< this.Unitarray.length; y++){
+                        Unit CurrentUnit = this.Unitarray[y];
+                        if  (CurrentUnit == null){
+                            break;
+
+                        }
+                        else{
+                            if (CurrentUnit.STATUS == UnitStatus.IDLE){
+                                int CurrentUnitx = CurrentUnit.xloc;
+                                int CurrentUnity = CurrentUnit.yloc;
+                                int Currentdistance = Math.abs(Incident_x - CurrentUnitx) + (Math.abs(Incident_y- CurrentUnity));
+                                if (Currentdistance < SmallestDistance){
+                                    SmallestDistance = Currentdistance;
+                                    ChosenUnitId = CurrentUnit.UnitID;  
+                                }
+                                else if(Currentdistance == SmallestDistance){
+                                    int CurrentChosenUnitId = CurrentUnit.UnitID;
+                                    if (CurrentChosenUnitId < ChosenUnitId){
+                                        ChosenUnitId = CurrentChosenUnitId;
+                                    }
+                                    else if (CurrentChosenUnitId == ChosenUnitId){
+                                        int CurrentChosenHomeStationId = CurrentUnit.Stationid;
+                                        if (CurrentChosenHomeStationId < ChosenHomeStationId){
+                                            ChosenHomeStationId = CurrentChosenHomeStationId;
+                                        }
+                                        
+                                    }
+                                    }
+                                    
+                                }
+                            }
+                        }
+                        for (int a = 0; a < this.Unitarray.length; a++){
+                            Unit Curr_unit = this.Unitarray[a];
+                            if (ChosenUnitId == Curr_unit.UnitID){
+                                Curr_unit.STATUS = UnitStatus.EN_ROUTE;
+                                Curr_unit.AssignedIncidentId = Current_Incident.getincidentid();
+                                
+                            }
+                        }
+                    }
+
+                    }
+                }
+                
+                
+                
+            
+        
+
         
         
 
-        throw new UnsupportedOperationException("Not implemented yet");
+        //throw new UnsupportedOperationException("Not implemented yet");
     }
 
     @Override
     public void tick() {
         // TODO: implement
+        // 1) Move En_route units first by ascending unit id
+        int [] UNITLIST = getUnitIds();
+        for (int i = 0 ; i<UNITLIST.length;i++){
+           Unit tempUnit = (Unit) UNITLIST[i];
+            if (tempUnit.STATUS == UnitStatus.EN_ROUTE){
+                int X = tempUnit.xloc;  
+                int Y = tempUnit.yloc;
+                int [][] potential = new int[4][2];  // 4 coordinates each with y,x
+                int x;
+                int y;
+                if(Y+1>this.height){
+                    //N is valid
+                    y = Y+1;
+                    x = X;
+                    potential[0][0] = y;
+                    potential[0][1] = x;
+                }
+                if (X+1> this.width) {
+                    //E is valid
+                    y = Y;
+                    x = X+1;
+                    potential[1][0] = y;
+                    potential[1][1] = x;
+                }
+                if(Y-1>0){
+                    //S is valid
+                    y = Y-1;
+                    x = X;
+                    potential[2][0] = y;
+                    potential[2][1] = x;
+                }  
+                if(X-1>0){
+                    //W is valid
+                    y = Y;
+                    x = X-1;
+                    potential[3][0] = y;
+                    potential[3][1] = x;
+                } 
+                int I_xloc ;
+                int I_yloc;
+                for (int t = 0; t<this.Incidentarray.length;t++){
+                    if (this.Incidentarray[t] == tempUnit.AssignedIncidentId){
+                        Incident incident = (Incident)this.Incidentarray[t];
+                        I_xloc = incident.x;
+                        I_yloc = incident.y;
+                        break;
+                    }
+                }
+                int OG_MAN = (Maths.abs((I_xloc-X)))-(Maths.abs((I_yloc-Y)));
+                for (int z=0;z<potential.length;z++){
+                    int xLOC = this.potential[z][1];
+                    int yLOC = this.potential[z][0];
+
+                    if (this.Obstaclearray[yloc][xloc] != "obstacle"){
+                        int New_Score =  (Math.abs((I_xloc-xloc))-(Math.abs((I_yloc-yloc))));
+                        if (New_Score <OG_MAN){
+                            //CHANging location
+                            
+                            System.out.println("HELLO");
+                        }
+                    } 
+                } 
+            }
+        
+        
+        }
+        // 2) Mark arrivals
+        // 3) process on scene work 
+        // 4) resolve completed incidents by ascending unit id 
+        
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
