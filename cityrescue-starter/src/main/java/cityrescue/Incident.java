@@ -9,7 +9,7 @@ public class Incident {
     public IncidentStatus status;
     public IncidentType Type;
     private static int NextIncidentID = 1;
-    private final int IncidentID;
+    public int IncidentID;
     public int severity;
     public int Unitid;
     
@@ -43,8 +43,18 @@ public class Incident {
 
     }
     public int getincidentid(){
-        return this.IncidentID;
+        return  this.IncidentID;
 
+    }
+    public int setincidentid(int newid){
+        this.IncidentID = newid;
+        return(this.IncidentID);
+    
+
+    }
+    public int setincidentsUnitid(int newid){
+        this.Unitid = newid;
+        return this.Unitid;
     }
   
     public String incidentview(){

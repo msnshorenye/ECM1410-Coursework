@@ -4,7 +4,7 @@ import cityrescue.enums.UnitType;
 import cityrescue.enums.UnitStatus;
 class Fire_engine extends Unit{
     public Fire_engine(int Stationid){
-        this.UnitID = NextID++;
+        this.UnitID = -1;
         this.ticks = 4;
         this.TYPE = UnitType.FIRE_ENGINE; 
         this.Stationid = Stationid;

@@ -11,9 +11,10 @@ abstract class Unit {
     public int AssignedIncidentId=-1;
     int WORK;
     public int UnitID;
-    public static int NextID = 1;
     int Stationid;
     //public abstract boolean canHandle(IncidentType type);
+    public abstract int get_unit_id();
+    public abstract String unitview();
 }
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="PublicDispatchTest" time="0.034" tests="1" errors="1" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="PublicDispatchTest" time="0.016" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="session.topDirectory" value="/workspaces/ECM1410-Coursework/cityrescue-starter"/>
     <property name="sun.boot.library.path" value="/usr/local/sdkman/candidates/java/25.0.2-open/lib"/>
-    <property name="sun.java.command" value="/workspaces/ECM1410-Coursework/cityrescue-starter/target/surefire/surefirebooter-20260302113608206_3.jar /workspaces/ECM1410-Coursework/cityrescue-starter/target/surefire 2026-03-02T11-36-07_980-jvmRun1 surefire-20260302113608206_1tmp surefire_0-20260302113608206_2tmp"/>
+    <property name="sun.java.command" value="/workspaces/ECM1410-Coursework/cityrescue-starter/target/surefire/surefirebooter-20260302220619338_3.jar /workspaces/ECM1410-Coursework/cityrescue-starter/target/surefire 2026-03-02T22-06-19_122-jvmRun1 surefire-20260302220619338_1tmp surefire_0-20260302220619338_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/workspaces/ECM1410-Coursework/cityrescue-starter/target/test-classes:/workspaces/ECM1410-Coursework/cityrescue-starter/target/classes:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/home/codespace/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/codespace/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/home/codespace/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/home/codespace/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -27,7 +27,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/workspaces/ECM1410-Coursework/cityrescue-starter/target/surefire/surefirebooter-20260302113608206_3.jar"/>
+    <property name="surefire.real.class.path" value="/workspaces/ECM1410-Coursework/cityrescue-starter/target/surefire/surefirebooter-20260302220619338_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="25.0.2+10-69"/>
     <property name="user.name" value="codespace"/>
@@ -54,17 +54,23 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="dispatch_assignsClosestEligibleUnit_thenLowestUnitId" classname="PublicDispatchTest" time="0.027">
-    <error message="Not implemented yet" type="java.lang.UnsupportedOperationException"><![CDATA[java.lang.UnsupportedOperationException: Not implemented yet
-	at cityrescue.CityRescueImpl.dispatch(CityRescueImpl.java:434)
-	at PublicDispatchTest.dispatch_assignsClosestEligibleUnit_thenLowestUnitId(PublicDispatchTest.java:25)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
-]]></error>
+  <testcase name="dispatch_assignsClosestEligibleUnit_thenLowestUnitId" classname="PublicDispatchTest" time="0.01">
     <system-out><![CDATA[[[null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null]]
-HE::O
-HE::O
+TYPE PASSED: POLICE_CAR
+Police car
+U#1 TYPE=POLICE_CAR HOME=1 LOC=(0,0) STATUS=IDLE INCIDENT=-1
+This is u1: 1
+TYPE PASSED: POLICE_CAR
+Police car
+TYPE PASSED: FIRE_ENGINE
+Fire enginge
+U#3 TYPE=FIRE_ENGINE HOME=1 LOC=(0,0) STATUS=IDLE INCIDENT=-1
+This is u2: 2
+U#3 TYPE=FIRE_ENGINE HOME=1 LOC=(0,0) STATUS=IDLE INCIDENT=-1
+null
+added incident0
+1
+I# 1 TYPE=CRIME SEV=2LOC=(2,2) STATUS=REPORTEDUNIT=1
 ]]></system-out>
   </testcase>
 </testsuite>

@@ -29,8 +29,11 @@ public class CityRescueImpl implements CityRescue {
     public int Max_units = 50;
     public int Max_incidents = 200;
     public int current_station_num;
+    public int current_station_id;
     public int current_unit_num;
+    public int current_unit_id;
     public int current_incident_num;
+    public int current_incident_id;
     public int current_obstacle_num;
     public int width;
     public int height;
@@ -60,6 +63,9 @@ public class CityRescueImpl implements CityRescue {
         this.current_incident_num = 0;
         this.current_obstacle_num = 0;
         this.current_station_num = 0;
+        this.current_incident_id = 0;
+        this.current_station_id = 0;
+        this.current_unit_id = 0;
         this.current_unit_num = 0;
         
         
@@ -100,13 +106,14 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public int addStation(String name, int x, int y) throws InvalidNameException, InvalidLocationException {
         // TODO: implement
-         for(int i=0;i<=this.Stationarray.length;i++){
+         for(int i=0;i<this.Stationarray.length;i++){
             if (this.Stationarray[i]==(null)){
                 int length = i;
                 Station Newstation = new Station(name, x, y);
                 this.Stationarray[length] = Newstation;
                 this.current_station_num += 1;
-                Newstation.id = this.current_station_num;
+                this.current_station_id += 1;
+                Newstation.id = this.current_station_id;
                 return (int) (Newstation.id);
             }
         }
@@ -118,7 +125,7 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public void removeStation(int stationId) throws IDNotRecognisedException, IllegalStateException {
         // TODO: implement
-        for (int x = 0; x<=this.Stationarray.length; x++){
+        for (int x = 0; x<this.Stationarray.length; x++){
             if (this.Stationarray[x].GetId() == stationId){
                 this.Stationarray[x] = null;
                 this.current_station_num -= 1;
@@ -131,7 +138,7 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public void setStationCapacity(int stationId, int maxUnits) throws IDNotRecognisedException, InvalidCapacityException {
         // TODO: implement
-        for (int x = 0; x<=this.Stationarray.length; x++){
+        for (int x = 0; x<this.Stationarray.length; x++){
 
             if (this.Stationarray[x].GetId() == stationId){
                 this.Stationarray[x].stationmaxcapacity = maxUnits;
@@ -145,9 +152,9 @@ public class CityRescueImpl implements CityRescue {
         int [] stationIdlist = new int[this.Stationarray.length];
         for (int i = 0; i <= this.Stationarray.length; i++){
             Station current_station = Stationarray[i];
-            stationIdlist[i] = current_station.GetId();
+            stationIdlist[i] =  current_station.GetId();
         }
-            Arrays.sort(stationIdlist, Comparator.nullsLast(String::compareTo));
+            Arrays.sort(stationIdlist);
         // TODO: implement
         return stationIdlist;
         //throw new UnsupportedOperationException("Not implemented yet");
@@ -157,12 +164,15 @@ public class CityRescueImpl implements CityRescue {
     public int addUnit(int stationId, UnitType type) throws IDNotRecognisedException, InvalidUnitException, IllegalStateException {
         // TODO: implement
         int length;        
+        System.out.println("TYPE PASSED: " + type);
         for(int i=0;i<Unitarray.length;i++){
             length = i;
             if (Unitarray[i] == (null)){
                 switch(type) {
                     case AMBULANCE:
+                        System.out.println("Ambulancee");
                         Ambulance ambulance = new Ambulance(stationId);
+                        System.out.println(ambulance.TYPE);
                         this.Unitarray[length] = ambulance;
                         for (int x =0; x< this.Stationarray.length; x++){
                             Station CurrentStation = this.Stationarray[x];
@@ -172,6 +182,13 @@ public class CityRescueImpl implements CityRescue {
                             if (CurrentStationid == stationId) {
                                 ambulance.xloc = CurrentStation.x;
                                 ambulance.yloc = CurrentStation.y;
+                                this.current_unit_id += 1;
+                                this.current_unit_num += 1;
+                                ambulance.UnitID = this.current_unit_id;
+                                System.out.println(ambulance.TYPE);
+                                return(ambulance.UnitID);
+                                
+
 
 
                             }
@@ -182,6 +199,7 @@ public class CityRescueImpl implements CityRescue {
                         System.out.println("HE::O");
                         break;
                     case FIRE_ENGINE:
+                        System.out.println("Fire enginge");
                         Fire_engine fire_engine = new Fire_engine(stationId);
                         this.Unitarray[length] = fire_engine;
                         for (int x =0; x< this.Stationarray.length; x++){
@@ -189,14 +207,20 @@ public class CityRescueImpl implements CityRescue {
                             if (CurrentStation != null) {
                             int CurrentStationid = CurrentStation.GetId();
                             if (CurrentStationid == stationId) {
-                                 fire_engine.xloc = CurrentStation.x;
-                                 fire_engine.yloc = CurrentStation.y;
+                                fire_engine.xloc = CurrentStation.x;
+                                fire_engine.yloc = CurrentStation.y;
+                                this.current_unit_id += 1;
+                                this.current_unit_num += 1;
+                                fire_engine.UnitID = this.current_unit_id;
+                                return(fire_engine.UnitID);
+                                 
                             }
                             }
                         }
                         System.out.println("HE::O");
                         break;
                     case POLICE_CAR:
+                        System.out.println("Police car");
                         Police_car police = new Police_car(stationId);
                         this.Unitarray[length] = police;
                         for (int x =0; x< this.Stationarray.length; x++){
@@ -204,28 +228,34 @@ public class CityRescueImpl implements CityRescue {
                             if (CurrentStation != null ){
                             int CurrentStationid = CurrentStation.GetId();
                             if (CurrentStationid == stationId) {
-                                 police.xloc = CurrentStation.x;
-                                 police.yloc = CurrentStation.y;
-
+                                police.xloc = CurrentStation.x;
+                                police.yloc = CurrentStation.y;
+                                this.current_unit_id += 1;
+                                this.current_unit_num += 1;
+                                police.UnitID = this.current_unit_id;
+                                return (police.UnitID);
 
                             }
                             }
                         }
+                        this.current_unit_id += 1;
+                        this.current_unit_num += 1;
+                        police.UnitID = this.current_unit_id;
                         System.out.println("HE::O");
                         break;
                 }
             break;
             }
         }
-        int one = 1;
-        return (one);
+       
+        return(1);
         //throw new UnsupportedOperationException("Not implemented yet");
     }
 
     @Override
     public void decommissionUnit(int unitId) throws IDNotRecognisedException, IllegalStateException {
         // TODO: implement
-    for (int x = 0; x<=this.Unitarray.length; x++){
+    for (int x = 0; x<this.Unitarray.length; x++){
             if (this.Unitarray[x] == null){
                 UnitStatus status = this.Unitarray[unitId].STATUS;
             if (!status.equals(UnitStatus.EN_ROUTE) && !status.equals(UnitStatus.AT_SCENE)){
@@ -242,7 +272,7 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public void transferUnit(int unitId, int newStationId) throws IDNotRecognisedException, IllegalStateException {
         // TODO: implement
-        for (int x = 0; x<=this.Unitarray.length; x++){
+        for (int x = 0; x<this.Unitarray.length; x++){
             if (this.Unitarray[x] == null){
                 if (this.Unitarray[x].UnitID == unitId){
                     this.Unitarray[x].Stationid = newStationId;
@@ -259,12 +289,12 @@ public class CityRescueImpl implements CityRescue {
     public void setUnitOutOfService(int unitId, boolean outOfService) throws IDNotRecognisedException, IllegalStateException {
         //TODO:implement
         if (outOfService == true){
-            for (int x = 0; x<=this.Unitarray.length; x++){
+            for (int x = 0; x<this.Unitarray.length; x++){
                 if (this.Unitarray[x].UnitID == unitId && this.Unitarray[x].STATUS == UnitStatus.IDLE){
                     this.Unitarray[x].STATUS = UnitStatus.OUT_OF_SERVICE;}
                 }}
         else{
-            for (int x = 0; x<= this.Unitarray.length; x++){
+            for (int x = 0; x< this.Unitarray.length; x++){
                 if (this.Unitarray[x].UnitID == unitId){
                     this.Unitarray[x].STATUS = UnitStatus.IDLE;
                 }
@@ -279,28 +309,15 @@ public class CityRescueImpl implements CityRescue {
     public int[] getUnitIds() {
         // TODO: implement
         int [] UNitIdlist = new int[this.Unitarray.length];
-        for (int i = 0; i <= this.Unitarray.length; i++){
-            int length = i;
-                switch(this.Unitarray[length].TYPE) {
-                    case AMBULANCE:
-                        Ambulance ambulance = (Ambulance)this.Unitarray[length];
-                        int neededid = ambulance.get_unit_id();
-                        UNitIdlist[i] = neededid;
-                        break;
-                    case FIRE_ENGINE:
-                        Fire_engine fire_engine = (Fire_engine) this.Unitarray[length];
-                        neededid = fire_engine.get_unit_id();
-                        UNitIdlist[i] = neededid;
-                        break; 
-                    case POLICE_CAR:
-                        Police_car police = (Police_car) this.Unitarray[length];
-                        neededid = police.get_unit_id();
-                        UNitIdlist[i] = neededid;
-                        break;
-                }
+        for (int i = 0; i < this.Unitarray.length; i++){
+            Unit unit = this.Unitarray[i];
+
+            if (unit != null) {
+                UNitIdlist[i] = unit.get_unit_id();
+            }
         }
-            
-        Arrays.sort(UNitIdlist, Comparator.nullsLast(String::compareTo));
+        System.out.println("HJK^&67676767");
+        Arrays.sort(UNitIdlist);
         return UNitIdlist;
         //throw new UnsupportedOperationException("Not implemented yet");
     }
@@ -310,27 +327,10 @@ public class CityRescueImpl implements CityRescue {
         // TODO: implement
         String UnitStrings = "";
         for (int i =0 ; i<Unitarray.length;i++){
-            if (Unitarray[i] != null){
-            if (Unitarray[i].UnitID == unitId){
-                int length = i;
-                switch(this.Unitarray[length].TYPE) {
-                    case AMBULANCE:
-                        Ambulance ambulance = (Ambulance)this.Unitarray[length];
-                        String temp = ambulance.unitview();
-                        UnitStrings = temp;
-                        break;
-                    case FIRE_ENGINE:
-                        Fire_engine fire_engine = (Fire_engine) this.Unitarray[length];
-                        String temp2 = fire_engine.unitview();
-                        UnitStrings =  temp2;
-                        break; 
-                    case POLICE_CAR:
-                        Police_car police = (Police_car) this.Unitarray[length];
-                        String temp3 = police.unitview();
-                        UnitStrings =  temp3;
-                        break;
-                }
-            }
+            Unit unit = this.Unitarray[i];
+
+            if (unit != null) {
+                UnitStrings = unit.unitview();
             }
         }
         return UnitStrings;
@@ -341,15 +341,19 @@ public class CityRescueImpl implements CityRescue {
     public int reportIncident(IncidentType type, int severity, int x, int y) throws InvalidSeverityException, InvalidLocationException {
         // TODO: implement
         for(int i=0;i<this.Incidentarray.length;i++){
+            System.out.println(this.Incidentarray[i]);
             if (this.Incidentarray[i] == (null)){
                 int length = i;
                 Incident newinci = new Incident(x,y,type,severity);
                 this.Incidentarray[length] = newinci;
                 this.current_incident_num += 1;
+                this.current_incident_id += 1;
+                newinci.setincidentid(this.current_incident_id);
+                
 
             
-
-                return this.current_incident_num;
+                System.out.println("added incident"+i);
+                return this.current_incident_id;
                 
             }
         
@@ -361,7 +365,7 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public void cancelIncident(int incidentId) throws IDNotRecognisedException, IllegalStateException {
         // TODO: implement
-        for (int x = 0; x<=this.Incidentarray.length; x++){
+        for (int x = 0; x<this.Incidentarray.length; x++){
             if ((this.Incidentarray[x].getincidentid()) == incidentId){
                 this.Incidentarray[x].CancelIncidentstatus(IncidentStatus.CANCELLED);
                 this.current_incident_num -= 1;
@@ -374,7 +378,7 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public void escalateIncident(int incidentId, int newSeverity) throws IDNotRecognisedException, InvalidSeverityException, IllegalStateException {
         // TODO: implement
-        for(int i=0;i<=this.Incidentarray.length;i++){
+        for(int i=0;i<this.Incidentarray.length;i++){
             int needid = this.Incidentarray[i].getincidentid();
             if (needid == incidentId){
                 this.Incidentarray[i].severity = newSeverity;
@@ -388,15 +392,15 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public int[] getIncidentIds() {
         // TODO: implement
-        int [] Incidentidlist = new int[this.Incidentarray.length];
-        for (int i = 0; i <= this.Incidentarray.length; i++){
+        int[] Incidentidlist = new int[this.Incidentarray.length];
+        for (int i = 0; i < this.Incidentarray.length; i++){
+            if (Incidentarray[i] != null){
             Incident current_Incident = Incidentarray[i];
-            Incidentidlist[i] = current_Incident.getincidentid();
-
-                   
+            Incidentidlist[i] =  current_Incident.getincidentid();
+            }      
         }
-        Arrays.sort(Incidentidlist, Comparator.nullsLast(String::compareTo));
-
+        Arrays.sort(Incidentidlist);
+        
         // TODO: implement
         return Incidentidlist;
         
@@ -431,20 +435,33 @@ public class CityRescueImpl implements CityRescue {
     public void dispatch() {
         // TODO: implement
         int [] Incidentidlist = getIncidentIds();
+        // for (int i:Incidentidlist){
+        //     System.out.println(i);
+        // }
         for (int i = 0; i< Incidentidlist.length; i++){
             int current_incident = Incidentidlist[i];
-            if (current_incident == null){
-                break; 
+            //System.out.println("hello"+current_incident);
+            if (current_incident == 0){
+                continue;
+                //System.out.println("im breaking ts"+current_incident);
+                //break; 
             }
             for (int x = 0; x< this.Incidentarray.length; x++){
+                if (this.Incidentarray[x] != null){
+            
                 
                 Incident Current_Incident = this.Incidentarray[x];
                 
-                if (Current_Incident.getincidentid() == current_id){
+                if (Current_Incident.status == IncidentStatus.REPORTED){
+                    
+                
+                
+                if (Current_Incident.getincidentid() == current_incident){
+
                     int Incident_x = Current_Incident.x;
                     int Incident_y = Current_Incident.y;
                     int ChosenUnitId = -1;
-                    int SmallestDistance = -1;
+                    int SmallestDistance = Integer.MAX_VALUE;
                     int ChosenHomeStationId = -1;
                     for (int y = 0; y< this.Unitarray.length; y++){
                         Unit CurrentUnit = this.Unitarray[y];
@@ -454,6 +471,7 @@ public class CityRescueImpl implements CityRescue {
                         }
                         else{
                             if (CurrentUnit.STATUS == UnitStatus.IDLE){
+                                if ((CurrentUnit.TYPE== UnitType.AMBULANCE && Current_Incident.Type == IncidentType.MEDICAL)|| (CurrentUnit.TYPE == UnitType.FIRE_ENGINE && Current_Incident.Type == IncidentType.FIRE) || (CurrentUnit.TYPE == UnitType.POLICE_CAR && Current_Incident.Type == IncidentType.CRIME)){
                                 int CurrentUnitx = CurrentUnit.xloc;
                                 int CurrentUnity = CurrentUnit.yloc;
                                 int Currentdistance = Math.abs(Incident_x - CurrentUnitx) + (Math.abs(Incident_y- CurrentUnity));
@@ -479,17 +497,23 @@ public class CityRescueImpl implements CityRescue {
                             }
                         }
                         for (int a = 0; a < this.Unitarray.length; a++){
-                            Unit Curr_unit = this.Unitarray[a];
-                            if (ChosenUnitId == Curr_unit.UnitID){
-                                Curr_unit.STATUS = UnitStatus.EN_ROUTE;
-                                Curr_unit.AssignedIncidentId = Current_Incident.getincidentid();
-                                
+                            if (this.Unitarray[a] != (null)){
+                                Unit Curr_unit = this.Unitarray[a];
+                                if (ChosenUnitId == Curr_unit.UnitID){
+                                    Curr_unit.STATUS = UnitStatus.EN_ROUTE;
+                                    Curr_unit.AssignedIncidentId = Current_Incident.getincidentid();
+                                    Current_Incident.setincidentsUnitid(Curr_unit.get_unit_id());
+                                    
+                                }
                             }
                         }
                     }
 
                     }
                 }
+                }
+            }
+        }
                 
                 
                 
@@ -506,9 +530,32 @@ public class CityRescueImpl implements CityRescue {
     public void tick() {
         // TODO: implement
         // 1) Move En_route units first by ascending unit id
+        System.out.println("RAWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWR 1");
         int [] UNITLIST = getUnitIds();
-        for (int i = 0 ; i<UNITLIST.length;i++){
-           Unit tempUnit = (Unit) UNITLIST[i];
+        System.out.println("RAWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWR 2");
+        Unit tempUnit = null;
+        System.out.println("RAWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWR 3");
+        for (Unit u : Unitarray) {
+            for (int i = 0 ; i<UNITLIST.length;i++){
+                //System.out.println(u.get_unit_id());
+                if (u != (null) ){
+                    //System.out.println(u);
+                    if (u.get_unit_id() == i) {
+                    System.out.println("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
+                    tempUnit = u;
+                    }
+                }
+            }
+            System.out.println("RAWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWR 4");
+            System.out.println(tempUnit.TYPE+"...............................................");
+            Incident incident = null ;
+            for (int t = 0; t<this.Incidentarray.length;t++){
+                    incident = (Incident)this.Incidentarray[t];
+                    if (incident.getincidentid() == tempUnit.AssignedIncidentId){
+                        break;
+                    }
+                }
+            System.out.println(incident.Type);
             if (tempUnit.STATUS == UnitStatus.EN_ROUTE){
                 int X = tempUnit.xloc;  
                 int Y = tempUnit.yloc;
@@ -545,37 +592,47 @@ public class CityRescueImpl implements CityRescue {
                 } 
                 int I_xloc ;
                 int I_yloc;
-                for (int t = 0; t<this.Incidentarray.length;t++){
-                    if (this.Incidentarray[t] == tempUnit.AssignedIncidentId){
-                        Incident incident = (Incident)this.Incidentarray[t];
-                        I_xloc = incident.x;
-                        I_yloc = incident.y;
-                        break;
-                    }
-                }
-                int OG_MAN = (Maths.abs((I_xloc-X)))-(Maths.abs((I_yloc-Y)));
+                I_xloc = incident.x;
+                I_yloc = incident.y;
+                // for (int l= 0 ; l<potential.length;l++){
+                //     System.out.println(potential[l][0]);
+                //     System.out.println(potential[l][1]);
+                // }
+                int OG_MAN = (Math.abs((I_xloc-X)))-(Math.abs((I_yloc-Y)));
                 for (int z=0;z<potential.length;z++){
-                    int xLOC = this.potential[z][1];
-                    int yLOC = this.potential[z][0];
+                    int xLOC = potential[z][1];
+                    int yLOC = potential[z][0];
 
-                    if (this.Obstaclearray[yloc][xloc] != "obstacle"){
-                        int New_Score =  (Math.abs((I_xloc-xloc))-(Math.abs((I_yloc-yloc))));
+                    if (this.Obstaclearray[yLOC][xLOC] != "obstacle"){
+                        int New_Score =  (Math.abs((I_xloc-xLOC))-(Math.abs((I_yloc-yLOC))));
                         if (New_Score <OG_MAN){
                             //CHANging location
-                            
-                            System.out.println("HELLO");
+                            tempUnit.xloc = xLOC;
+                            tempUnit.yloc = yLOC;
+                            System.out.println("This way"+z);
+                            break;
                         }
                     } 
-                } 
+                }
+                //2) Mark New arrivals
+                if ((tempUnit.yloc == I_yloc)&&(tempUnit.xloc == I_xloc)){
+                    //set status to 
+                    tempUnit.STATUS = UnitStatus.AT_SCENE;
+                    incident.status = IncidentStatus.IN_PROGRESS;
+                }
             }
-        
-        
-        }
-        // 2) Mark arrivals
+            else {
+                if (tempUnit.STATUS == UnitStatus.AT_SCENE){
+                    tempUnit.WORK += 1;
+                    incident.status = IncidentStatus.RESOLVED;                         
+                    }
+                }
+            }
+        System.out.println(tempUnit.TYPE);
         // 3) process on scene work 
         // 4) resolve completed incidents by ascending unit id 
         
-        throw new UnsupportedOperationException("Not implemented yet");
+        //throw new UnsupportedOperationException("Not implemented yet");
     }
 
     @Override

@@ -4,9 +4,9 @@ import cityrescue.enums.UnitType;
 import cityrescue.enums.UnitStatus;
 class Ambulance extends Unit{
     public Ambulance(int Stationid){
-        this.UnitID = NextID++;
+        this.UnitID = -1;
         this.ticks = 3;
-        this.TYPE = UnitType.POLICE_CAR;
+        this.TYPE = UnitType.AMBULANCE;
         this.Stationid = Stationid;
         this.STATUS = UnitStatus.IDLE;
         this.xloc = -1;
