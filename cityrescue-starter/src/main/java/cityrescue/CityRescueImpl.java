@@ -139,14 +139,16 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public void removeStation(int stationId) throws IDNotRecognisedException, IllegalStateException {
-        int[] stationlist = getStationIds();
+
         boolean idbool = false;
-        for (int i = 0; i< GetStationIds.length; i++){
-            if (station[i] == stationId){
+        for (int i = 0; i< this.Stationarray.length; i++){
+            if (this.Stationarray[i] != null){
+                Station picked_Station = this.Stationarray[i];
+            if (picked_Station.GetId()== stationId){
                 idbool = true;
             }
            
-        }
+        }}
         if (idbool == false){
             throw new IDNotRecognisedException("No Station with this id");
             
@@ -162,7 +164,7 @@ public class CityRescueImpl implements CityRescue {
             }
         }
         if (HasUnit == true){
-            throw new IllegalStateException();
+            throw new IllegalStateException("Unit in the station trying to be removed");
         }
         // TODO: implement
         for (int x = 0; x<this.Stationarray.length; x++){
@@ -179,8 +181,9 @@ public class CityRescueImpl implements CityRescue {
     public void setStationCapacity(int stationId, int maxUnits) throws IDNotRecognisedException, InvalidCapacityException {
         int[] stationlist = getStationIds();
         boolean idbool = false;
-        for (int i = 0; i< GetStationIds.length; i++){
-            if (station[i] == stationId){
+        for (int i = 0; i< stationlist.length; i++){
+            
+            if (stationlist[i] == stationId){
                 idbool = true;
             }
            
@@ -189,7 +192,7 @@ public class CityRescueImpl implements CityRescue {
             throw new IDNotRecognisedException("No Station with this id");
             
         }
-        current_unit_num = 0
+        int CurrentUnitNum = 0;
         for (int y = 0; y<this.Unitarray.length; y++){
             if (this.Unitarray[y] != null){
                 Unit c_unit = this.Unitarray[y];
@@ -197,26 +200,30 @@ public class CityRescueImpl implements CityRescue {
                     CurrentUnitNum += 1;
                 }
 
-        
+            }
+        }
         if (maxUnits<=0 || CurrentUnitNum > maxUnits){
-            throw new InvalidCapacityException();
+            throw new InvalidCapacityException("Too full");
         }
         // TODO: implement
         for (int x = 0; x<this.Stationarray.length; x++){
-
+            if( this.Stationarray[x] != (null)){
             if (this.Stationarray[x].GetId() == stationId){
                 this.Stationarray[x].stationmaxcapacity = maxUnits;
             }
+            }
         }
-        //throw new UnsupportedOperationException("Not implemented yet");
+          //throw new UnsupportedOperationException("Not implemented yet");
     }
 
     @Override
     public int[] getStationIds() {
         int [] stationIdlist = new int[this.Stationarray.length];
-        for (int i = 0; i <= this.Stationarray.length; i++){
-            Station current_station = Stationarray[i];
-            stationIdlist[i] =  current_station.GetId();
+        for (int i = 0; i < this.Stationarray.length; i++){
+            if (Stationarray[i] != null){
+                Station current_station = Stationarray[i];
+                stationIdlist[i] =  current_station.GetId();
+            }
         }
             Arrays.sort(stationIdlist);
         // TODO: implement
@@ -226,12 +233,30 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public int addUnit(int stationId, UnitType type) throws IDNotRecognisedException, InvalidUnitException, IllegalStateException {
-        // TODO: implement
-        for (int x= 0; x < this.Stationarrayarray.length; x++){
-            if (this.Stationarray[x] != null){
+        boolean StationExists =  false;
+        for (int x= 0; x < this.Stationarray.length; x++){
+            if (this.Stationarray[x] != (null)){
                 Station Stat = this.Stationarray[x];
+                if (Stat.GetId() == stationId){
+                    StationExists = true;
+                    System.out.println(Stat.currentcapacity+" "+Stat.stationmaxcapacity+"-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                    if (Stat.currentcapacity == Stat.stationmaxcapacity){
+                        throw new IllegalStateException("Station is already full");
+                    }
+                    
+
+                    
+                }
             }
         }
+        if (StationExists == false){
+            throw new IDNotRecognisedException("Station of the Id given does not exist");
+        }
+        if (type == null){
+            throw new  InvalidUnitException("Type of Unit cannot be equal to null");
+        }
+        
+
         int length;        
         //System.out.println("TYPE PASSED: " + type);
         for(int i=0;i<Unitarray.length;i++){
@@ -254,6 +279,7 @@ public class CityRescueImpl implements CityRescue {
                                 this.current_unit_id += 1;
                                 this.current_unit_num += 1;
                                 ambulance.UnitID = this.current_unit_id;
+                                CurrentStation.currentcapacity += 1;
                                 //System.out.println(ambulance.TYPE);
                                 return(ambulance.UnitID);
                                 
@@ -281,6 +307,7 @@ public class CityRescueImpl implements CityRescue {
                                 this.current_unit_id += 1;
                                 this.current_unit_num += 1;
                                 fire_engine.UnitID = this.current_unit_id;
+                                CurrentStation.currentcapacity += 1;
                                 return(fire_engine.UnitID);
                                  
                             }
@@ -302,6 +329,7 @@ public class CityRescueImpl implements CityRescue {
                                 this.current_unit_id += 1;
                                 this.current_unit_num += 1;
                                 police.UnitID = this.current_unit_id;
+                                CurrentStation.currentcapacity += 1;
                                 return (police.UnitID);
 
                             }
@@ -320,26 +348,76 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public void decommissionUnit(int unitId) throws IDNotRecognisedException, IllegalStateException {
+        boolean UnitExist = false;
+        for (int y =0; y<this.Unitarray.length; y++){
+            if (this.Unitarray[y] != null){
+                Unit CheckUnit = this.Unitarray[y];
+                if (CheckUnit.UnitID == unitId){
+                    UnitExist = true;
+                }
+            }
+        
+        if (UnitExist == false){
+            throw new IDNotRecognisedException("Unit does not exist");
+        }
+
         // TODO: implement
     for (int x = 0; x<this.Unitarray.length; x++){
-            if (this.Unitarray[x] == null){
-                UnitStatus status = this.Unitarray[unitId].STATUS;
-            if (!status.equals(UnitStatus.EN_ROUTE) && !status.equals(UnitStatus.AT_SCENE)){
-            this.Unitarray[unitId] = null;
-        }
-                break;
+            if (this.Unitarray[x] != null){
+                Unit DecomUnit = this.Unitarray[x];
+                if (DecomUnit.UnitID == unitId){
+                    if (DecomUnit.STATUS == UnitStatus.EN_ROUTE || DecomUnit.STATUS == UnitStatus.AT_SCENE){
+                        throw new IllegalStateException();
+
+                    }
+
+                    if (DecomUnit.STATUS != UnitStatus.EN_ROUTE || DecomUnit.STATUS != UnitStatus.AT_SCENE){
+                        DecomUnit =null;
+                        
+                    }
+                    
+    
+                }
             }
+            
         }
+        
+        }
+            }
 
         
        // throw new UnsupportedOperationException("Not implemented yet");
-    }
+    
 
     @Override
     public void transferUnit(int unitId, int newStationId) throws IDNotRecognisedException, IllegalStateException {
+        boolean UnitExist = false;
+        for (int y =0; y<this.Unitarray.length; y++){
+            if (this.Unitarray[y] != null){
+                Unit CheckUnit = this.Unitarray[y];
+                if (CheckUnit.UnitID == unitId){
+                    UnitExist = true;
+                }
+            }
+        }
+        if (UnitExist == false){
+            throw new IDNotRecognisedException("Unit does not exist");
+        }
+
+    for (int a= 0; a<this.Unitarray.length; a++){
+            if (this.Unitarray[a] != null){
+                Unit TransferUnit = this.Unitarray[a];
+                if (TransferUnit.UnitID == unitId){
+                    if (TransferUnit.STATUS == UnitStatus.EN_ROUTE || TransferUnit.STATUS == UnitStatus.AT_SCENE){
+                        throw new IllegalStateException("Unit is not IDLE or OutofService");
+                    }
+                }
+            }
+        }
+
         // TODO: implement
         for (int x = 0; x<this.Unitarray.length; x++){
-            if (this.Unitarray[x] == null){
+            if (this.Unitarray[x] != null){
                 if (this.Unitarray[x].UnitID == unitId){
                     this.Unitarray[x].Stationid = newStationId;
                 }
@@ -352,6 +430,21 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public void setUnitOutOfService(int unitId, boolean outOfService) throws IDNotRecognisedException, IllegalStateException {
+        boolean isin = false;
+        for (int x = 0; x<this.Unitarray.length; x++){
+            if (this.Unitarray[x]!= null){
+            if (this.Unitarray[x].UnitID == unitId){
+                isin = true;
+                if(this.Unitarray[x].STATUS == UnitStatus.EN_ROUTE || this.Unitarray[x].STATUS == UnitStatus.AT_SCENE ){
+                    throw new IllegalStateException("Not allowed units of types that arent OUt of service or idle");
+                }
+            }
+        }
+        }
+        if (isin==false){
+            throw new IDNotRecognisedException("this id is not an existing unit");
+        }
+        
         //TODO:implement
         if (outOfService == true){
             for (int x = 0; x<this.Unitarray.length; x++){
@@ -375,9 +468,9 @@ public class CityRescueImpl implements CityRescue {
         // TODO: implement
         int [] UNitIdlist = new int[this.Unitarray.length];
         for (int i = 0; i < this.Unitarray.length; i++){
-            Unit unit = this.Unitarray[i];
 
-            if (unit != null) {
+            if (Unitarray[i] != null) {
+                Unit unit = this.Unitarray[i];
                 UNitIdlist[i] = unit.get_unit_id();
             }
         }
@@ -395,8 +488,13 @@ public class CityRescueImpl implements CityRescue {
             Unit unit = this.Unitarray[i];
 
             if (unit != null) {
-                UnitStrings = unit.unitview();
+                if (unit.get_unit_id() == unitId){
+                    UnitStrings = unit.unitview();
+                }
             }
+        }
+        if (UnitStrings == ""){
+            throw new IDNotRecognisedException("ID is not in use ");
         }
         return UnitStrings;
         //throw new UnsupportedOperationException("Not implemented yet");
@@ -405,6 +503,15 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public int reportIncident(IncidentType type, int severity, int x, int y) throws InvalidSeverityException, InvalidLocationException {
         // TODO: implement
+        if(x<0||y<0||x>this.width||y>this.height){
+            throw new InvalidLocationException("NOT on grid");
+        }
+        else if(this.Obstaclearray[y][x] != (null)){
+            throw new InvalidLocationException("Obstacle already in that location");
+        }
+        if (severity<1 || severity>5){
+            throw new InvalidSeverityException("New severerity is not valid");
+        }
         for(int i=0;i<this.Incidentarray.length;i++){
             //System.out.println(this.Incidentarray[i]);
             if (this.Incidentarray[i] == (null)){
@@ -429,11 +536,41 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public void cancelIncident(int incidentId) throws IDNotRecognisedException, IllegalStateException {
+        boolean Isin = false;
+        for (int x=0;x<Incidentarray.length;x++){
+            if (this.Incidentarray[x] != null){
+            if (incidentId == Incidentarray[x].getincidentid()){
+                Isin = true;
+            }
+            }
+        }
+        if (Isin == false){
+            throw new IDNotRecognisedException("Incident 1with this id is not found");
+        }
         // TODO: implement
         for (int x = 0; x<this.Incidentarray.length; x++){
-            if ((this.Incidentarray[x].getincidentid()) == incidentId){
-                this.Incidentarray[x].CancelIncidentstatus(IncidentStatus.CANCELLED);
-                this.current_incident_num -= 1;
+            if (this.Incidentarray[x] != (null)){ 
+                if ((this.Incidentarray[x].getincidentid()) == incidentId){
+                    if (this.Incidentarray[x].status == IncidentStatus.REPORTED){
+                        this.Incidentarray[x].CancelIncidentstatus(IncidentStatus.CANCELLED);
+                        this.current_incident_num -= 1;
+                    }
+                    Unit temp ;
+                    if (this.Incidentarray[x].status == IncidentStatus.DISPATCHED){
+                        this.Incidentarray[x].CancelIncidentstatus(IncidentStatus.CANCELLED);
+                        this.current_incident_num -= 1;
+                        for (int t=0;t<this.Unitarray.length;t++){
+                            if (this.Unitarray[t] != (null)){
+                                if (this.Unitarray[t].AssignedIncidentId == incidentId){
+                                    setUnitOutOfService(Unitarray[t].get_unit_id(),true);
+                                }
+                            }
+                        }
+                    }
+                    else{
+                        throw new IllegalStateException("Cannot make an incedent that is  IN_PROGRESS, RESOLVED, CANCELLED");
+                    }
+                }
             }
         }
 
@@ -444,17 +581,19 @@ public class CityRescueImpl implements CityRescue {
     public void escalateIncident(int incidentId, int newSeverity) throws IDNotRecognisedException, InvalidSeverityException, IllegalStateException {
         boolean Isin = false;
         for (int x=0;x<Incidentarray.length;x++){
+            if (Incidentarray[x] != null){
             if (incidentId == Incidentarray[x].getincidentid()){
                 Isin = true;
                 if (Incidentarray[x].status == IncidentStatus.RESOLVED || Incidentarray[x].status == IncidentStatus.CANCELLED ){
-                    throw new IllegalStateException("Incident is Resolved/Cancelled")
+                    throw new IllegalStateException("Incident is Resolved/Cancelled");
                 }
-            }
-        if (Isin == false){
-            throw new IDNotRecognisedException("Incident with this id is not found")
+             } }
         }
-        if (newSeverity<1 && newSeverity>5){
-            throw new InvalidSeverityException("New severerity is not valid")
+        if (Isin == false){
+            throw new IDNotRecognisedException("Incident 2with this id is not found");
+        }
+        if (newSeverity<1 || newSeverity>5){
+            throw new InvalidSeverityException("New severerity is not valid");
         }
         // TODO: implement
         for(int i=0;i<this.Incidentarray.length;i++){
@@ -464,6 +603,7 @@ public class CityRescueImpl implements CityRescue {
                 break;
             }
         }
+
         //throw new UnsupportedOperationException("Not implemented yet");
     }
 
@@ -488,13 +628,16 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public String viewIncident(int incidentId) throws IDNotRecognisedException {
-        boolean Isin = False;
+        boolean Isin = false;
         for (int x=0;x<Incidentarray.length;x++){
+            if (this.Incidentarray[x] != null){
             if (incidentId == Incidentarray[x].getincidentid()){
-                Isin = True;
+                Isin = true;
             }
-        if (Isin == False){
-            throw new IDNotRecognisedException("Incident with this id is not found")
+        }
+    }
+        if (Isin == false){
+            throw new IDNotRecognisedException("Incident 3with this id is not found");
         }
               // TODO: implement
         for (int i=0;i<this.Incidentarray.length;i++){
@@ -510,10 +653,9 @@ public class CityRescueImpl implements CityRescue {
            
             }
         }
-            
-        return("incident not found");
+        
 
-            }
+            return("incident not found");}
         
         //throw new UnsupportedOperationException("Not implemented yet");
     
@@ -740,12 +882,12 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public String getStatus() {
 
-        String StatusString = "TICK=" + this.ticks +"\n STATIONS="+ this.current_station_num +" UNITS="+ this.current_unit_num + " INCIDENTS="+ this.current_incident_num+ " Obstacles="+this.current_obstacle_num ;
+        String StatusString = "TICK=" + this.ticks +"\n STATIONS="+ this.current_station_num +" UNITS="+ this.current_unit_num + " INCIDENTS="+ this.current_incident_num+ " OBSTACLES="+this.current_obstacle_num ;
         String IncidentString = "INCIDENTS\n ";
         for (int x = 0 ; x<Incidentarray.length;x++){
             if (this.Incidentarray[x] != null){
                 String TEMP = Incidentarray[x].incidentview();
-                IncidentString = IncidentString + "\n U#" +  x+" "+ TEMP;
+                IncidentString = IncidentString + "\n"+ TEMP;
             }
         }
         String UnitStrings = "UNITS";
@@ -757,17 +899,17 @@ public class CityRescueImpl implements CityRescue {
                     case AMBULANCE:
                         Ambulance ambulance = (Ambulance)this.Unitarray[length];
                         String temp = ambulance.unitview();
-                        UnitStrings = UnitStrings + "\n U#" +  length+" "+ temp;
+                        UnitStrings = UnitStrings + "\n"+ temp;
                         break;
                     case FIRE_ENGINE:
                         Fire_engine fire_engine = (Fire_engine) this.Unitarray[length];
                         String temp2 = fire_engine.unitview();
-                        UnitStrings = UnitStrings + "\n U#" + length +" "+ temp2;
+                        UnitStrings = UnitStrings + "\n"+ temp2;
                         break; 
                     case POLICE_CAR:
                         Police_car police = (Police_car) this.Unitarray[length];
                         String temp3 = police.unitview();
-                        UnitStrings = UnitStrings + "\n U#" +  length+" "+ temp3;
+                        UnitStrings = UnitStrings + "\n"+ temp3;
                         break;
                 }
             }
@@ -776,4 +918,9 @@ public class CityRescueImpl implements CityRescue {
         String REPORT = StatusString+"\n"+ IncidentString+"\n"+UnitStrings;
         return (REPORT);
     }
-}
+    
+    }
+
+    
+
+        

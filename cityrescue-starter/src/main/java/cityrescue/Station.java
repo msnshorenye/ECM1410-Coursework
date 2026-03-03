@@ -23,32 +23,58 @@ public class Station{
     public int GetId(){
         return this.id;
     }
-    
-    public boolean AddUnit(){
-        if (this.currentcapacity >= this
-            .stationId){
-            return false;
-        }
-        else{
-            this.currentcapacity += 1;
-            return true;
-        }
+    public int Getx(){
+        return this.x;
     }
+    public int Gety(){
+        return this.y;
+    }
+    public int getstationmaxcapacity(){
+        return this.stationmaxcapacity;
+    }
+    public void setstationmaxcapacity(int NewMax){
+        this.stationmaxcapacity = NewMax;
     
-    public int RemoveUnit(){
-        this.currentcapacity -= 1;
+    }
+    public int GetCurrentStationCapacity(){
         return this.currentcapacity;
     }
+    public void IncreaseOrDecreaseCurrentStationCapacity(String sign){
+        if (sign == "+"){
+            this.currentcapacity += 1;
+        }
+        if (sign == "-"){
+            this.currentcapacity += 1;
+        }
+        
+    }
+
+
+    // public boolean AddUnit(){
+    //     if (this.currentcapacity >= this
+    //         .stationId){
+    //         return false;
+    //     }
+    //     else{
+    //         this.currentcapacity += 1;
+    //         return true;
+    //     }
+    // }
     
-    public boolean setCapacity(int capacity){
-        if (capacity >= 0){
-            this.stationmaxcapacity = capacity;
-            return true;
-        }
-        else{
-            return false;
-        }
+    // public int RemoveUnit(){
+    //     this.currentcapacity -= 1;
+    //     return this.currentcapacity;
+    // }
+    
+    // public boolean setCapacity(int capacity){
+    //     if (capacity >= 0){
+    //         this.stationmaxcapacity = capacity;
+    //         return true;
+    //     }
+    //     else{
+    //         return false;
+    //     }
     
     }
-    }
+    
 

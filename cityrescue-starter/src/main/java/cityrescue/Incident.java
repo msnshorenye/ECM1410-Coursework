@@ -56,7 +56,23 @@ public class Incident {
         this.Unitid = newid;
         return this.Unitid;
     }
-  
+   public int GetIncidentX(){
+    return this.x;
+
+   }
+   public int GetIncidentY(){
+    return this.y;
+   }
+   public int GetIncidentsUnitId(){
+    return this.Unitid;
+   }
+   public void setIncidentUnitId(int NewUnitID){
+    this.Unitid = NewUnitID;
+
+   }
+   public int GetSeverity(){
+    return this.severity;
+   }
     public String incidentview(){
         String view_string = "I# " + this.IncidentID + " TYPE=" + this.Type + " SEV=" + this.severity + "LOC=(" + this.x +"," + this.y + ") STATUS=" + this.status +"UNIT=" + this.Unitid;
         return view_string;

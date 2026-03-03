@@ -4,6 +4,7 @@ import cityrescue.enums.UnitType;
 import cityrescue.enums.UnitStatus;
 class Fire_engine extends Unit{
     public Fire_engine(int Stationid){
+        super();
         this.UnitID = -1;
         this.ticks = 4;
         this.TYPE = UnitType.FIRE_ENGINE; 
@@ -39,4 +40,13 @@ class Fire_engine extends Unit{
         }
         return view_string;
     }
+    @Override
+    public int get_unit_ticks(){
+        return 4;
+    }
+    @Override
+    public UnitType get_unit_type(){
+        return UnitType.FIRE_ENGINE;
+    }
+
 }

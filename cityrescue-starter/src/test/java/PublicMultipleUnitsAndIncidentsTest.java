@@ -30,7 +30,8 @@ public class PublicMultipleUnitsAndIncidentsTest {
         assertEquals(1, amb);
         assertEquals(2, fire);
         assertEquals(3, police);
-        System.out.println(cr.viewUnit(amb));
+        System.out.println(cr.getStatus());
+        System.out.println(cr.viewUnit(amb)+" 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"+amb);
         assertTrue(cr.viewUnit(amb).contains("TYPE=AMBULANCE"));
         assertTrue(cr.viewUnit(fire).contains("TYPE=FIRE_ENGINE"));
         assertTrue(cr.viewUnit(police).contains("TYPE=POLICE_CAR"));
