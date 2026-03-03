@@ -12,7 +12,8 @@ class Fire_engine extends Unit{
         this.xloc =-1;
         this.yloc =-1;
         this.AssignedIncidentId =-1;
-    }
+        this.WORK = 0;
+    } 
     // public void main(String[] args) {
     //     Fire_engine fire = new Fire_engine();
     //     fire.get_data();
@@ -28,7 +29,14 @@ class Fire_engine extends Unit{
     }
 
     public String unitview(){
-        String view_string = "U#" + this.UnitID + " TYPE=" + this.TYPE + " HOME=" + this.Stationid + " LOC=(" + this.xloc +"," + this.yloc + ") STATUS=" + this.STATUS +" INCIDENT=" + this.AssignedIncidentId;
+        String view_string;
+        if (this.WORK != 0){
+            view_string = "U#" + this.UnitID + " TYPE=" + this.TYPE + " HOME=" + this.Stationid + "LOC=(" + this.xloc +"," + this.yloc + ") STATUS=" + this.STATUS +" INCIDENT=" + this.AssignedIncidentId+" WORK="+this.WORK;
+        }
+        else{
+            view_string = "U#" + this.UnitID + " TYPE=" + this.TYPE + " HOME=" + this.Stationid + "LOC=(" + this.xloc +"," + this.yloc + ") STATUS=" + this.STATUS +" INCIDENT=" + this.AssignedIncidentId;
+
+        }
         return view_string;
     }
 }

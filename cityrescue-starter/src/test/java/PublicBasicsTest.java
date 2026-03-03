@@ -12,7 +12,7 @@ public class PublicBasicsTest {
     void setUp() throws Exception {
         cr = new CityRescueImpl();
         cr.initialise(5, 5);
-        System.out.println("DONE 1 -----------------------------");
+        //System.out.println("DONE 1 -----------------------------");
     }
 
     @Test
@@ -21,8 +21,8 @@ public class PublicBasicsTest {
         System.out.println(sz);
         assertArrayEquals(new int[]{5,5}, sz);
         assertTrue(cr.getStatus().contains("TICK=0"));
-        System.err.println(cr.getStatus());
-        System.out.println("Done 2");
+        //System.err.println(cr.getStatus());
+        //System.out.println("Done 2");
     }
 
     @Test
@@ -31,7 +31,7 @@ public class PublicBasicsTest {
         int id2 = cr.addStation("North", 1, 2);
         assertEquals(1, id1);
         assertEquals(2, id2);
-        System.out.println("Done 3");
+        //System.out.println("Done 3");
     }
 
     @Test
@@ -39,6 +39,6 @@ public class PublicBasicsTest {
         String before = cr.getStatus();
         assertThrows(InvalidLocationException.class, () -> cr.addObstacle(-1, 0));
         assertEquals(before, cr.getStatus());
-        System.out.println("Done 4 - ---");
+        //System.out.println("Done 4 - ---");
     }
 }

@@ -9,6 +9,7 @@ class Police_car extends Unit{
         this.TYPE = UnitType.POLICE_CAR;
         this.Stationid = Stationid;
         this.STATUS = UnitStatus.IDLE;
+        this.WORK =0;
         this.xloc =-1;
         this.yloc = -1;
         this.AssignedIncidentId = -1;
@@ -20,7 +21,14 @@ class Police_car extends Unit{
         return this.UnitID;
     }
     public String unitview(){
-        String view_string = "U#" + this.UnitID + " TYPE=" + this.TYPE + " HOME=" + this.Stationid + " LOC=(" + this.xloc +"," + this.yloc + ") STATUS=" + this.STATUS +" INCIDENT=" + this.AssignedIncidentId ;
+        String view_string;
+        if (this.WORK != 0){
+            view_string = "U#" + this.UnitID + " TYPE=" + this.TYPE + " HOME=" + this.Stationid + "LOC=(" + this.xloc +"," + this.yloc + ") STATUS=" + this.STATUS +" INCIDENT=" + this.AssignedIncidentId+" WORK="+this.WORK;
+        }
+        else{
+            view_string = "U#" + this.UnitID + " TYPE=" + this.TYPE + " HOME=" + this.Stationid + "LOC=(" + this.xloc +"," + this.yloc + ") STATUS=" + this.STATUS +" INCIDENT=" + this.AssignedIncidentId;
+
+        }
         return view_string;
     }
 }

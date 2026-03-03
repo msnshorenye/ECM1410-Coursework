@@ -52,6 +52,9 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public void initialise(int width, int height) throws InvalidGridException {
+        if (width <= 0 || height <= 0){
+            throw new InvalidGridException("Invalid Grid size");
+        }
 
 
         // TODO: implement
@@ -88,6 +91,9 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public void addObstacle(int x, int y) throws InvalidLocationException {
+        if (x<0 || y<0 || y>this.height || x>this.width){
+            throw new InvalidLocationException("Out of bounds");
+        }
         this.Obstaclearray[x][y] = "obstacle";
         this.current_obstacle_num += 1;
         
@@ -97,6 +103,9 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public void removeObstacle(int x, int y) throws InvalidLocationException {
+        if (x<0||y<0||x>this.height||y>this.width){
+            throw new InvalidLocationException("Out of Bounds");
+        }        
         // TODO: implement
         this.Obstaclearray[x][y] = " ";
         this.current_obstacle_num -= 1;
@@ -105,6 +114,12 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public int addStation(String name, int x, int y) throws InvalidNameException, InvalidLocationException {
+        if (name == ""){
+            throw new InvalidNameException("Must enter a name");
+        }
+        if (x<0 || y<0 || y>this.height || x>this.width){
+            throw new InvalidLocationException("Out of bounds");
+        }
         // TODO: implement
          for(int i=0;i<this.Stationarray.length;i++){
             if (this.Stationarray[i]==(null)){
@@ -124,6 +139,31 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public void removeStation(int stationId) throws IDNotRecognisedException, IllegalStateException {
+        int[] stationlist = getStationIds();
+        boolean idbool = false;
+        for (int i = 0; i< GetStationIds.length; i++){
+            if (station[i] == stationId){
+                idbool = true;
+            }
+           
+        }
+        if (idbool == false){
+            throw new IDNotRecognisedException("No Station with this id");
+            
+        }
+        boolean HasUnit = false;
+        for (int y = 0; y<this.Unitarray.length; y++){
+            if (this.Unitarray[y] != null){
+                Unit c_unit = this.Unitarray[y];
+                if (c_unit.Stationid == stationId){
+                    HasUnit = true;
+                }
+
+            }
+        }
+        if (HasUnit == true){
+            throw new IllegalStateException();
+        }
         // TODO: implement
         for (int x = 0; x<this.Stationarray.length; x++){
             if (this.Stationarray[x].GetId() == stationId){
@@ -137,6 +177,30 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public void setStationCapacity(int stationId, int maxUnits) throws IDNotRecognisedException, InvalidCapacityException {
+        int[] stationlist = getStationIds();
+        boolean idbool = false;
+        for (int i = 0; i< GetStationIds.length; i++){
+            if (station[i] == stationId){
+                idbool = true;
+            }
+           
+        }
+        if (idbool == false){
+            throw new IDNotRecognisedException("No Station with this id");
+            
+        }
+        current_unit_num = 0
+        for (int y = 0; y<this.Unitarray.length; y++){
+            if (this.Unitarray[y] != null){
+                Unit c_unit = this.Unitarray[y];
+                if (c_unit.Stationid == stationId){
+                    CurrentUnitNum += 1;
+                }
+
+        
+        if (maxUnits<=0 || CurrentUnitNum > maxUnits){
+            throw new InvalidCapacityException();
+        }
         // TODO: implement
         for (int x = 0; x<this.Stationarray.length; x++){
 
@@ -163,16 +227,21 @@ public class CityRescueImpl implements CityRescue {
     @Override
     public int addUnit(int stationId, UnitType type) throws IDNotRecognisedException, InvalidUnitException, IllegalStateException {
         // TODO: implement
+        for (int x= 0; x < this.Stationarrayarray.length; x++){
+            if (this.Stationarray[x] != null){
+                Station Stat = this.Stationarray[x];
+            }
+        }
         int length;        
-        System.out.println("TYPE PASSED: " + type);
+        //System.out.println("TYPE PASSED: " + type);
         for(int i=0;i<Unitarray.length;i++){
             length = i;
             if (Unitarray[i] == (null)){
                 switch(type) {
                     case AMBULANCE:
-                        System.out.println("Ambulancee");
+                        //System.out.println("Ambulancee");
                         Ambulance ambulance = new Ambulance(stationId);
-                        System.out.println(ambulance.TYPE);
+                        //System.out.println(ambulance.TYPE);
                         this.Unitarray[length] = ambulance;
                         for (int x =0; x< this.Stationarray.length; x++){
                             Station CurrentStation = this.Stationarray[x];
@@ -185,7 +254,7 @@ public class CityRescueImpl implements CityRescue {
                                 this.current_unit_id += 1;
                                 this.current_unit_num += 1;
                                 ambulance.UnitID = this.current_unit_id;
-                                System.out.println(ambulance.TYPE);
+                                //System.out.println(ambulance.TYPE);
                                 return(ambulance.UnitID);
                                 
 
@@ -196,10 +265,10 @@ public class CityRescueImpl implements CityRescue {
                             
                         }
 
-                        System.out.println("HE::O");
+                        //System.out.println("HE::O");
                         break;
                     case FIRE_ENGINE:
-                        System.out.println("Fire enginge");
+                        //System.out.println("Fire enginge");
                         Fire_engine fire_engine = new Fire_engine(stationId);
                         this.Unitarray[length] = fire_engine;
                         for (int x =0; x< this.Stationarray.length; x++){
@@ -217,10 +286,10 @@ public class CityRescueImpl implements CityRescue {
                             }
                             }
                         }
-                        System.out.println("HE::O");
+                        //System.out.println("HE::O");
                         break;
                     case POLICE_CAR:
-                        System.out.println("Police car");
+                        //System.out.println("Police car");
                         Police_car police = new Police_car(stationId);
                         this.Unitarray[length] = police;
                         for (int x =0; x< this.Stationarray.length; x++){
@@ -238,10 +307,7 @@ public class CityRescueImpl implements CityRescue {
                             }
                             }
                         }
-                        this.current_unit_id += 1;
-                        this.current_unit_num += 1;
-                        police.UnitID = this.current_unit_id;
-                        System.out.println("HE::O");
+                        //System.out.println("HE::O");
                         break;
                 }
             break;
@@ -283,7 +349,6 @@ public class CityRescueImpl implements CityRescue {
 
         //throw new UnsupportedOperationException("Not implemented yet");
     }
-    //Dictionary Skin_colour = {"Matthew":1,"Fin":2,"William King":3};
 
     @Override
     public void setUnitOutOfService(int unitId, boolean outOfService) throws IDNotRecognisedException, IllegalStateException {
@@ -316,7 +381,7 @@ public class CityRescueImpl implements CityRescue {
                 UNitIdlist[i] = unit.get_unit_id();
             }
         }
-        System.out.println("HJK^&67676767");
+        //System.out.println("HJK^&67676767");
         Arrays.sort(UNitIdlist);
         return UNitIdlist;
         //throw new UnsupportedOperationException("Not implemented yet");
@@ -341,7 +406,7 @@ public class CityRescueImpl implements CityRescue {
     public int reportIncident(IncidentType type, int severity, int x, int y) throws InvalidSeverityException, InvalidLocationException {
         // TODO: implement
         for(int i=0;i<this.Incidentarray.length;i++){
-            System.out.println(this.Incidentarray[i]);
+            //System.out.println(this.Incidentarray[i]);
             if (this.Incidentarray[i] == (null)){
                 int length = i;
                 Incident newinci = new Incident(x,y,type,severity);
@@ -352,7 +417,7 @@ public class CityRescueImpl implements CityRescue {
                 
 
             
-                System.out.println("added incident"+i);
+                //System.out.println("added incident"+i);
                 return this.current_incident_id;
                 
             }
@@ -377,6 +442,20 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public void escalateIncident(int incidentId, int newSeverity) throws IDNotRecognisedException, InvalidSeverityException, IllegalStateException {
+        boolean Isin = false;
+        for (int x=0;x<Incidentarray.length;x++){
+            if (incidentId == Incidentarray[x].getincidentid()){
+                Isin = true;
+                if (Incidentarray[x].status == IncidentStatus.RESOLVED || Incidentarray[x].status == IncidentStatus.CANCELLED ){
+                    throw new IllegalStateException("Incident is Resolved/Cancelled")
+                }
+            }
+        if (Isin == false){
+            throw new IDNotRecognisedException("Incident with this id is not found")
+        }
+        if (newSeverity<1 && newSeverity>5){
+            throw new InvalidSeverityException("New severerity is not valid")
+        }
         // TODO: implement
         for(int i=0;i<this.Incidentarray.length;i++){
             int needid = this.Incidentarray[i].getincidentid();
@@ -409,7 +488,15 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public String viewIncident(int incidentId) throws IDNotRecognisedException {
-        // TODO: implement
+        boolean Isin = False;
+        for (int x=0;x<Incidentarray.length;x++){
+            if (incidentId == Incidentarray[x].getincidentid()){
+                Isin = True;
+            }
+        if (Isin == False){
+            throw new IDNotRecognisedException("Incident with this id is not found")
+        }
+              // TODO: implement
         for (int i=0;i<this.Incidentarray.length;i++){
             if (this.Incidentarray[i] != null){
     
@@ -503,7 +590,6 @@ public class CityRescueImpl implements CityRescue {
                                     Curr_unit.STATUS = UnitStatus.EN_ROUTE;
                                     Curr_unit.AssignedIncidentId = Current_Incident.getincidentid();
                                     Current_Incident.setincidentsUnitid(Curr_unit.get_unit_id());
-                                    
                                 }
                             }
                         }
@@ -530,24 +616,26 @@ public class CityRescueImpl implements CityRescue {
     public void tick() {
         // TODO: implement
         // 1) Move En_route units first by ascending unit id
-        System.out.println("RAWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWR 1");
+        //System.out.println("RAWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWR 1");
         int [] UNITLIST = getUnitIds();
-        System.out.println("RAWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWR 2");
-        Unit tempUnit = null;
-        System.out.println("RAWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWR 3");
+        //System.out.println("RAWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWR 2");
+        //Unit tempUnit = null;
+        //System.out.println("RAWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWR 3");
         for (Unit u : Unitarray) {
+            Unit tempUnit = null;
             for (int i = 0 ; i<UNITLIST.length;i++){
                 //System.out.println(u.get_unit_id());
                 if (u != (null) ){
                     //System.out.println(u);
                     if (u.get_unit_id() == i) {
-                    System.out.println("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
+                    //System.out.println("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
                     tempUnit = u;
                     }
                 }
             }
-            System.out.println("RAWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWR 4");
-            System.out.println(tempUnit.TYPE+"...............................................");
+            //System.out.println("RAWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWR 4");
+            //System.out.println(tempUnit.TYPE+"...............................................");
+            if (tempUnit != (null)){
             Incident incident = null ;
             for (int t = 0; t<this.Incidentarray.length;t++){
                     incident = (Incident)this.Incidentarray[t];
@@ -555,80 +643,94 @@ public class CityRescueImpl implements CityRescue {
                         break;
                     }
                 }
-            System.out.println(incident.Type);
-            if (tempUnit.STATUS == UnitStatus.EN_ROUTE){
-                int X = tempUnit.xloc;  
-                int Y = tempUnit.yloc;
-                int [][] potential = new int[4][2];  // 4 coordinates each with y,x
-                int x;
-                int y;
-                if(Y+1>this.height){
-                    //N is valid
-                    y = Y+1;
-                    x = X;
-                    potential[0][0] = y;
-                    potential[0][1] = x;
-                }
-                if (X+1> this.width) {
-                    //E is valid
-                    y = Y;
-                    x = X+1;
-                    potential[1][0] = y;
-                    potential[1][1] = x;
-                }
-                if(Y-1>0){
-                    //S is valid
-                    y = Y-1;
-                    x = X;
-                    potential[2][0] = y;
-                    potential[2][1] = x;
-                }  
-                if(X-1>0){
-                    //W is valid
-                    y = Y;
-                    x = X-1;
-                    potential[3][0] = y;
-                    potential[3][1] = x;
-                } 
-                int I_xloc ;
-                int I_yloc;
-                I_xloc = incident.x;
-                I_yloc = incident.y;
-                // for (int l= 0 ; l<potential.length;l++){
-                //     System.out.println(potential[l][0]);
-                //     System.out.println(potential[l][1]);
-                // }
-                int OG_MAN = (Math.abs((I_xloc-X)))-(Math.abs((I_yloc-Y)));
-                for (int z=0;z<potential.length;z++){
-                    int xLOC = potential[z][1];
-                    int yLOC = potential[z][0];
-
-                    if (this.Obstaclearray[yLOC][xLOC] != "obstacle"){
-                        int New_Score =  (Math.abs((I_xloc-xLOC))-(Math.abs((I_yloc-yLOC))));
-                        if (New_Score <OG_MAN){
-                            //CHANging location
-                            tempUnit.xloc = xLOC;
-                            tempUnit.yloc = yLOC;
-                            System.out.println("This way"+z);
-                            break;
-                        }
+            //System.out.println(incident.Type+"    ---------------------------------------------------------------------");
+            if (tempUnit != (null)){
+                if (tempUnit.STATUS == UnitStatus.EN_ROUTE){
+                    int X = tempUnit.xloc;  
+                    int Y = tempUnit.yloc;
+                    int [][] potential = new int[4][2];  // 4 coordinates each with y,x
+                    int x;
+                    int y;
+                    if(Y+1<this.height){
+                        //N is valid
+                        //System.out.println("NORTH");
+                        y = Y+1;
+                        x = X;
+                        potential[0][0] = y;
+                        potential[0][1] = x;
+                    }
+                    if (X+1< this.width) {
+                        //E is valid
+                        //System.out.println("EAST");
+                        y = Y;
+                        x = X+1;
+                        potential[1][0] = y;
+                        potential[1][1] = x;
+                    }
+                    if(Y-1>0){
+                        //S is valid
+                        y = Y-1;
+                        x = X;
+                        potential[2][0] = y;
+                        potential[2][1] = x;
+                    }  
+                    if(X-1>0){
+                        //W is valid
+                        y = Y;
+                        x = X-1;
+                        potential[3][0] = y;
+                        potential[3][1] = x;
                     } 
-                }
-                //2) Mark New arrivals
-                if ((tempUnit.yloc == I_yloc)&&(tempUnit.xloc == I_xloc)){
-                    //set status to 
-                    tempUnit.STATUS = UnitStatus.AT_SCENE;
-                    incident.status = IncidentStatus.IN_PROGRESS;
-                }
-            }
-            else {
-                if (tempUnit.STATUS == UnitStatus.AT_SCENE){
-                    tempUnit.WORK += 1;
-                    incident.status = IncidentStatus.RESOLVED;                         
+                    int I_xloc ;
+                    int I_yloc;
+                    I_xloc = incident.x;
+                    I_yloc = incident.y;
+                    // for (int l= 0 ; l<potential.length;l++){
+                    //     System.out.println(potential[l][0]);
+                    //     System.out.println(potential[l][1]);
+                    // }
+                    int OG_MAN = ((Math.abs((I_yloc-Y))+Math.abs((I_xloc-X))));
+                    for (int z=0;z<potential.length;z++){
+                        int xLOC = potential[z][1];
+                        int yLOC = potential[z][0];
+
+                        if (this.Obstaclearray[yLOC][xLOC] != "obstacle"){
+                            int New_Score =  ((Math.abs((I_yloc-yLOC)))+Math.abs((I_xloc-xLOC)));
+                            //System.out.println(New_Score+" <"+OG_MAN);
+                            if (New_Score <OG_MAN){
+                                //CHANging location
+                                tempUnit.xloc = xLOC;
+                                tempUnit.yloc = yLOC;
+                                System.out.println("This way"+z);
+                                break;
+                            }
+                        } 
+                    }
+                    //2) Mark New arrivals
+                    if ((tempUnit.yloc == I_yloc)&&(tempUnit.xloc == I_xloc)){
+                        //set status to 
+                        tempUnit.STATUS = UnitStatus.AT_SCENE;
+                        incident.status = IncidentStatus.IN_PROGRESS;
                     }
                 }
+                else {
+                    if (tempUnit.STATUS == UnitStatus.AT_SCENE){
+                        tempUnit.WORK += 1;
+                        if (tempUnit.WORK == tempUnit.ticks){
+                            incident.status = IncidentStatus.RESOLVED;
+                            tempUnit.STATUS = UnitStatus.IDLE;
+                            tempUnit.WORK = 0;
+
+                        }
+                                                
+                        }
+                    }
+            //int count = 0 ;
+            //System.out.println(++count);
             }
-        System.out.println(tempUnit.TYPE);
+            }
+        }
+        //System.out.println(tempUnit.TYPE);
         // 3) process on scene work 
         // 4) resolve completed incidents by ascending unit id 
         
@@ -674,7 +776,4 @@ public class CityRescueImpl implements CityRescue {
         String REPORT = StatusString+"\n"+ IncidentString+"\n"+UnitStrings;
         return (REPORT);
     }
- public static void main(String[] args) {
-    System.out.println("Hello");
- }
 }

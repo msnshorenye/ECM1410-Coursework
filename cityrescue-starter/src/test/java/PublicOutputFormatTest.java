@@ -31,9 +31,9 @@ public class PublicOutputFormatTest {
 
         // Output prefix must match the coursework specification examples
         // (e.g., "U#2 ..." and "I#1 ...").
-        System.out.println(cr.viewUnit(u));
-        System.out.println(cr.viewIncident(i));
-        System.out.println(i);
+        //System.out.println(cr.viewUnit(u));
+        //System.out.println(cr.viewIncident(i));
+        //System.out.println(i);
         assertTrue(cr.viewUnit(u).startsWith("U#"));
         assertTrue(cr.viewIncident(i).startsWith("I#"));
     }
