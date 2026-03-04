@@ -22,11 +22,23 @@ class Police_car extends Unit{
         // this.AssignedIncidentId = -1;
     }
     
-
+/**
+ * Police car Overides Units abstract get methid get unit ticks method to return an integer value.
+ * @return It returns integer 3 as that is the exact amount
+ * of ticks that a Fire engine takes to complete an Incident at the scene.
+ */
     @Override
     public int get_unit_ticks(){
         return 3;
     }
+    /**
+     * Police Car overides the get unit type method 
+     * to return the Fire engine type.
+     *  This means long switch and if statements are not required as
+     * a Unit subclass object can call a method to get its exact 
+     * type regardless of which subclass object has been created.
+     * 
+     */
     @Override
     public UnitType get_unit_type(){
         return UnitType.POLICE_CAR;

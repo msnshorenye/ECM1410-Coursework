@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="EdgeCaseTest" time="0.051" tests="3" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="EdgeCaseTest" time="0.021" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="session.topDirectory" value="/workspaces/ECM1410-Coursework/cityrescue-starter"/>
     <property name="sun.boot.library.path" value="/usr/local/sdkman/candidates/java/25.0.2-open/lib"/>
-    <property name="sun.java.command" value="/workspaces/ECM1410-Coursework/cityrescue-starter/target/surefire/surefirebooter-20260304210101314_3.jar /workspaces/ECM1410-Coursework/cityrescue-starter/target/surefire 2026-03-04T21-01-00_991-jvmRun1 surefire-20260304210101314_1tmp surefire_0-20260304210101314_2tmp"/>
+    <property name="sun.java.command" value="/workspaces/ECM1410-Coursework/cityrescue-starter/target/surefire/surefirebooter-20260304212841941_3.jar /workspaces/ECM1410-Coursework/cityrescue-starter/target/surefire 2026-03-04T21-28-41_813-jvmRun1 surefire-20260304212841941_1tmp surefire_0-20260304212841941_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/workspaces/ECM1410-Coursework/cityrescue-starter/target/test-classes:/workspaces/ECM1410-Coursework/cityrescue-starter/target/classes:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/home/codespace/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/codespace/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/home/codespace/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/home/codespace/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -27,7 +27,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/workspaces/ECM1410-Coursework/cityrescue-starter/target/surefire/surefirebooter-20260304210101314_3.jar"/>
+    <property name="surefire.real.class.path" value="/workspaces/ECM1410-Coursework/cityrescue-starter/target/surefire/surefirebooter-20260304212841941_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="25.0.2+10-69"/>
     <property name="user.name" value="codespace"/>
@@ -54,7 +54,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="test_last_first_legal_move" classname="EdgeCaseTest" time="0.006">
+  <testcase name="test_last_first_legal_move" classname="EdgeCaseTest" time="0.002">
     <system-out><![CDATA[[[null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null]]
 0 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 1
@@ -75,7 +75,7 @@ UNITS
 U#1 TYPE=POLICE_CAR HOME=1LOC=(2,1) STATUS=EN_ROUTE INCIDENT=1
 ]]></system-out>
   </testcase>
-  <testcase name="test_unit_max_capacity" classname="EdgeCaseTest" time="0.015">
+  <testcase name="test_unit_max_capacity" classname="EdgeCaseTest" time="0.009">
     <system-out><![CDATA[[[null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null]]
 HHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 0 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -187,9 +187,10 @@ U#3 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
 50 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 U#51 TYPE=AMBULANCE HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
 TICK=0
- STATIONS=2 UNITS=50 INCIDENTS=0 OBSTACLES=0
+ STATIONS=2 UNITS=50 INCIDENTS=1 OBSTACLES=0
 INCIDENTS
  
+I# 1 TYPE=CRIME SEV=2LOC=(2,2) STATUS=REPORTEDUNIT=0
 UNITS
 U#1 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
 U#2 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
@@ -242,9 +243,96 @@ U#48 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
 U#49 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
 U#50 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
 U#51 TYPE=AMBULANCE HOME=2LOC=(0,0) STATUS=IDLE INCIDENT=-1
+TICK=0
+ STATIONS=2 UNITS=50 INCIDENTS=0 OBSTACLES=0
+INCIDENTS
+ 
+I# 1 TYPE=CRIME SEV=2LOC=(2,2) STATUS=CANCELLEDUNIT=0
+UNITS
+U#1 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#2 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#51 TYPE=AMBULANCE HOME=2LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#4 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#5 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#6 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#7 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#8 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#9 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#10 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#11 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#12 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#13 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#14 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#15 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#16 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#17 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#18 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#19 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#20 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#21 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#22 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#23 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#24 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#25 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#26 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#27 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#28 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#29 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#30 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#31 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#32 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#33 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#34 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#35 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#36 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#37 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#38 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#39 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#40 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#41 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#42 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#43 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#44 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#45 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#46 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#47 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#48 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#49 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#50 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
 ]]></system-out>
   </testcase>
-  <testcase name="wills_testicle" classname="EdgeCaseTest" time="0.02">
+  <testcase name="test_cancel" classname="EdgeCaseTest" time="0.003">
+    <system-out><![CDATA[[[null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null]]
+
+
+
+
+
+0 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+This way0
+U#1 TYPE=POLICE_CAR HOME=1LOC=(2,3) STATUS=EN_ROUTE INCIDENT=1
+TICK=1
+ STATIONS=1 UNITS=1 INCIDENTS=0 OBSTACLES=0
+INCIDENTS
+ 
+I# 1 TYPE=CRIME SEV=3LOC=(4,3) STATUS=CANCELLEDUNIT=1
+UNITS
+U#1 TYPE=POLICE_CAR HOME=1LOC=(2,3) STATUS=IDLE INCIDENT=1
+TICK=2
+ STATIONS=1 UNITS=1 INCIDENTS=0 OBSTACLES=0
+INCIDENTS
+ 
+I# 1 TYPE=CRIME SEV=3LOC=(4,3) STATUS=CANCELLEDUNIT=1
+UNITS
+U#1 TYPE=POLICE_CAR HOME=1LOC=(2,3) STATUS=IDLE INCIDENT=1
+
+
+
+
+
+]]></system-out>
+  </testcase>
+  <testcase name="wills_testicle" classname="EdgeCaseTest" time="0.004">
     <system-out><![CDATA[[[null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null]]
 0 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 1 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

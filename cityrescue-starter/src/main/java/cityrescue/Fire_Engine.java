@@ -2,6 +2,17 @@ package cityrescue;
 import cityrescue.Unit.*;
 import cityrescue.enums.UnitType;
 import cityrescue.enums.UnitStatus;
+/**
+ * Fire engine class is a subclass of unit 
+ * that services incident objects of type fire
+ * The constructur uses the abstract classes 
+ * Unit Set methods to give default values to
+ * the Fire engines attributes which are
+ * the attributes outlined in the Unit
+ * abstract class other than the 
+ * attributes returned by overriden methods.
+ * 
+ */
 class Fire_engine extends Unit{
     public Fire_engine(int Stationid){
         SetUnitID(-1);
@@ -30,7 +41,7 @@ class Fire_engine extends Unit{
     /**
      * Fire engine Overides Units abstract get methid get unit ticks method to return an integer value.
      * @return It returns integer 4 as that is the exact amount
-     * of ticks that a Fire engine takes to complete an Incident.
+     * of ticks that a Fire engine takes to complete an Incident at the scene.
      */
     @Override
     public int get_unit_ticks(){
@@ -38,7 +49,10 @@ class Fire_engine extends Unit{
     }
     /**
      * Fire engine overides the get unit type method 
-     * to return the
+     * to return the Fire engine type.
+     *  This means long switch and if statements are not required as
+     * a Unit subclass object can call a method to get its exact 
+     * type regardless of which subclass object has been created.
      */
     @Override
     

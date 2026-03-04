@@ -81,7 +81,7 @@ public class EdgeCaseTest {
         System.out.println(cr.getStatus());
         cr.transferUnit(51,2);//test transfer unit
         System.out.println(cr.viewUnit(51));
-        cr.cancelIncident(a)
+        cr.cancelIncident(a);
         System.out.println(cr.getStatus());
     }
     @Test
@@ -118,4 +118,19 @@ public class EdgeCaseTest {
         cr.tick(); 
         System.out.println(cr.getStatus());
     }   
+    @Test
+    void test_cancel() throws Exception {
+        System.out.println("\n\n\n\n");
+        int s = cr.addStation("A", 2, 2);
+        int u1 = cr.addUnit(s, UnitType.POLICE_CAR);
+        int i1 = cr.reportIncident(IncidentType.CRIME,3, 4, 3);
+        cr.dispatch();
+        cr.tick();
+        System.out.println(cr.viewUnit(u1));
+        cr.cancelIncident(i1);
+        System.out.println(cr.getStatus());
+        cr.tick();
+        System.out.println(cr.getStatus());
+        System.out.println("\n\n\n\n");
+    }
 }

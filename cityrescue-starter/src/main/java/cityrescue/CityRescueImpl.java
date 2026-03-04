@@ -532,9 +532,15 @@ public class CityRescueImpl implements CityRescue {
                     if (this.Incidentarray[x].get_IncidentStatus()== IncidentStatus.REPORTED){
                         this.Incidentarray[x].CancelIncidentstatus(IncidentStatus.CANCELLED);
                         this.current_incident_num -= 1;
+                         for (int b=0;b<this.Unitarray.length;b++){
+                            if (this.Unitarray[b] != (null)){
+                                if (this.Unitarray[b].GetAssignedIncidentId() == incidentId){
+                                    this.Unitarray[b].set_status(UnitStatus.IDLE);
+                                }
+                            }
+                        }
                     }
-                    Unit temp ;
-                    if (this.Incidentarray[x].get_IncidentStatus() == IncidentStatus.DISPATCHED){
+                    else if (this.Incidentarray[x].get_IncidentStatus() == IncidentStatus.DISPATCHED){
                         this.Incidentarray[x].CancelIncidentstatus(IncidentStatus.CANCELLED);
                         this.current_incident_num -= 1;
                         for (int t=0;t<this.Unitarray.length;t++){
