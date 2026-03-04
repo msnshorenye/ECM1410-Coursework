@@ -28,6 +28,7 @@ public class PublicBasicsTest {
     @Test
     void addStation_assignsIdStartingAt1() throws Exception {
         int id1 = cr.addStation("Central", 1, 1);
+        
         int id2 = cr.addStation("North", 1, 2);
         assertEquals(1, id1);
         assertEquals(2, id2);

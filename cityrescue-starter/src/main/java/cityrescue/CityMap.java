@@ -2,9 +2,9 @@
 package cityrescue;
 import java.util.Arrays;
 public class CityMap {
-    public int width;
-    public int height;
-    public String[][] grid;
+    private int width;
+    private int height;
+    private String[][] grid;
     
     
     public CityMap(int width, int height){
@@ -54,6 +54,15 @@ public class CityMap {
           
 
     }
+    public int getwidth(){
+        return this.width;
+    }
+    public int getheight(){
+        return this.height;
+    }
           
+    public String[][]getgrid(){
+        return this.grid;
+    }
 
     }

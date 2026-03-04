@@ -3,19 +3,17 @@ import cityrescue.enums.UnitType;
 import cityrescue.enums.UnitStatus;
 
 abstract class Unit {
-    int ticks = 0; //get rid of
-    public UnitType TYPE; //get rid of
-    public int xloc; //privated
-    public int yloc; // privated
-    private UnitStatus STATUS; //
-    public int AssignedIncidentId=-1;
-    public int WORK;
-    public int UnitID;
-    int Stationid;
+    private int ticks = 0; //get rid of
+    private UnitType TYPE; //get rid of
+    private int xloc = -1; //privated
+    private int yloc =-1; // privated
+    private UnitStatus STATUS = UnitStatus.IDLE; //
+    private int AssignedIncidentId=-1;
+    private int WORK;
+    private int UnitID =-1;
+    private int Stationid =-1;
     //public abstract boolean canHandle(IncidentType type);
-    public abstract String unitview();
     public abstract int get_unit_ticks(); 
-    public abstract void set_station(int StatID);
     public abstract UnitType get_unit_type();
 
     public Unit() {}
@@ -51,14 +49,40 @@ abstract class Unit {
     public int get_incidentid(){
         return AssignedIncidentId;
     }
-    public void set_WORK(int reset){
-        this.WORK = reset;
+    public void set_WORK(int new_work){
+        this.WORK = new_work;
     }
     public int get_WORK(){
         return this.WORK;
     }
     public int get_station(){
         return this.Stationid;
+    }
+    public void set_station(int newstation){
+        this.Stationid = newstation;
+    }
+    public void set_unit_ticks(int newticks){
+        this.ticks = newticks; 
+    }
+    public void SetAssignedIncidentId(int newincidentid){
+        this.AssignedIncidentId = newincidentid; 
+    }
+    public int GetAssignedIncidentId(){
+        return this.AssignedIncidentId;
+    }
+      public String unitview(){
+        String view_string;
+        if (this.WORK != 0){
+            view_string = "U#" + this.UnitID + " TYPE=" + this.TYPE + " HOME=" + this.Stationid + "LOC=(" + this.xloc +"," + this.yloc + ") STATUS=" + this.STATUS +" INCIDENT=" + this.AssignedIncidentId+" WORK="+this.WORK;
+        }
+        else{
+            view_string = "U#" + this.UnitID + " TYPE=" + this.TYPE + " HOME=" + this.Stationid + "LOC=(" + this.xloc +"," + this.yloc + ") STATUS=" + this.STATUS +" INCIDENT=" + this.AssignedIncidentId;
+
+        }
+        return view_string;
+    }
+    public void SetUnitType(UnitType Utype){
+        this.TYPE = Utype;
     }
 }
 

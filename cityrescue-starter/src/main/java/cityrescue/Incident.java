@@ -4,14 +4,14 @@ import cityrescue.enums.IncidentStatus;
 import cityrescue.enums.IncidentType;
 
 public class Incident {
-    public int x;
-    public int y;
-    public IncidentStatus status;
-    public IncidentType Type;
+    private int x;
+    private int y;
+    private IncidentStatus status;
+    private IncidentType Type;
     private static int NextIncidentID = 1;
-    public int IncidentID;
-    public int severity;
-    public int Unitid;
+    private int IncidentID;
+    private int severity;
+    private int Unitid;
     
     public Incident(int x, int y, IncidentType Type, int severity ){
         this.x = x;
@@ -63,22 +63,39 @@ public class Incident {
    public int GetIncidentY(){
     return this.y;
    }
-   public int GetIncidentsUnitId(){
+   public void SetIncidentx(int  newx){
+    this.x =newx;
+}
+public void SetIncidenty(int newy){
+    this.y =newy;
+}
+public int GetIncidentsUnitId(){
     return this.Unitid;
-   }
-   public void setIncidentUnitId(int NewUnitID){
+}
+public void setIncidentUnitId(int NewUnitID){
     this.Unitid = NewUnitID;
 
-   }
-   public int GetSeverity(){
+}
+public int GetSeverity(){
     return this.severity;
-   }
-    public String incidentview(){
-        String view_string = "I# " + this.IncidentID + " TYPE=" + this.Type + " SEV=" + this.severity + "LOC=(" + this.x +"," + this.y + ") STATUS=" + this.status +"UNIT=" + this.Unitid;
-        return view_string;
-    }
-        
-    }
+}
+public String incidentview(){
+    String view_string = "I# " + this.IncidentID + " TYPE=" + this.Type + " SEV=" + this.severity + "LOC=(" + this.x +"," + this.y + ") STATUS=" + this.status +"UNIT=" + this.Unitid;
+    return view_string;
+}
+public IncidentStatus get_IncidentStatus(){
+    return(this.status);
+}  
+public void SetIncidentStatus(IncidentStatus newstatus){
+    this.status = newstatus;
+}
+public void SetIncidentType(IncidentType newType){
+    this.Type = newType;
+}
+public IncidentType GetIncidentType(){
+    return this.Type;
+}
+}
 
 
 

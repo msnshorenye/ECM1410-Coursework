@@ -1,14 +1,14 @@
 package cityrescue;
 
 public class Station{
-    public int x;
-    public int y;
-    public int stationId;
-    public int stationmaxcapacity;
-    public int currentcapacity;
-    public String stationname;
-    public static int NextId = 1;
-    public int id;
+    private int x;
+    private int y;
+    private int stationId;
+    private int stationmaxcapacity;
+    private int currentcapacity;
+    private String stationname;
+    private static int NextId = 1;
+    private int id;
 
     public Station(String stationname,int x, int y){
         this.x = x;
@@ -21,7 +21,7 @@ public class Station{
 
     }
     public int GetId(){
-        return this.id;
+        return this.stationId;
     }
     public int Getx(){
         return this.x;
@@ -47,6 +47,9 @@ public class Station{
             this.currentcapacity += 1;
         }
         
+    }
+    public void SetStationId(int newid){
+        this.stationId = newid;
     }
 
 

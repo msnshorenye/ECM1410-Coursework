@@ -4,7 +4,14 @@ import cityrescue.enums.UnitStatus;
 import cityrescue.enums.UnitType;
 class Police_car extends Unit{
     public Police_car(int Stationid){
-        super();
+        SetUnitID(-1);
+        set_xloc(-1);
+        set_yloc(-1);
+        set_status(UnitStatus.IDLE);
+        set_WORK(0);
+        set_station(Stationid);
+        SetAssignedIncidentId(-1);
+        SetUnitType(UnitType.POLICE_CAR);
         // this.UnitID = -1;
         // this.TYPE = UnitType.POLICE_CAR;
         // this.Stationid = Stationid;
@@ -14,23 +21,8 @@ class Police_car extends Unit{
         // this.yloc = -1;
         // this.AssignedIncidentId = -1;
     }
-    public void set_station(int StatID){
-        this.Stationid = StatID;
-    }
-     public int get_unit_id(){
-        return this.UnitID;
-    }
-    public String unitview(){
-        String view_string;
-        if (this.WORK != 0){
-            view_string = "U#" + this.UnitID + " TYPE=" + this.TYPE + " HOME=" + this.Stationid + "LOC=(" + this.xloc +"," + this.yloc + ") STATUS=" + this.STATUS +" INCIDENT=" + this.AssignedIncidentId+" WORK="+this.WORK;
-        }
-        else{
-            view_string = "U#" + this.UnitID + " TYPE=" + this.TYPE + " HOME=" + this.Stationid + "LOC=(" + this.xloc +"," + this.yloc + ") STATUS=" + this.STATUS +" INCIDENT=" + this.AssignedIncidentId;
+    
 
-        }
-        return view_string;
-    }
     @Override
     public int get_unit_ticks(){
         return 3;

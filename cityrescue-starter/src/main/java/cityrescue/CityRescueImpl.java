@@ -15,10 +15,11 @@ import java.lang.Math;
 /**
  * CityRescueImpl (Starter)
  *
- * Your task is to implement the full specification.
- * You may add additional classes in any package(s) you like.
+ * This is the main class that implements the CityRescue interface
+ * 
  */
 public class CityRescueImpl implements CityRescue {
+
     public int ticks;
     public CityMap TheMap;
     public Station [] Stationarray;
@@ -41,10 +42,16 @@ public class CityRescueImpl implements CityRescue {
     
 
 
-
+/**
+ * 
+ */
 
     // TODO: add fields (map, arrays for stations/units/incidents, counters, tick, etc.)
     public CityRescueImpl(){
+        /**
+         * This is the constructur and will create the arrays of size intended e.g. of max capacity
+         * @param None
+         */
         this.Stationarray = new Station[Max_Stations];
         this.Incidentarray = new Incident[Max_incidents];
         this.Unitarray = new Unit[Max_units]; 
@@ -52,12 +59,19 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public void initialise(int width, int height) throws InvalidGridException {
+        /**
+         * This is used to create / reset the grid with all values being reset to 0 and all arrays to be set to contain only null
+         * It will also create the grid by calling CityMap constructor and passing in the parameters that initialise took to create grid of given size
+         * it will
+         * @params width , height 
+         * 
+         */
         if (width <= 0 || height <= 0){
             throw new InvalidGridException("Invalid Grid size");
         }
-
-
-        // TODO: implement
+        this.Stationarray = new Station[Max_Stations];
+        this.Incidentarray = new Incident[Max_incidents];
+        this.Unitarray = new Unit[Max_units]; 
         this.ticks = 0;
         this.TheMap = new CityMap(width, height);
         this.width = width;
@@ -73,7 +87,7 @@ public class CityRescueImpl implements CityRescue {
         
         
         TheMap.newcreategrid();
-        String[][]Rescue_map = this.TheMap.grid;
+        String [][]Rescue_map = this.TheMap.getgrid();
 
 
         //throw new UnsupportedOperationException("Not implemented yet");
@@ -128,8 +142,8 @@ public class CityRescueImpl implements CityRescue {
                 this.Stationarray[length] = Newstation;
                 this.current_station_num += 1;
                 this.current_station_id += 1;
-                Newstation.id = this.current_station_id;
-                return (int) (Newstation.id);
+                Newstation.SetStationId(this.current_station_id);
+                return  Newstation.GetId();
             }
         }
         return 1;
@@ -157,7 +171,7 @@ public class CityRescueImpl implements CityRescue {
         for (int y = 0; y<this.Unitarray.length; y++){
             if (this.Unitarray[y] != null){
                 Unit c_unit = this.Unitarray[y];
-                if (c_unit.Stationid == stationId){
+                if (c_unit.get_station() == stationId){
                     HasUnit = true;
                 }
 
@@ -196,7 +210,7 @@ public class CityRescueImpl implements CityRescue {
         for (int y = 0; y<this.Unitarray.length; y++){
             if (this.Unitarray[y] != null){
                 Unit c_unit = this.Unitarray[y];
-                if (c_unit.Stationid == stationId){
+                if (c_unit.get_station() == stationId){
                     CurrentUnitNum += 1;
                 }
 
@@ -209,10 +223,9 @@ public class CityRescueImpl implements CityRescue {
         for (int x = 0; x<this.Stationarray.length; x++){
             if( this.Stationarray[x] != (null)){
             if (this.Stationarray[x].GetId() == stationId){
-                this.Stationarray[x].stationmaxcapacity = maxUnits;
+                this.Stationarray[x].setstationmaxcapacity(maxUnits);
             }
-            }
-        }
+        }}
           //throw new UnsupportedOperationException("Not implemented yet");
     }
 
@@ -239,8 +252,8 @@ public class CityRescueImpl implements CityRescue {
                 Station Stat = this.Stationarray[x];
                 if (Stat.GetId() == stationId){
                     StationExists = true;
-                    System.out.println(Stat.currentcapacity+" "+Stat.stationmaxcapacity+"-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-                    if (Stat.currentcapacity == Stat.stationmaxcapacity){
+                    System.out.println(Stat.GetCurrentStationCapacity()+" "+Stat.getstationmaxcapacity()+"-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                    if (Stat.GetCurrentStationCapacity() == Stat.getstationmaxcapacity()){
                         throw new IllegalStateException("Station is already full");
                     }
                     
@@ -266,77 +279,36 @@ public class CityRescueImpl implements CityRescue {
                     case AMBULANCE:
                         //System.out.println("Ambulancee");
                         Ambulance ambulance = new Ambulance(stationId);
-                        //System.out.println(ambulance.TYPE);
+                        //System.out.println(ambulance.get_unit_type());
                         this.Unitarray[length] = ambulance;
-                        for (int x =0; x< this.Stationarray.length; x++){
-                            Station CurrentStation = this.Stationarray[x];
-                            if (CurrentStation != null) {
-                                
-                            int CurrentStationid = CurrentStation.GetId();
-                            if (CurrentStationid == stationId) {
-                                ambulance.xloc = CurrentStation.x;
-                                ambulance.yloc = CurrentStation.y;
-                                this.current_unit_id += 1;
-                                this.current_unit_num += 1;
-                                ambulance.UnitID = this.current_unit_id;
-                                CurrentStation.currentcapacity += 1;
-                                //System.out.println(ambulance.TYPE);
-                                return(ambulance.UnitID);
-                                
-
-
-
-                            }
-                            }
-                            
-                        }
-
-                        //System.out.println("HE::O");
                         break;
                     case FIRE_ENGINE:
                         //System.out.println("Fire enginge");
                         Fire_engine fire_engine = new Fire_engine(stationId);
                         this.Unitarray[length] = fire_engine;
-                        for (int x =0; x< this.Stationarray.length; x++){
-                            Station CurrentStation = this.Stationarray[x];
-                            if (CurrentStation != null) {
-                            int CurrentStationid = CurrentStation.GetId();
-                            if (CurrentStationid == stationId) {
-                                fire_engine.xloc = CurrentStation.x;
-                                fire_engine.yloc = CurrentStation.y;
-                                this.current_unit_id += 1;
-                                this.current_unit_num += 1;
-                                fire_engine.UnitID = this.current_unit_id;
-                                CurrentStation.currentcapacity += 1;
-                                return(fire_engine.UnitID);
-                                 
-                            }
-                            }
-                        }
-                        //System.out.println("HE::O");
                         break;
                     case POLICE_CAR:
                         //System.out.println("Police car");
                         Police_car police = new Police_car(stationId);
                         this.Unitarray[length] = police;
-                        for (int x =0; x< this.Stationarray.length; x++){
+                        break;
+                }
+                for (int x =0; x< this.Stationarray.length; x++){
                             Station CurrentStation = this.Stationarray[x];
-                            if (CurrentStation != null ){
+                            if (CurrentStation != null) {
+                                
                             int CurrentStationid = CurrentStation.GetId();
                             if (CurrentStationid == stationId) {
-                                police.xloc = CurrentStation.x;
-                                police.yloc = CurrentStation.y;
+                                this.Unitarray[length].set_xloc(CurrentStation.Getx()); 
+                                this.Unitarray[length].set_yloc(CurrentStation.Gety()); 
                                 this.current_unit_id += 1;
                                 this.current_unit_num += 1;
-                                police.UnitID = this.current_unit_id;
-                                CurrentStation.currentcapacity += 1;
-                                return (police.UnitID);
-
+                                this.Unitarray[length].SetUnitID(this.current_unit_id); 
+                                CurrentStation.IncreaseOrDecreaseCurrentStationCapacity("+");;
+                                //System.out.println(this.Unitarray[length].get_unit_type());
+                                return(this.Unitarray[length].get_unit_id());
                             }
                             }
-                        }
-                        //System.out.println("HE::O");
-                        break;
                 }
             break;
             }
@@ -352,7 +324,7 @@ public class CityRescueImpl implements CityRescue {
         for (int y =0; y<this.Unitarray.length; y++){
             if (this.Unitarray[y] != null){
                 Unit CheckUnit = this.Unitarray[y];
-                if (CheckUnit.UnitID == unitId){
+                if (CheckUnit.get_unit_id() == unitId){
                     UnitExist = true;
                 }
             }
@@ -362,28 +334,24 @@ public class CityRescueImpl implements CityRescue {
         }
 
         // TODO: implement
-    for (int x = 0; x<this.Unitarray.length; x++){
+        for (int x = 0; x<this.Unitarray.length; x++){
             if (this.Unitarray[x] != null){
                 Unit DecomUnit = this.Unitarray[x];
-                if (DecomUnit.UnitID == unitId){
-                    if (DecomUnit.STATUS == UnitStatus.EN_ROUTE || DecomUnit.STATUS == UnitStatus.AT_SCENE){
+                if (DecomUnit.get_unit_id() == unitId){
+                    if (DecomUnit.get_status() == UnitStatus.EN_ROUTE || DecomUnit.get_status() == UnitStatus.AT_SCENE){
                         throw new IllegalStateException();
 
                     }
 
-                    if (DecomUnit.STATUS != UnitStatus.EN_ROUTE || DecomUnit.STATUS != UnitStatus.AT_SCENE){
-                        DecomUnit =null;
+                    if (DecomUnit.get_status() != UnitStatus.EN_ROUTE || DecomUnit.get_status() != UnitStatus.AT_SCENE){
+                        this.Unitarray[x] =null;
                         
                     }
-                    
-    
                 }
             }
-            
         }
-        
         }
-            }
+    }
 
         
        // throw new UnsupportedOperationException("Not implemented yet");
@@ -395,7 +363,7 @@ public class CityRescueImpl implements CityRescue {
         for (int y =0; y<this.Unitarray.length; y++){
             if (this.Unitarray[y] != null){
                 Unit CheckUnit = this.Unitarray[y];
-                if (CheckUnit.UnitID == unitId){
+                if (CheckUnit.get_unit_id() == unitId){
                     UnitExist = true;
                 }
             }
@@ -407,8 +375,8 @@ public class CityRescueImpl implements CityRescue {
     for (int a= 0; a<this.Unitarray.length; a++){
             if (this.Unitarray[a] != null){
                 Unit TransferUnit = this.Unitarray[a];
-                if (TransferUnit.UnitID == unitId){
-                    if (TransferUnit.STATUS == UnitStatus.EN_ROUTE || TransferUnit.STATUS == UnitStatus.AT_SCENE){
+                if (TransferUnit.get_unit_id() == unitId){
+                    if (TransferUnit.get_status() == UnitStatus.EN_ROUTE || TransferUnit.get_status() == UnitStatus.AT_SCENE){
                         throw new IllegalStateException("Unit is not IDLE or OutofService");
                     }
                 }
@@ -418,8 +386,8 @@ public class CityRescueImpl implements CityRescue {
         // TODO: implement
         for (int x = 0; x<this.Unitarray.length; x++){
             if (this.Unitarray[x] != null){
-                if (this.Unitarray[x].UnitID == unitId){
-                    this.Unitarray[x].Stationid = newStationId;
+                if (this.Unitarray[x].get_unit_id() == unitId){
+                    this.Unitarray[x].set_station(newStationId);
                 }
             }
         }
@@ -433,9 +401,9 @@ public class CityRescueImpl implements CityRescue {
         boolean isin = false;
         for (int x = 0; x<this.Unitarray.length; x++){
             if (this.Unitarray[x]!= null){
-            if (this.Unitarray[x].UnitID == unitId){
+            if (this.Unitarray[x].get_unit_id()== unitId){
                 isin = true;
-                if(this.Unitarray[x].STATUS == UnitStatus.EN_ROUTE || this.Unitarray[x].STATUS == UnitStatus.AT_SCENE ){
+                if(this.Unitarray[x].get_status() == UnitStatus.EN_ROUTE || this.Unitarray[x].get_status() == UnitStatus.AT_SCENE ){
                     throw new IllegalStateException("Not allowed units of types that arent OUt of service or idle");
                 }
             }
@@ -448,13 +416,13 @@ public class CityRescueImpl implements CityRescue {
         //TODO:implement
         if (outOfService == true){
             for (int x = 0; x<this.Unitarray.length; x++){
-                if (this.Unitarray[x].UnitID == unitId && this.Unitarray[x].STATUS == UnitStatus.IDLE){
-                    this.Unitarray[x].STATUS = UnitStatus.OUT_OF_SERVICE;}
+                if (this.Unitarray[x].get_unit_id() == unitId && this.Unitarray[x].get_status() == UnitStatus.IDLE){
+                    this.Unitarray[x].set_status(UnitStatus.OUT_OF_SERVICE);}
                 }}
         else{
             for (int x = 0; x< this.Unitarray.length; x++){
-                if (this.Unitarray[x].UnitID == unitId){
-                    this.Unitarray[x].STATUS = UnitStatus.IDLE;
+                if (this.Unitarray[x].get_unit_id() == unitId){
+                    this.Unitarray[x].set_status(UnitStatus.IDLE); 
                 }
             }
         }
@@ -551,17 +519,17 @@ public class CityRescueImpl implements CityRescue {
         for (int x = 0; x<this.Incidentarray.length; x++){
             if (this.Incidentarray[x] != (null)){ 
                 if ((this.Incidentarray[x].getincidentid()) == incidentId){
-                    if (this.Incidentarray[x].status == IncidentStatus.REPORTED){
+                    if (this.Incidentarray[x].get_IncidentStatus()== IncidentStatus.REPORTED){
                         this.Incidentarray[x].CancelIncidentstatus(IncidentStatus.CANCELLED);
                         this.current_incident_num -= 1;
                     }
                     Unit temp ;
-                    if (this.Incidentarray[x].status == IncidentStatus.DISPATCHED){
+                    if (this.Incidentarray[x].get_IncidentStatus() == IncidentStatus.DISPATCHED){
                         this.Incidentarray[x].CancelIncidentstatus(IncidentStatus.CANCELLED);
                         this.current_incident_num -= 1;
                         for (int t=0;t<this.Unitarray.length;t++){
                             if (this.Unitarray[t] != (null)){
-                                if (this.Unitarray[t].AssignedIncidentId == incidentId){
+                                if (this.Unitarray[t].GetAssignedIncidentId() == incidentId){
                                     setUnitOutOfService(Unitarray[t].get_unit_id(),true);
                                 }
                             }
@@ -584,7 +552,7 @@ public class CityRescueImpl implements CityRescue {
             if (Incidentarray[x] != null){
             if (incidentId == Incidentarray[x].getincidentid()){
                 Isin = true;
-                if (Incidentarray[x].status == IncidentStatus.RESOLVED || Incidentarray[x].status == IncidentStatus.CANCELLED ){
+                if (Incidentarray[x].get_IncidentStatus() == IncidentStatus.RESOLVED || Incidentarray[x].get_IncidentStatus() == IncidentStatus.CANCELLED ){
                     throw new IllegalStateException("Incident is Resolved/Cancelled");
                 }
              } }
@@ -599,7 +567,7 @@ public class CityRescueImpl implements CityRescue {
         for(int i=0;i<this.Incidentarray.length;i++){
             int needid = this.Incidentarray[i].getincidentid();
             if (needid == incidentId){
-                this.Incidentarray[i].severity = newSeverity;
+                this.Incidentarray[i].SetIncidentseverity(newSeverity);
                 break;
             }
         }
@@ -681,14 +649,14 @@ public class CityRescueImpl implements CityRescue {
                 
                 Incident Current_Incident = this.Incidentarray[x];
                 
-                if (Current_Incident.status == IncidentStatus.REPORTED){
+                if (Current_Incident.get_IncidentStatus()== IncidentStatus.REPORTED){
                     
                 
                 
                 if (Current_Incident.getincidentid() == current_incident){
 
-                    int Incident_x = Current_Incident.x;
-                    int Incident_y = Current_Incident.y;
+                    int Incident_x = Current_Incident.GetIncidentX();
+                    int Incident_y = Current_Incident.GetIncidentY();
                     int ChosenUnitId = -1;
                     int SmallestDistance = Integer.MAX_VALUE;
                     int ChosenHomeStationId = -1;
@@ -699,22 +667,22 @@ public class CityRescueImpl implements CityRescue {
 
                         }
                         else{
-                            if (CurrentUnit.STATUS == UnitStatus.IDLE){
-                                if ((CurrentUnit.TYPE== UnitType.AMBULANCE && Current_Incident.Type == IncidentType.MEDICAL)|| (CurrentUnit.TYPE == UnitType.FIRE_ENGINE && Current_Incident.Type == IncidentType.FIRE) || (CurrentUnit.TYPE == UnitType.POLICE_CAR && Current_Incident.Type == IncidentType.CRIME)){
-                                int CurrentUnitx = CurrentUnit.xloc;
-                                int CurrentUnity = CurrentUnit.yloc;
+                            if (CurrentUnit.get_status() == UnitStatus.IDLE){
+                                if ((CurrentUnit.get_unit_type()== UnitType.AMBULANCE && Current_Incident.GetIncidentType() == IncidentType.MEDICAL)|| (CurrentUnit.get_unit_type() == UnitType.FIRE_ENGINE && Current_Incident.GetIncidentType() == IncidentType.FIRE) || (CurrentUnit.get_unit_type() == UnitType.POLICE_CAR && Current_Incident.GetIncidentType() == IncidentType.CRIME)){
+                                int CurrentUnitx = CurrentUnit.get_xloc();
+                                int CurrentUnity = CurrentUnit.get_yloc();
                                 int Currentdistance = Math.abs(Incident_x - CurrentUnitx) + (Math.abs(Incident_y- CurrentUnity));
                                 if (Currentdistance < SmallestDistance){
                                     SmallestDistance = Currentdistance;
-                                    ChosenUnitId = CurrentUnit.UnitID;  
+                                    ChosenUnitId = CurrentUnit.get_unit_id();  
                                 }
                                 else if(Currentdistance == SmallestDistance){
-                                    int CurrentChosenUnitId = CurrentUnit.UnitID;
+                                    int CurrentChosenUnitId = CurrentUnit.get_unit_id();
                                     if (CurrentChosenUnitId < ChosenUnitId){
                                         ChosenUnitId = CurrentChosenUnitId;
                                     }
                                     else if (CurrentChosenUnitId == ChosenUnitId){
-                                        int CurrentChosenHomeStationId = CurrentUnit.Stationid;
+                                        int CurrentChosenHomeStationId = CurrentUnit.get_station();
                                         if (CurrentChosenHomeStationId < ChosenHomeStationId){
                                             ChosenHomeStationId = CurrentChosenHomeStationId;
                                         }
@@ -728,9 +696,9 @@ public class CityRescueImpl implements CityRescue {
                         for (int a = 0; a < this.Unitarray.length; a++){
                             if (this.Unitarray[a] != (null)){
                                 Unit Curr_unit = this.Unitarray[a];
-                                if (ChosenUnitId == Curr_unit.UnitID){
-                                    Curr_unit.STATUS = UnitStatus.EN_ROUTE;
-                                    Curr_unit.AssignedIncidentId = Current_Incident.getincidentid();
+                                if (ChosenUnitId == Curr_unit.get_unit_id()){
+                                    Curr_unit.set_status(UnitStatus.EN_ROUTE);
+                                    Curr_unit.SetAssignedIncidentId(Current_Incident.getincidentid());
                                     Current_Incident.setincidentsUnitid(Curr_unit.get_unit_id());
                                 }
                             }
@@ -776,20 +744,20 @@ public class CityRescueImpl implements CityRescue {
                 }
             }
             //System.out.println("RAWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWR 4");
-            //System.out.println(tempUnit.TYPE+"...............................................");
+            //System.out.println(tempUnit.get_unit_type()+"...............................................");
             if (tempUnit != (null)){
             Incident incident = null ;
             for (int t = 0; t<this.Incidentarray.length;t++){
                     incident = (Incident)this.Incidentarray[t];
-                    if (incident.getincidentid() == tempUnit.AssignedIncidentId){
+                    if (incident.getincidentid() == tempUnit.GetAssignedIncidentId()){
                         break;
                     }
                 }
-            //System.out.println(incident.Type+"    ---------------------------------------------------------------------");
+            //System.out.println(incident.get_unit_type()+"    ---------------------------------------------------------------------");
             if (tempUnit != (null)){
-                if (tempUnit.STATUS == UnitStatus.EN_ROUTE){
-                    int X = tempUnit.xloc;  
-                    int Y = tempUnit.yloc;
+                if (tempUnit.get_status() == UnitStatus.EN_ROUTE){
+                    int X = tempUnit.get_xloc();  
+                    int Y = tempUnit.get_yloc();
                     int [][] potential = new int[4][2];  // 4 coordinates each with y,x
                     int x;
                     int y;
@@ -823,15 +791,15 @@ public class CityRescueImpl implements CityRescue {
                         potential[3][0] = y;
                         potential[3][1] = x;
                     } 
-                    int I_xloc ;
-                    int I_yloc;
-                    I_xloc = incident.x;
-                    I_yloc = incident.y;
+                    int I_xloc = incident.GetIncidentX();
+                    int I_yloc = incident.GetIncidentY();
+
                     // for (int l= 0 ; l<potential.length;l++){
                     //     System.out.println(potential[l][0]);
                     //     System.out.println(potential[l][1]);
                     // }
                     int OG_MAN = ((Math.abs((I_yloc-Y))+Math.abs((I_xloc-X))));
+                    int temp_OG_MAN = OG_MAN;
                     for (int z=0;z<potential.length;z++){
                         int xLOC = potential[z][1];
                         int yLOC = potential[z][0];
@@ -841,27 +809,41 @@ public class CityRescueImpl implements CityRescue {
                             //System.out.println(New_Score+" <"+OG_MAN);
                             if (New_Score <OG_MAN){
                                 //CHANging location
-                                tempUnit.xloc = xLOC;
-                                tempUnit.yloc = yLOC;
+                                tempUnit.set_xloc(xLOC);
+                                tempUnit.set_yloc(yLOC);
                                 System.out.println("This way"+z);
                                 break;
+                            }
+                            if (OG_MAN == temp_OG_MAN){
+                                for (int a=0; a<potential.length; a++){
+                                    int newxLOC = potential[a][1];
+                                    int newyLOC = potential[a][0];
+                                    if (this.Obstaclearray[newyLOC][newxLOC] != "obstacle"){
+                                        tempUnit.set_xloc(newxLOC);
+                                        tempUnit.set_yloc(newyLOC);
+                                        break;
+                                    }
+                                    
+
+                                }
+                                
                             }
                         } 
                     }
                     //2) Mark New arrivals
-                    if ((tempUnit.yloc == I_yloc)&&(tempUnit.xloc == I_xloc)){
+                    if ((tempUnit.get_yloc() == I_yloc)&&(tempUnit.get_xloc() == I_xloc)){
                         //set status to 
-                        tempUnit.STATUS = UnitStatus.AT_SCENE;
-                        incident.status = IncidentStatus.IN_PROGRESS;
+                        tempUnit.set_status(UnitStatus.AT_SCENE);
+                        incident.SetIncidentStatus(IncidentStatus.IN_PROGRESS);
                     }
                 }
                 else {
-                    if (tempUnit.STATUS == UnitStatus.AT_SCENE){
-                        tempUnit.WORK += 1;
-                        if (tempUnit.WORK == tempUnit.ticks){
-                            incident.status = IncidentStatus.RESOLVED;
-                            tempUnit.STATUS = UnitStatus.IDLE;
-                            tempUnit.WORK = 0;
+                    if (tempUnit.get_status() == UnitStatus.AT_SCENE){
+                        tempUnit.set_WORK(tempUnit.get_WORK()+1); 
+                        if (tempUnit.get_WORK() == tempUnit.get_unit_ticks()){
+                            incident.SetIncidentStatus(IncidentStatus.RESOLVED);
+                            tempUnit.set_status( UnitStatus.IDLE);
+                            tempUnit.set_WORK(0);
 
                         }
                                                 
@@ -872,7 +854,7 @@ public class CityRescueImpl implements CityRescue {
             }
             }
         }
-        //System.out.println(tempUnit.TYPE);
+        //System.out.println(tempUnit.get_unit_type());
         // 3) process on scene work 
         // 4) resolve completed incidents by ascending unit id 
         
@@ -894,24 +876,7 @@ public class CityRescueImpl implements CityRescue {
         for (int i = 0; i<this.Unitarray.length;i++) {
             int length = i;
             if (this.Unitarray[i] !=(null)) {
-                
-                switch(this.Unitarray[length].TYPE) {
-                    case AMBULANCE:
-                        Ambulance ambulance = (Ambulance)this.Unitarray[length];
-                        String temp = ambulance.unitview();
-                        UnitStrings = UnitStrings + "\n"+ temp;
-                        break;
-                    case FIRE_ENGINE:
-                        Fire_engine fire_engine = (Fire_engine) this.Unitarray[length];
-                        String temp2 = fire_engine.unitview();
-                        UnitStrings = UnitStrings + "\n"+ temp2;
-                        break; 
-                    case POLICE_CAR:
-                        Police_car police = (Police_car) this.Unitarray[length];
-                        String temp3 = police.unitview();
-                        UnitStrings = UnitStrings + "\n"+ temp3;
-                        break;
-                }
+                UnitStrings = UnitStrings + "\n" + Unitarray[i].unitview();
             }
         } 
         //throw new UnsupportedOperationException("Not implemented yet");
