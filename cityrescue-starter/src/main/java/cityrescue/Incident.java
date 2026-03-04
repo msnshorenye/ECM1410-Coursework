@@ -79,17 +79,39 @@ public void setIncidentUnitId(int NewUnitID){
 public int GetSeverity(){
     return this.severity;
 }
+/**
+ * incidentview creates a string 
+ * to give the current state of a particular incident object.
+ * The information given is Id, Incident Type, Incident severity
+ * @return
+ */
 public String incidentview(){
     String view_string = "I# " + this.IncidentID + " TYPE=" + this.Type + " SEV=" + this.severity + "LOC=(" + this.x +"," + this.y + ") STATUS=" + this.status +"UNIT=" + this.Unitid;
     return view_string;
 }
+/**
+ * Get Method for Incident Object's Status enum.
+ * @return Incident Object's Status enum.
+ */
 public IncidentStatus get_IncidentStatus(){
     return(this.status);
-}  
+} 
+
+/**
+ *Set method for Incidents status 
+ * so that it can be changed 
+ * if it has been resolved after ticks for instance. 
+ * @param newstatus Incident status enum given 
+ */
 public void SetIncidentStatus(IncidentStatus newstatus){
     this.status = newstatus;
 }
-
+/**
+ * Set method for Incidents Type 
+ * so that it can be changed 
+ * after it has been created. 
+ * @param newType Enum IncidentType that is to be changed to the objects Enum.
+ */
 public void SetIncidentType(IncidentType newType){
     this.Type = newType;
 }
