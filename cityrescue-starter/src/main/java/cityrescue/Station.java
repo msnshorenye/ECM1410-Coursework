@@ -17,7 +17,7 @@ public class Station{
         this.x = x;
         this.y = y;
         this.stationname = stationname;
-        this.stationmaxcapacity = 10;
+        this.stationmaxcapacity = 100;
         this.currentcapacity = 0;
 
     }

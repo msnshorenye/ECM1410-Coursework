@@ -108,7 +108,7 @@ public class CityRescueImpl implements CityRescue {
         if (x<0 || y<0 || y>this.height || x>this.width){
             throw new InvalidLocationException("Out of bounds");
         }
-        this.Obstaclearray[x][y] = "obstacle";
+        this.Obstaclearray[y][x] = "obstacle";
         this.current_obstacle_num += 1;
         
         // TODO: implement
@@ -121,7 +121,7 @@ public class CityRescueImpl implements CityRescue {
             throw new InvalidLocationException("Out of Bounds");
         }        
         // TODO: implement
-        this.Obstaclearray[x][y] = " ";
+        this.Obstaclearray[y][x] = " ";
         this.current_obstacle_num -= 1;
         //throw new UnsupportedOperationException("Not implemented yet");
     }
@@ -133,6 +133,9 @@ public class CityRescueImpl implements CityRescue {
         }
         if (x<0 || y<0 || y>this.height || x>this.width){
             throw new InvalidLocationException("Out of bounds");
+        }
+        if (current_station_num == MAX_STATIONS){
+            throw new CapacityExceededException("There are already max amount of stations");
         }
         // TODO: implement
          for(int i=0;i<this.Stationarray.length;i++){
@@ -246,6 +249,9 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public int addUnit(int stationId, UnitType type) throws IDNotRecognisedException, InvalidUnitException, IllegalStateException {
+        if (MAX_UNITS == current_unit_num){
+            throw new CapacityExceededException("Already reach max capacity of units");
+        }
         boolean StationExists =  false;
         for (int x= 0; x < this.Stationarray.length; x++){
             if (this.Stationarray[x] != (null)){
@@ -328,7 +334,7 @@ public class CityRescueImpl implements CityRescue {
                     UnitExist = true;
                 }
             }
-        
+        }
         if (UnitExist == false){
             throw new IDNotRecognisedException("Unit does not exist");
         }
@@ -345,12 +351,13 @@ public class CityRescueImpl implements CityRescue {
 
                     if (DecomUnit.get_status() != UnitStatus.EN_ROUTE || DecomUnit.get_status() != UnitStatus.AT_SCENE){
                         this.Unitarray[x] =null;
+                        this.current_unit_num -= 1;
                         
                     }
                 }
             }
         }
-        }
+        
     }
 
         
@@ -470,6 +477,9 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public int reportIncident(IncidentType type, int severity, int x, int y) throws InvalidSeverityException, InvalidLocationException {
+        if (MAX_INCIDENTS == current_incident_num){
+            throw new CapacityExceededException("Already reach max capacity of incidents");
+        }
         // TODO: implement
         if(x<0||y<0||x>this.width||y>this.height){
             throw new InvalidLocationException("NOT on grid");
@@ -530,7 +540,7 @@ public class CityRescueImpl implements CityRescue {
                         for (int t=0;t<this.Unitarray.length;t++){
                             if (this.Unitarray[t] != (null)){
                                 if (this.Unitarray[t].GetAssignedIncidentId() == incidentId){
-                                    setUnitOutOfService(Unitarray[t].get_unit_id(),true);
+                                    this.Unitarray[t].set_status(UnitStatus.IDLE);
                                 }
                             }
                         }
@@ -750,8 +760,10 @@ public class CityRescueImpl implements CityRescue {
             Incident incident = null ;
             for (int t = 0; t<this.Incidentarray.length;t++){
                     incident = (Incident)this.Incidentarray[t];
+                    if (incident != null){
                     if (incident.getincidentid() == tempUnit.GetAssignedIncidentId()){
                         break;
+                    }
                     }
                 }
             //System.out.println(incident.get_unit_type()+"    ---------------------------------------------------------------------");
@@ -778,14 +790,14 @@ public class CityRescueImpl implements CityRescue {
                         potential[1][0] = y;
                         potential[1][1] = x;
                     }
-                    if(Y-1>0){
+                    if(Y-1>=0){
                         //S is valid
                         y = Y-1;
                         x = X;
                         potential[2][0] = y;
                         potential[2][1] = x;
                     }  
-                    if(X-1>0){
+                    if(X-1>=0){
                         //W is valid
                         y = Y;
                         x = X-1;
@@ -801,6 +813,7 @@ public class CityRescueImpl implements CityRescue {
                     // }
                     int OG_MAN = ((Math.abs((I_yloc-Y))+Math.abs((I_xloc-X))));
                     int temp_OG_MAN = OG_MAN;
+                    boolean Change = false;
                     for (int z=0;z<potential.length;z++){
                         int xLOC = potential[z][1];
                         int yLOC = potential[z][0];
@@ -810,12 +823,14 @@ public class CityRescueImpl implements CityRescue {
                             //System.out.println(New_Score+" <"+OG_MAN);
                             if (New_Score <OG_MAN){
                                 //CHANging location
+                                Change = true;
                                 tempUnit.set_xloc(xLOC);
                                 tempUnit.set_yloc(yLOC);
                                 System.out.println("This way"+z);
                                 break;
                             }
-                            if (OG_MAN == temp_OG_MAN){
+                        }
+                            if (Change == false){
                                 for (int a=0; a<potential.length; a++){
                                     int newxLOC = potential[a][1];
                                     int newyLOC = potential[a][0];
@@ -829,7 +844,7 @@ public class CityRescueImpl implements CityRescue {
                                 }
                                 
                             }
-                        } 
+                         
                     }
                     //2) Mark New arrivals
                     if ((tempUnit.get_yloc() == I_yloc)&&(tempUnit.get_xloc() == I_xloc)){

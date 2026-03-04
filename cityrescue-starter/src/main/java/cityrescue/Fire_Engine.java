@@ -27,11 +27,21 @@ class Fire_engine extends Unit{
     //     Fire_engine fire = new Fire_engine();
     //     fire.get_data();
     // }
+    /**
+     * Fire engine Overides Units abstract get methid get unit ticks method to return an integer value.
+     * @return It returns integer 4 as that is the exact amount
+     * of ticks that a Fire engine takes to complete an Incident.
+     */
     @Override
     public int get_unit_ticks(){
         return 4;
     }
+    /**
+     * Fire engine overides the get unit type method 
+     * to return the
+     */
     @Override
+    
     public UnitType get_unit_type(){
         return UnitType.FIRE_ENGINE;
     }

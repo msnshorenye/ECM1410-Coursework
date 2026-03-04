@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="EdgeCaseTest" time="0.051" tests="3" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="25"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/workspaces/ECM1410-Coursework/cityrescue-starter/target/test-classes:/workspaces/ECM1410-Coursework/cityrescue-starter/target/classes:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/home/codespace/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/codespace/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/home/codespace/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/home/codespace/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="os.name" value="Linux"/>
+    <property name="java.vm.specification.version" value="25"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="session.topDirectory" value="/workspaces/ECM1410-Coursework/cityrescue-starter"/>
+    <property name="sun.boot.library.path" value="/usr/local/sdkman/candidates/java/25.0.2-open/lib"/>
+    <property name="sun.java.command" value="/workspaces/ECM1410-Coursework/cityrescue-starter/target/surefire/surefirebooter-20260304210101314_3.jar /workspaces/ECM1410-Coursework/cityrescue-starter/target/surefire 2026-03-04T21-01-00_991-jvmRun1 surefire-20260304210101314_1tmp surefire_0-20260304210101314_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/workspaces/ECM1410-Coursework/cityrescue-starter/target/test-classes:/workspaces/ECM1410-Coursework/cityrescue-starter/target/classes:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/home/codespace/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/codespace/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/home/codespace/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/home/codespace/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/home/codespace"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2026-01-20"/>
+    <property name="java.home" value="/usr/local/sdkman/candidates/java/25.0.2-open"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/workspaces/ECM1410-Coursework/cityrescue-starter"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="surefire.real.class.path" value="/workspaces/ECM1410-Coursework/cityrescue-starter/target/surefire/surefirebooter-20260304210101314_3.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="25.0.2+10-69"/>
+    <property name="user.name" value="codespace"/>
+    <property name="stdout.encoding" value="UTF-8"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="6.8.0-1044-azure"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="localRepository" value="/home/codespace/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="java.version" value="25.0.2"/>
+    <property name="user.dir" value="/workspaces/ECM1410-Coursework/cityrescue-starter"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="UTF-8"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="25.0.2+10-69"/>
+    <property name="stdin.encoding" value="UTF-8"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="69.0"/>
+  </properties>
+  <testcase name="test_last_first_legal_move" classname="EdgeCaseTest" time="0.006">
+    <system-out><![CDATA[[[null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null]]
+0 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1
+U#1 TYPE=POLICE_CAR HOME=1LOC=(2,1) STATUS=EN_ROUTE INCIDENT=1
+This way0
+U#1 TYPE=POLICE_CAR HOME=1LOC=(2,2) STATUS=EN_ROUTE INCIDENT=1
+U#1 TYPE=POLICE_CAR HOME=1LOC=(2,1) STATUS=EN_ROUTE INCIDENT=1
+This way0
+U#1 TYPE=POLICE_CAR HOME=1LOC=(2,2) STATUS=EN_ROUTE INCIDENT=1
+U#1 TYPE=POLICE_CAR HOME=1LOC=(2,1) STATUS=EN_ROUTE INCIDENT=1
+This way0
+TICK=7
+ STATIONS=1 UNITS=1 INCIDENTS=1 OBSTACLES=2
+INCIDENTS
+ 
+I# 1 TYPE=CRIME SEV=3LOC=(4,3) STATUS=REPORTEDUNIT=1
+UNITS
+U#1 TYPE=POLICE_CAR HOME=1LOC=(2,1) STATUS=EN_ROUTE INCIDENT=1
+]]></system-out>
+  </testcase>
+  <testcase name="test_unit_max_capacity" classname="EdgeCaseTest" time="0.015">
+    <system-out><![CDATA[[[null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null]]
+HHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+0 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+5 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+6 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+7 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+8 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+9 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+10 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+11 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+12 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+13 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+14 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+15 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+16 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+17 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+18 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+19 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+20 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+21 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+22 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+23 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+24 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+25 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+26 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+27 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+28 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+29 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+30 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+31 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+32 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+33 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+34 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+35 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+36 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+37 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+38 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+39 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+40 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+41 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+42 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+43 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+44 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+45 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+46 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+47 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+48 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+49 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+TICK=0
+ STATIONS=2 UNITS=50 INCIDENTS=0 OBSTACLES=0
+INCIDENTS
+ 
+UNITS
+U#1 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#2 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#3 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#4 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#5 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#6 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#7 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#8 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#9 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#10 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#11 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#12 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#13 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#14 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#15 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#16 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#17 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#18 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#19 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#20 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#21 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#22 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#23 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#24 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#25 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#26 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#27 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#28 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#29 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#30 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#31 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#32 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#33 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#34 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#35 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#36 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#37 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#38 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#39 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#40 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#41 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#42 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#43 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#44 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#45 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#46 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#47 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#48 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#49 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#50 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#3 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+50 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+U#51 TYPE=AMBULANCE HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+TICK=0
+ STATIONS=2 UNITS=50 INCIDENTS=0 OBSTACLES=0
+INCIDENTS
+ 
+UNITS
+U#1 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#2 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#51 TYPE=AMBULANCE HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#4 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#5 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#6 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#7 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#8 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#9 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#10 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#11 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#12 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#13 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#14 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#15 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#16 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#17 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#18 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#19 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#20 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#21 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#22 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#23 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#24 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#25 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#26 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#27 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#28 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#29 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#30 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#31 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#32 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#33 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#34 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#35 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#36 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#37 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#38 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#39 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#40 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#41 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#42 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#43 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#44 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#45 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#46 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#47 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#48 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#49 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#50 TYPE=POLICE_CAR HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1
+U#51 TYPE=AMBULANCE HOME=2LOC=(0,0) STATUS=IDLE INCIDENT=-1
+]]></system-out>
+  </testcase>
+  <testcase name="wills_testicle" classname="EdgeCaseTest" time="0.02">
+    <system-out><![CDATA[[[null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null], [null, null, null, null, null, null]]
+0 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2 100-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1
+1
+2
+This way0
+This way0
+U#1 TYPE=POLICE_CAR HOME=1LOC=(0,1) STATUS=EN_ROUTE INCIDENT=1
+U#3 TYPE=FIRE_ENGINE HOME=1LOC=(0,1) STATUS=EN_ROUTE INCIDENT=2
+This way0
+This way0
+U#1 TYPE=POLICE_CAR HOME=1LOC=(0,2) STATUS=EN_ROUTE INCIDENT=1
+U#3 TYPE=FIRE_ENGINE HOME=1LOC=(0,2) STATUS=EN_ROUTE INCIDENT=2
+This way1
+This way0
+U#1 TYPE=POLICE_CAR HOME=1LOC=(1,2) STATUS=EN_ROUTE INCIDENT=1
+U#3 TYPE=FIRE_ENGINE HOME=1LOC=(0,3) STATUS=EN_ROUTE INCIDENT=2
+This way1
+This way0
+U#1 TYPE=POLICE_CAR HOME=1LOC=(2,2) STATUS=AT_SCENE INCIDENT=1
+U#3 TYPE=FIRE_ENGINE HOME=1LOC=(0,4) STATUS=EN_ROUTE INCIDENT=2
+This way1
+U#1 TYPE=POLICE_CAR HOME=1LOC=(2,2) STATUS=AT_SCENE INCIDENT=1 WORK=1
+U#3 TYPE=FIRE_ENGINE HOME=1LOC=(1,4) STATUS=EN_ROUTE INCIDENT=2
+This way1
+This way1
+]]></system-out>
+  </testcase>
+</testsuite>

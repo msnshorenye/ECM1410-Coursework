@@ -2,6 +2,18 @@ package cityrescue;
 
 import cityrescue.enums.IncidentStatus;
 import cityrescue.enums.IncidentType;
+/**
+ * Incident is an object which class is the target of the units
+ *  and it has a types which match with unit. It placed onto the grid 
+ * and then using get methods the closest unit is calculated 
+ * from this position in the grid. It has an id that is used to identify
+ * each individual object and assign 
+ * these individual incidents to other
+ * individual units. It also has a status
+ * which goes through a lifecycle
+ * from when a unit is assigned to it 
+ * to when the unit arrives and completes the work. 
+ */
 
 public class Incident {
     private int x;
@@ -25,7 +37,13 @@ public class Incident {
 
 
     }
-    
+    /**
+     * Sets Incidents object status to Cancelled if Incidentstatus enum parameter is equal to cancelled.
+     * @param newstatus the Incident Status Enum which should have Cancelled 
+     * otherwise it is not set.
+     * @return it returns a boolean which is true or false depending
+     *  on whether Incidents Status enum was set to cancelled or not.
+     */
     public boolean CancelIncidentstatus(IncidentStatus newstatus){
         if (newstatus == IncidentStatus.CANCELLED){
             this.status = newstatus;
@@ -34,7 +52,13 @@ public class Incident {
             return false;
         }
     }
-    
+    /**
+     * Sets the severity attribute to given parameter 
+     * if it is in legal range of allowed severity levels.
+     * @param newseverity the integer passed to be set to the incident Objects security level
+     * @return the Severity level the Incident is currently at
+     * is returned regardless of whether the parameter has been set as the severity level.
+     */
     public int SetIncidentseverity( int newseverity){
         if (newseverity >= 0 && newseverity <= 5){
             this.severity = newseverity;
@@ -42,40 +66,85 @@ public class Incident {
         return this.severity;
 
     }
+    /**
+     * Get method for returning the incident Object's unique id
+     * @return  incident Object's unique id
+     */
     public int getincidentid(){
         return  this.IncidentID;
 
     }
+    /**
+     * Set method for the incident Id so that they can be assigned on incident report
+     * @return the Incident Id that has been newly set.
+     */
     public int setincidentid(int newid){
         this.IncidentID = newid;
         return(this.IncidentID);
     
 
     }
+    /**
+     * Set method that sets the incidents liked unit Id. 
+     * @param newid the id that the incident is now being assigned to
+     * @return the new unit Id that has been set
+     */
     public int setincidentsUnitid(int newid){
         this.Unitid = newid;
         return this.Unitid;
     }
+    /**
+     * Get method for x coordinate 
+     * @return the x coordinate of the incident
+     */
    public int GetIncidentX(){
     return this.x;
 
    }
+   /**
+    * Get method for the Incident y value is used also for calculating manhatten distance.
+    * @return returns the Incident y position.
+    */
    public int GetIncidentY(){
     return this.y;
    }
+   /**
+    * Get method for the Incident x value is
+    * used for calculating Manhatten distance from the different units.
+    * @param newx
+    */
    public void SetIncidentx(int  newx){
     this.x =newx;
 }
+/**
+ * Set incidents Y coordinate to a new coordinate done 
+ * usually when creating the incident.
+ * @param newy New y coordinate to be set 
+ */
 public void SetIncidenty(int newy){
     this.y =newy;
 }
+/**
+ * Get method for the assigned Units id for the incident.
+ * @return returns The unit assigned to the incidents id.
+ */
 public int GetIncidentsUnitId(){
     return this.Unitid;
 }
+/**
+ * Set method For the Incident Unit ID that can change so that the current Unit can be assigned.
+ *
+ *
+ * @param NewUnitID Id of the unit dispatched that is closest to the incident 
+ */
 public void setIncidentUnitId(int NewUnitID){
     this.Unitid = NewUnitID;
 
 }
+/**
+ * Get method for  the Incident Objects severity level.
+ * @return return Incident Objects severity 
+ */
 public int GetSeverity(){
     return this.severity;
 }
