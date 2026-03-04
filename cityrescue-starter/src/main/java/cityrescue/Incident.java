@@ -89,9 +89,14 @@ public IncidentStatus get_IncidentStatus(){
 public void SetIncidentStatus(IncidentStatus newstatus){
     this.status = newstatus;
 }
+
 public void SetIncidentType(IncidentType newType){
     this.Type = newType;
 }
+/**
+ * Get method for Incident object's Enum Type E.G.(Medical..)
+ * @return Enum Incident type of Incident object
+ */
 public IncidentType GetIncidentType(){
     return this.Type;
 }

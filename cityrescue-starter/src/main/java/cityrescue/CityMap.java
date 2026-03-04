@@ -32,7 +32,7 @@ public class CityMap {
         if (x>= 0 && x<= this.height && y>=0 && y<= this.width){
             this.grid[y][x] = "obstacle";
         }
-        return this.grid;
+        return this.grid.clone();
 
     }
     
@@ -41,7 +41,7 @@ public class CityMap {
         if (ob.equals(this.grid[y][x])){
             this.grid[y][x] = " ";
         }
-        return this.grid;
+        return this.grid.clone();
     }
     public static void main(String[] args) {
           int width = Integer.parseInt(args[0]);
@@ -62,7 +62,7 @@ public class CityMap {
     }
           
     public String[][]getgrid(){
-        return this.grid;
+        return this.grid.clone();
     }
 
     }

@@ -26,9 +26,9 @@ public class CityRescueImpl implements CityRescue {
     public String [][] Obstaclearray;
     public Unit [] Unitarray;
     public Incident [] Incidentarray;
-    public int Max_Stations = 20;
-    public int Max_units = 50;
-    public int Max_incidents = 200;
+    public final int MAX_STATIONS = 20;
+    public final int MAX_UNITS = 50;
+    public final int MAX_INCIDENTS = 200;
     public int current_station_num;
     public int current_station_id;
     public int current_unit_num;
@@ -52,9 +52,9 @@ public class CityRescueImpl implements CityRescue {
          * This is the constructur and will create the arrays of size intended e.g. of max capacity
          * @param None
          */
-        this.Stationarray = new Station[Max_Stations];
-        this.Incidentarray = new Incident[Max_incidents];
-        this.Unitarray = new Unit[Max_units]; 
+        this.Stationarray = new Station[MAX_STATIONS];
+        this.Incidentarray = new Incident[MAX_INCIDENTS];
+        this.Unitarray = new Unit[MAX_UNITS]; 
     }
 
     @Override
@@ -69,9 +69,9 @@ public class CityRescueImpl implements CityRescue {
         if (width <= 0 || height <= 0){
             throw new InvalidGridException("Invalid Grid size");
         }
-        this.Stationarray = new Station[Max_Stations];
-        this.Incidentarray = new Incident[Max_incidents];
-        this.Unitarray = new Unit[Max_units]; 
+        this.Stationarray = new Station[MAX_STATIONS];
+        this.Incidentarray = new Incident[MAX_INCIDENTS];
+        this.Unitarray = new Unit[MAX_UNITS]; 
         this.ticks = 0;
         this.TheMap = new CityMap(width, height);
         this.width = width;
@@ -727,6 +727,7 @@ public class CityRescueImpl implements CityRescue {
         // TODO: implement
         // 1) Move En_route units first by ascending unit id
         //System.out.println("RAWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWR 1");
+        this.ticks += 1;
         int [] UNITLIST = getUnitIds();
         //System.out.println("RAWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWR 2");
         //Unit tempUnit = null;
@@ -863,6 +864,11 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public String getStatus() {
+        /**
+         * It Creates a large string which  
+         * contains the number of specific objects in the simulation
+         * 
+         */
 
         String StatusString = "TICK=" + this.ticks +"\n STATIONS="+ this.current_station_num +" UNITS="+ this.current_unit_num + " INCIDENTS="+ this.current_incident_num+ " OBSTACLES="+this.current_obstacle_num ;
         String IncidentString = "INCIDENTS\n ";
@@ -874,7 +880,6 @@ public class CityRescueImpl implements CityRescue {
         }
         String UnitStrings = "UNITS";
         for (int i = 0; i<this.Unitarray.length;i++) {
-            int length = i;
             if (this.Unitarray[i] !=(null)) {
                 UnitStrings = UnitStrings + "\n" + Unitarray[i].unitview();
             }
