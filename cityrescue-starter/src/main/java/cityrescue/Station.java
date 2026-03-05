@@ -3,15 +3,35 @@ package cityrescue;
  * The Station Class is used to create Station Objects 
  * that allow Unit objects to have a specified start point when they are
  * created. It has capacity that can limit the number of Units created.
- * It has get and set methods for all its attributes 
+ * It has get and set methods for all its attributes
+ * except station name which allow units
+ * to be transfered around Stations 
+ * and for the capacity of the station object.  
  */
 public class Station{
+    
     private int x;
     private int y;
     private int stationId;
     private int stationmaxcapacity;
     private int currentcapacity;
     private String stationname;
+    /**
+     * The constructor intialises these parameters 
+     * as attributes as well as the stations max capacity 
+     * set to the station object as a default value 
+     * as well as the current capacity attribute
+     *  which is set to 0 as when instantiated a station
+     * will have 0 units stored in it. 
+     * 
+     * @param stationname parameter given to be set 
+     * as the name of the station.
+     * @param x x value given as a parameter 
+     * to be set as the station objects x coordinate.
+     * @param y y value is the parameter that is
+     *  set as the y coordinate for the station object instantiated.
+     *
+     */
 
     public Station(String stationname,int x, int y){
         this.x = x;

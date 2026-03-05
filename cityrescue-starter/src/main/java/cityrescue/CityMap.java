@@ -6,13 +6,32 @@ public class CityMap {
     private int height;
     private String[][] grid;
     
-    
+    /**
+     * Constructor instantiates the two given parameters 
+     * of width and height.
+     * The grid is an attribute created in the constructor 
+     * using the two parameters given. 
+     * The grid is a 2d array size of width and height.
+     * @param width integer given which will represent
+     *  the number of columns in the grid attribute.
+     * @param height
+     * The height as a parameter is the given number of rows
+     * within the grid atttribute which is used for checking 
+     * boundary values for coordinates for any object that has 
+     * a position in the simulation.
+     */
     public CityMap(int width, int height){
      this.width = width;
      this.height = height;
      this.grid = new String[height][width];
     }
-
+/**
+ * getGridsize 
+ * returns the width and height attribute as an integer array
+ * containg both. This gives the main class information about the grid created.
+ * 
+ * @return returns the width and height attributes as an integer array
+ */
     public int [] getGridSize(){
 
     return new int [] {this.width, this.height};
@@ -21,48 +40,26 @@ public class CityMap {
         this.grid = new String[this.height][this.width];
         System.out.println(Arrays.deepToString(this.grid));
         return this.grid;
-        // for (int i = 0; i<= this.height; i++){
-        //     for (int y = 0; y<= this.width; y++){
-        //         this.grid[i][y] = " "
-        //     }
-        //     system.out.println(this.grid)
         }
     
-    public String [][] AddObstacle(int x, int y){
-        if (x>= 0 && x<= this.height && y>=0 && y<= this.width){
-            this.grid[y][x] = "obstacle";
-        }
-        return this.grid.clone();
 
-    }
-    
-    public String[][] RemoveObstacle(int x, int y){
-        String ob = "obstacle";
-        if (ob.equals(this.grid[y][x])){
-            this.grid[y][x] = " ";
-        }
-        return this.grid.clone();
-    }
-    public static void main(String[] args) {
-          int width = Integer.parseInt(args[0]);
-          int height = Integer.parseInt(args[1]);
-        
-          CityMap the_city_map = new CityMap(width, height);
-          int[] size = the_city_map.getGridSize();
-          String[][] map = the_city_map.newcreategrid();
-          System.out.println(Arrays.toString(size));
-          
-
-    }
+  
+    /**
+     * Get method for the City map width so it can be used
+     * @return returns the width attribute of the instantiated City map object.
+     * 
+     */
     public int getwidth(){
         return this.width;
     }
+    /**
+     * Get method for City maps grids height attribute 
+     * @return the integer value of the grids height 
+     * which represents the rows of the grid.
+     */
     public int getheight(){
         return this.height;
     }
           
-    public String[][]getgrid(){
-        return this.grid.clone();
-    }
 
     }

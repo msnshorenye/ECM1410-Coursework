@@ -16,6 +16,8 @@ import java.lang.Math;
  * CityRescueImpl (Starter)
  *
  * This is the main class that implements the CityRescue interface
+ * with all the methods and exception throws stated in the contract.
+ * 
  * 
  */
 public class CityRescueImpl implements CityRescue {
@@ -43,15 +45,14 @@ public class CityRescueImpl implements CityRescue {
 
 
 /**
+ * This is the constructor and will create the arrays of size intended 
+ * using Constants set up as default values before the constructor 
+ * e.g. of max capacity stations, incidents, units.
  * 
  */
 
-    // TODO: add fields (map, arrays for stations/units/incidents, counters, tick, etc.)
     public CityRescueImpl(){
-        /**
-         * This is the constructur and will create the arrays of size intended e.g. of max capacity
-         * @param None
-         */
+        
         this.Stationarray = new Station[MAX_STATIONS];
         this.Incidentarray = new Incident[MAX_INCIDENTS];
         this.Unitarray = new Unit[MAX_UNITS]; 
@@ -87,22 +88,35 @@ public class CityRescueImpl implements CityRescue {
         
         
         TheMap.newcreategrid();
-        String [][]Rescue_map = this.TheMap.getgrid();
+        
 
 
         //throw new UnsupportedOperationException("Not implemented yet");
     }
-
+    /**
+     * Get method for the grid size attributes
+     * instantiated with the width and height parameters
+     * 
+     * @return returns an integer array that is structured 
+     * with the grids width then height attribute.
+    */
     @Override
     public int[] getGridSize() {
-        // TODO: implement
+        
         int[] Gridsize = this.TheMap.getGridSize();
-
-        return new int [] {this.width, this.height};
-
-        //throw new UnsupportedOperationException("Not implemented yet");
+        return Gridsize;
     }
-
+    /**
+     * addObstacle is a method that sets an obstacle with coordinates (within the grid)
+     *on the 2d obstacle array
+     * given parameter as coordinates to mirror the exact positions on the grid
+     * used to simulate city rescue 
+     * @param x This parameter is the integer x coordinate for the 2d obstacle array 
+     * that the obstacle string is placed in.
+     * @param y This parameter is the integer y coordinate for the 2d obstacle array 
+     * that the obstacle string is placed in.
+     * 
+     */
     @Override
     public void addObstacle(int x, int y) throws InvalidLocationException {
         if (x<0 || y<0 || y>this.height || x>this.width){
@@ -110,22 +124,31 @@ public class CityRescueImpl implements CityRescue {
         }
         this.Obstaclearray[y][x] = "obstacle";
         this.current_obstacle_num += 1;
-        
-        // TODO: implement
-        //throw new UnsupportedOperationException("Not implemented yet");
     }
-
+    /**
+     * removeObstacle takes x and y values (if in the size of the grid) 
+     * and sets the string empty this works as 
+     */
     @Override
     public void removeObstacle(int x, int y) throws InvalidLocationException {
         if (x<0||y<0||x>this.height||y>this.width){
             throw new InvalidLocationException("Out of Bounds");
         }        
-        // TODO: implement
         this.Obstaclearray[y][x] = " ";
         this.current_obstacle_num -= 1;
-        //throw new UnsupportedOperationException("Not implemented yet");
     }
-
+    /**
+     * Station object is created at a grid position which is valid 
+     * its instantiated and a station id is set using an enumarating id number
+     * and set station id method. 
+     * @param name  given name of the station to be set as the name attribute.
+     * @param x x position to be set for station to instantiated at 
+     * @param y y position to be set for station to instantiated at
+     * @return It returns the Id given to the instantiated station method or just an int 
+     * if it cannot be created for any reason
+     * 
+     * 
+     */
     @Override
     public int addStation(String name, int x, int y) throws InvalidNameException, InvalidLocationException {
         if (name == ""){
@@ -137,7 +160,6 @@ public class CityRescueImpl implements CityRescue {
         if (current_station_num == MAX_STATIONS){
             throw new CapacityExceededException("There are already max amount of stations");
         }
-        // TODO: implement
          for(int i=0;i<this.Stationarray.length;i++){
             if (this.Stationarray[i]==(null)){
                 int length = i;
@@ -150,10 +172,16 @@ public class CityRescueImpl implements CityRescue {
             }
         }
         return 1;
-        //throw new UnsupportedOperationException("Not implemented yet");
-
     }
-
+    /**
+     * remove station takes an id of a created station 
+     * searches through the station id list in afor loop. 
+     * If the id given as a parameter is equal to one of the station in the list id 
+     * then that position is set to null in the station list.
+     * If any unit is found linked to the Station an exception is thrown.
+     * @param stationId integer which represents the unique id of the station object which needs to be removed.
+     * 
+     */
     @Override
     public void removeStation(int stationId) throws IDNotRecognisedException, IllegalStateException {
 
@@ -183,27 +211,34 @@ public class CityRescueImpl implements CityRescue {
         if (HasUnit == true){
             throw new IllegalStateException("Unit in the station trying to be removed");
         }
-        // TODO: implement
         for (int x = 0; x<this.Stationarray.length; x++){
             if (this.Stationarray[x].GetId() == stationId){
                 this.Stationarray[x] = null;
                 this.current_station_num -= 1;
             }
         }
-        
-        //throw new UnsupportedOperationException("Not implemented yet");
     }
 
+    /**
+     * 
+     * given a valid chosen station and valid maxUnits 
+     * (by calculating the current number of stations in a for loop 
+     * through the unit)
+     * it uses a for loop and ids like others to identify the station
+     * then gets its attributes and sets the parameter maxUnits equal
+     * to the Station chosen max capacity.
+     * 
+     * @param stationId the station 
+     * @param maxUnits 
+     */
     @Override
     public void setStationCapacity(int stationId, int maxUnits) throws IDNotRecognisedException, InvalidCapacityException {
         int[] stationlist = getStationIds();
         boolean idbool = false;
         for (int i = 0; i< stationlist.length; i++){
-            
             if (stationlist[i] == stationId){
                 idbool = true;
             }
-           
         }
         if (idbool == false){
             throw new IDNotRecognisedException("No Station with this id");
@@ -222,16 +257,23 @@ public class CityRescueImpl implements CityRescue {
         if (maxUnits<=0 || CurrentUnitNum > maxUnits){
             throw new InvalidCapacityException("Too full");
         }
-        // TODO: implement
         for (int x = 0; x<this.Stationarray.length; x++){
             if( this.Stationarray[x] != (null)){
             if (this.Stationarray[x].GetId() == stationId){
                 this.Stationarray[x].setstationmaxcapacity(maxUnits);
             }
-        }}
-          //throw new UnsupportedOperationException("Not implemented yet");
+        }
     }
-
+}
+/**
+ * Get station ids method loops through the station array
+ * and if it is not a null value it uses the get method get id 
+ * to get the integer value of the id and set it equal to the index
+ * of the for loop value of the new station id
+ * Then sort this list once it is filled with all station ids
+ * from all the stations in the station array.
+ * @return returns the sorted list of station ids.
+ */
     @Override
     public int[] getStationIds() {
         int [] stationIdlist = new int[this.Stationarray.length];
@@ -242,11 +284,29 @@ public class CityRescueImpl implements CityRescue {
             }
         }
             Arrays.sort(stationIdlist);
-        // TODO: implement
+        
         return stationIdlist;
-        //throw new UnsupportedOperationException("Not implemented yet");
     }
 
+    /**
+     * Add unit takes a station id and type of unit to create
+     * if the station exists and its a valid type
+     * then a for loop is run through the unit array and if an empty null
+     * space is found then a switch statment is run to create an 
+     * object at that empty index of the specific Enum Unitype
+     * specified. Once the unit has been created. The station array
+     * is iterated  until the station seleteced is found (for loop get id methods)
+     * then it uses a set station method to give the unit a home station id.
+     * 
+     * 
+     * @param type the Unit type Enum which is passed through which decides what type of unit
+     * will be instantiated.
+     * @param stationId the station unique id integer given which station to set the units station id
+     * and station its on give 
+     * 
+     * 
+     * @return returns the Id of the newly made Unit (or an int if unit was not made)
+     */
     @Override
     public int addUnit(int stationId, UnitType type) throws IDNotRecognisedException, InvalidUnitException, IllegalStateException {
         if (MAX_UNITS == current_unit_num){
@@ -258,7 +318,7 @@ public class CityRescueImpl implements CityRescue {
                 Station Stat = this.Stationarray[x];
                 if (Stat.GetId() == stationId){
                     StationExists = true;
-                    System.out.println(Stat.GetCurrentStationCapacity()+" "+Stat.getstationmaxcapacity()+"-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                    //System.out.println(Stat.GetCurrentStationCapacity()+" "+Stat.getstationmaxcapacity()+"--------------------------------");
                     if (Stat.GetCurrentStationCapacity() == Stat.getstationmaxcapacity()){
                         throw new IllegalStateException("Station is already full");
                     }
@@ -321,9 +381,27 @@ public class CityRescueImpl implements CityRescue {
         }
        
         return(1);
-        //throw new UnsupportedOperationException("Not implemented yet");
     }
 
+    /**
+     * The decommission unit method throws error if a non existent id is given 
+     * or if the Unit type enum is not equal to idle and is equal to en routeor at the scene.
+     * This is because you should not be able to decommision a unit that is currently
+     * resolving an incident. The index and Unit in the Unit array 
+     * found from looping through then checking Unit id is now set to null
+     * if the Enum conditions are correct. But first, a Get station id is used on the 
+     * Unit in a for loop through station array; 
+     * the station with the unit that is going to be removed's 
+     * current capacity is decrement by one
+     * 
+     *  The integer variable stored to count the current num of units is decremented.
+     * 
+     * 
+     * 
+     * 
+     * 
+     * @param unitId Unique id int parameter given to select the unit to decomission
+     */
     @Override
     public void decommissionUnit(int unitId) throws IDNotRecognisedException, IllegalStateException {
         boolean UnitExist = false;
@@ -339,7 +417,7 @@ public class CityRescueImpl implements CityRescue {
             throw new IDNotRecognisedException("Unit does not exist");
         }
 
-        // TODO: implement
+        
         for (int x = 0; x<this.Unitarray.length; x++){
             if (this.Unitarray[x] != null){
                 Unit DecomUnit = this.Unitarray[x];
@@ -350,19 +428,40 @@ public class CityRescueImpl implements CityRescue {
                     }
 
                     if (DecomUnit.get_status() != UnitStatus.EN_ROUTE || DecomUnit.get_status() != UnitStatus.AT_SCENE){
+                        for (int e = 0; e< this.Stationarray.length; e++){
+                            if (this.Stationarray[e] != (null)){
+                             Station Stat = this.Stationarray[e];
+                            if (Stat.GetId() == DecomUnit.get_station()){
+                                Stat.IncreaseOrDecreaseCurrentStationCapacity("-");
+                            
+                        }
+                    }
+
+                }  
                         this.Unitarray[x] =null;
                         this.current_unit_num -= 1;
                         
-                    }
+                    
                 }
             }
         }
-        
     }
+}
 
         
-       // throw new UnsupportedOperationException("Not implemented yet");
-    
+    /**
+     * The Transfer Unit method throws an exception if the unitId or station id cannot be found
+     * or if Units status enums are en route or at the scene. If the unit is dealing with an incident
+     * it should not be transfered between units. 
+     * If unit id is found and is an object then
+     * the  set station id method is used to set the station id attribute
+     * to the newStationid parameter given transferring where a Unit object of a given type
+     * is stationed.
+     * 
+     * @param unitId integer unique identifier for a specific unitId
+     * @param newStationId integer unique that should if valid 
+     * be set to give the selected unit a new station at that id.
+     */
 
     @Override
     public void transferUnit(int unitId, int newStationId) throws IDNotRecognisedException, IllegalStateException {
@@ -389,8 +488,6 @@ public class CityRescueImpl implements CityRescue {
                 }
             }
         }
-
-        // TODO: implement
         for (int x = 0; x<this.Unitarray.length; x++){
             if (this.Unitarray[x] != null){
                 if (this.Unitarray[x].get_unit_id() == unitId){
@@ -400,9 +497,16 @@ public class CityRescueImpl implements CityRescue {
         }
         
 
-        //throw new UnsupportedOperationException("Not implemented yet");
     }
-
+    /**
+     * setUnitOutOfService is used to change the status of a selected unit to and from OUT_OF_SERVICE and IDLE based on boolean @param outOfService which will
+     * specify whether unit needs to be set to I LE or Set to out of service @param unitId is also passed this specifies which unit needs to be changed
+     * Unitid passed is checked if it exists else throws exception. 
+     * After checking unit id and ensuring that status is not either EN_route or At_scene as those arent valid
+     * THen it checks boolean of input if true it will find Unit object then check if status is IDLE if is it willchange status to out of service
+     * if not it will through exception as is already of type trying to be set to
+     * and vice versa for false
+    */
     @Override
     public void setUnitOutOfService(int unitId, boolean outOfService) throws IDNotRecognisedException, IllegalStateException {
         boolean isin = false;
@@ -419,28 +523,41 @@ public class CityRescueImpl implements CityRescue {
         if (isin==false){
             throw new IDNotRecognisedException("this id is not an existing unit");
         }
-        
-        //TODO:implement
+        boolean used = false;
         if (outOfService == true){
             for (int x = 0; x<this.Unitarray.length; x++){
-                if (this.Unitarray[x].get_unit_id() == unitId && this.Unitarray[x].get_status() == UnitStatus.IDLE){
-                    this.Unitarray[x].set_status(UnitStatus.OUT_OF_SERVICE);}
-                }}
+                if (this.Unitarray[x].get_unit_id() == unitId ){
+                    if (this.Unitarray[x].get_status() == UnitStatus.IDLE){
+                        this.Unitarray[x].set_status(UnitStatus.OUT_OF_SERVICE);
+                    }
+                    else{
+                        throw new IllegalStateException("Unit passed already of type OUT_OF_SERVICE");
+                    }
+                }
+            }
+        }
         else{
             for (int x = 0; x< this.Unitarray.length; x++){
                 if (this.Unitarray[x].get_unit_id() == unitId){
-                    this.Unitarray[x].set_status(UnitStatus.IDLE); 
+                    if (this.Unitarray[x].get_status() == UnitStatus.OUT_OF_SERVICE){
+                        this.Unitarray[x].set_status(UnitStatus.IDLE); 
+                    }
+                    else{
+                        throw new IllegalStateException("Unit passed already of type IDLE");
+                    }
                 }
             }
         }
 
-    
-        //throw new UnsupportedOperationException("Not implemented yet");
     }
 
+    /** 
+    This method takes no parameters and is used to obtain the sorted list of used ids it works by checking the unit array 
+    and if not null it will add the id of the unit to a new list of equal length to previous then it will use Array.sort on new list
+    @return UNitIdlist which will return the sorted array of unit ids
+    */
     @Override
     public int[] getUnitIds() {
-        // TODO: implement
         int [] UNitIdlist = new int[this.Unitarray.length];
         for (int i = 0; i < this.Unitarray.length; i++){
 
@@ -452,12 +569,16 @@ public class CityRescueImpl implements CityRescue {
         //System.out.println("HJK^&67676767");
         Arrays.sort(UNitIdlist);
         return UNitIdlist;
-        //throw new UnsupportedOperationException("Not implemented yet");
+        
     }
-
+    /**
+     * viewUnit is used to view all the attributes of a specific unit
+     * @param unitId is used to locate incident in UNitarray
+     * Method will check if unitid is valid else throwing error
+     * If it is valid unit method unitview is used to obtain the string of all attributes 
+     * @return UnitStrings will return this string      */
     @Override
     public String viewUnit(int unitId) throws IDNotRecognisedException {
-        // TODO: implement
         String UnitStrings = "";
         for (int i =0 ; i<Unitarray.length;i++){
             Unit unit = this.Unitarray[i];
@@ -472,15 +593,25 @@ public class CityRescueImpl implements CityRescue {
             throw new IDNotRecognisedException("ID is not in use ");
         }
         return UnitStrings;
-        //throw new UnsupportedOperationException("Not implemented yet");
     }
-
+    /**
+     * report incident  is used to create an object of incident class it takes in the parameters  and passes them into constructor after checking all data passed is valid
+     * @param type
+     * This takes in the IncidentType of the new incident
+     * @param severity
+     * This is used to set the severity of the incident it has to be checked that it is within bounds (1-5) else exception thrown
+     * @param x @param y 
+     * These are used to set the coordinate of the new incident it has to be checked it is within bounds and that location is not already in location
+     * Max_Incidents is used to compare with current incident number if they are same then limit has been reached and new incident is not allowed to be made and error is thrown
+     * 
+     * if it passes all the throws then it will find an empty space on Incidentarray and willcreate a new object in location it will then increment incident_num and incident_id and pass incident id to location
+     */
     @Override
     public int reportIncident(IncidentType type, int severity, int x, int y) throws InvalidSeverityException, InvalidLocationException {
         if (MAX_INCIDENTS == current_incident_num){
             throw new CapacityExceededException("Already reach max capacity of incidents");
         }
-        // TODO: implement
+        
         if(x<0||y<0||x>this.width||y>this.height){
             throw new InvalidLocationException("NOT on grid");
         }
@@ -511,7 +642,17 @@ public class CityRescueImpl implements CityRescue {
         return 0;
         //throw new UnsupportedOperationException("Not implemented yet");
     }
-
+    /**
+     * Cancel incident is used to cancel incidents that are either dispatched or reported
+     * it works by first checking incident id passed exists else throwing exception
+     *  Then it will check if incident selected status is reported 
+     * IF IT IS it will change incidents status to CANCELLED and reduce total number of incedents by 1 
+     * else if it will check if status is DISPATCHED in which case it will do the same but also find the attached units id and will change its status to idle and remove its attached Incident ID  
+     *   else it will throw an error as an incorrect incident type is passed
+     * @param incidentId
+     * is usedd to find incednt to be cancelled
+     * 
+     * Has no returns as all updates made to incidentarray and targeted object on there     */
     @Override
     public void cancelIncident(int incidentId) throws IDNotRecognisedException, IllegalStateException {
         boolean Isin = false;
@@ -536,6 +677,7 @@ public class CityRescueImpl implements CityRescue {
                             if (this.Unitarray[b] != (null)){
                                 if (this.Unitarray[b].GetAssignedIncidentId() == incidentId){
                                     this.Unitarray[b].set_status(UnitStatus.IDLE);
+                                    this.Unitarray[b].SetAssignedIncidentId(-1);// sets assigned id to null value again
                                 }
                             }
                         }
@@ -561,6 +703,18 @@ public class CityRescueImpl implements CityRescue {
         //throw new UnsupportedOperationException("Not implemented yet");
     }
 
+
+    /**
+     * This method is used to update the severity of a specific incident to a new value
+     * It works by first checking if both incidentid and newSeverity are valid if not it will through the respective exception     
+     * If it they are valid it will check if the incident selected is of correct status (REPORTED or DISPATCHED)     if it isnt it will throw corresponding exception
+     * if it is valid it will run the method SetIncidentseverity passing new severity in to update incident object. 
+     * @param incidentId
+     * Used to locate correct incident to update
+     * @param newSeverity 
+     * Is the new value used to update severity
+
+     *    */
     @Override
     public void escalateIncident(int incidentId, int newSeverity) throws IDNotRecognisedException, InvalidSeverityException, IllegalStateException {
         boolean Isin = false;
@@ -579,7 +733,6 @@ public class CityRescueImpl implements CityRescue {
         if (newSeverity<1 || newSeverity>5){
             throw new InvalidSeverityException("New severerity is not valid");
         }
-        // TODO: implement
         for(int i=0;i<this.Incidentarray.length;i++){
             int needid = this.Incidentarray[i].getincidentid();
             if (needid == incidentId){
@@ -587,14 +740,16 @@ public class CityRescueImpl implements CityRescue {
                 break;
             }
         }
-
-        //throw new UnsupportedOperationException("Not implemented yet");
     }
 
-
+    /**
+     * This method is used to go through all Incidents in Incidentarray and will obtain all ids and then sort them to then be returned
+     * @return Incidentidlist
+     * this will return the sorted id's from Incidentarray
+    */
     @Override
     public int[] getIncidentIds() {
-        // TODO: implement
+        
         int[] Incidentidlist = new int[this.Incidentarray.length];
         for (int i = 0; i < this.Incidentarray.length; i++){
             if (Incidentarray[i] != null){
@@ -604,36 +759,43 @@ public class CityRescueImpl implements CityRescue {
         }
         Arrays.sort(Incidentidlist);
         
-        // TODO: implement
+        
         return Incidentidlist;
         
         //throw new UnsupportedOperationException("Not implemented yet");
     }
-
+    /**
+     * This method will take in an incident id and will then find try to find the incident 
+     * 
+     * If it is found it will call the incident method incidentview which will return the string off all key attributes of objct which the method then returns
+     * If the incident with matching id is not found it will throw an except on    
+     * @param incidentid
+     * This parameter is required to allow method to identify specific variable searching for 
+     * @return (currentIncidentViewed.incidentview())
+     * This will return a string about the requested id
+    */
     @Override
     public String viewIncident(int incidentId) throws IDNotRecognisedException {
         boolean Isin = false;
         for (int x=0;x<Incidentarray.length;x++){
             if (this.Incidentarray[x] != null){
-            if (incidentId == Incidentarray[x].getincidentid()){
-                Isin = true;
+                if (incidentId == Incidentarray[x].getincidentid()){
+                    Isin = true;
+                }
             }
         }
-    }
         if (Isin == false){
-            throw new IDNotRecognisedException("Incident 3with this id is not found");
+            throw new IDNotRecognisedException("Incident with this id is not found");
         }
-              // TODO: implement
+             
         for (int i=0;i<this.Incidentarray.length;i++){
             if (this.Incidentarray[i] != null){
-    
                 Incident currentIncidentViewed = this.Incidentarray[i];
                 int current_Incident_id_viewed = currentIncidentViewed.getincidentid();
-                System.out.println(current_Incident_id_viewed);
+                //System.out.println(current_Incident_id_viewed);
                 if (current_Incident_id_viewed == incidentId){
                     return(currentIncidentViewed.incidentview());
-
-            }
+                }
            
             }
         }
@@ -641,12 +803,33 @@ public class CityRescueImpl implements CityRescue {
 
             return("incident not found");}
         
-        //throw new UnsupportedOperationException("Not implemented yet");
     
-
+    /**
+     *  
+     *  Dispatch is a method that gets the list of Incident Ids 
+     * then does a loop through the ids 
+     * getting the incident Ids objects. 
+     * If the incident has just been reported and has the corresponding 
+     * enum then  it can look to assign 
+     * the closest Idle Unit (in manhatten distance).
+     * It sets a max value for the smallest distance intially 
+     * before the first iteration of a loop checking through every Unit 
+     * (checking its in the Unit array then accessing its methods)  and then
+     * checks whether each unit has a shorter manhatten  distance
+     * than the current shortest distance then sets the coordinatest the id and station id of 
+     * the unit closest as the chosen id and stationid (for the tie breaker).
+     * If the manhatten distance from the last closest unit 
+     * is equal to the current unit being checked in the for loops distance
+     * from then the lowest id decides which Unit is dispatched. 
+     * if hypothetically the unit ids are equal the unit id selected to 
+     * be dispatched to the current incident is the unit with the lowest station id.
+     * 
+     * 
+     * 
+     */
     @Override
     public void dispatch() {
-        // TODO: implement
+        
         int [] Incidentidlist = getIncidentIds();
         // for (int i:Incidentidlist){
         //     System.out.println(i);
@@ -726,21 +909,22 @@ public class CityRescueImpl implements CityRescue {
                 }
             }
         }
-                
-                
-                
-            
-        
-
-        
-        
-
-        //throw new UnsupportedOperationException("Not implemented yet");
     }
 
+    /**
+     * The method tick is used to advance each unit either moving toward assigned incident/working onassigned incident
+     * It works by checking each unit within unitarray andfinding its corresponding incident and then based on whether it is en_route or at scene 
+     * it will either move towards unit based off of movement rules otherwise if the unit status is at scene it will increment the units WORK 
+     * by calling get and set work if WORK is equal to units tick it will set itslf to idle and incident to RESOLVED
+     * Movement rules works by:
+     * a) checking all directions around and if valid (form check if status is en_route to if change == falsen) move and reduces the totalmanhattan distance it will ta e move N,E,S,W
+     * b) find the first move as none reduced the manhattan distance
+     * c) otherwise no move will be made and for loop will move onto next unit
+     * d) if it arrives to the scene it will change status to at_scene and set incident to in_progress 
+     * 
+    */ 
     @Override
     public void tick() {
-        // TODO: implement
         // 1) Move En_route units first by ascending unit id
         //System.out.println("RAWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWR 1");
         this.ticks += 1;
@@ -755,8 +939,8 @@ public class CityRescueImpl implements CityRescue {
                 if (u != (null) ){
                     //System.out.println(u);
                     if (u.get_unit_id() == i) {
-                    //System.out.println("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
-                    tempUnit = u;
+                        //System.out.println("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
+                        tempUnit = u;
                     }
                 }
             }
@@ -773,11 +957,11 @@ public class CityRescueImpl implements CityRescue {
                     }
                 }
             //System.out.println(incident.get_unit_type()+"    ---------------------------------------------------------------------");
-            if (tempUnit != (null)){
                 if (tempUnit.get_status() == UnitStatus.EN_ROUTE){
                     int X = tempUnit.get_xloc();  
                     int Y = tempUnit.get_yloc();
                     int [][] potential = new int[4][2];  // 4 coordinates each with y,x
+                    boolean [] move_valid = new boolean[4]; // makes array of length 4 with default value false
                     int x;
                     int y;
                     if(Y+1<this.height){
@@ -787,6 +971,9 @@ public class CityRescueImpl implements CityRescue {
                         x = X;
                         potential[0][0] = y;
                         potential[0][1] = x;
+                        move_valid[0] = true;
+
+                        
                     }
                     if (X+1< this.width) {
                         //E is valid
@@ -795,6 +982,7 @@ public class CityRescueImpl implements CityRescue {
                         x = X+1;
                         potential[1][0] = y;
                         potential[1][1] = x;
+                        move_valid[1] = true;
                     }
                     if(Y-1>=0){
                         //S is valid
@@ -802,6 +990,7 @@ public class CityRescueImpl implements CityRescue {
                         x = X;
                         potential[2][0] = y;
                         potential[2][1] = x;
+                        move_valid[2] = true;
                     }  
                     if(X-1>=0){
                         //W is valid
@@ -809,6 +998,7 @@ public class CityRescueImpl implements CityRescue {
                         x = X-1;
                         potential[3][0] = y;
                         potential[3][1] = x;
+                        move_valid[3] = true;
                     } 
                     int I_xloc = incident.GetIncidentX();
                     int I_yloc = incident.GetIncidentY();
@@ -818,40 +1008,41 @@ public class CityRescueImpl implements CityRescue {
                     //     System.out.println(potential[l][1]);
                     // }
                     int OG_MAN = ((Math.abs((I_yloc-Y))+Math.abs((I_xloc-X))));
-                    int temp_OG_MAN = OG_MAN;
                     boolean Change = false;
                     for (int z=0;z<potential.length;z++){
-                        int xLOC = potential[z][1];
-                        int yLOC = potential[z][0];
+                        if (move_valid[z] == true){
+                            int xLOC = potential[z][1];
+                            int yLOC = potential[z][0];
 
-                        if (this.Obstaclearray[yLOC][xLOC] != "obstacle"){
-                            int New_Score =  ((Math.abs((I_yloc-yLOC)))+Math.abs((I_xloc-xLOC)));
-                            //System.out.println(New_Score+" <"+OG_MAN);
-                            if (New_Score <OG_MAN){
-                                //CHANging location
-                                Change = true;
-                                tempUnit.set_xloc(xLOC);
-                                tempUnit.set_yloc(yLOC);
-                                System.out.println("This way"+z);
-                                break;
+                            if (this.Obstaclearray[yLOC][xLOC] != "obstacle"){
+                                int New_Score =  ((Math.abs((I_yloc-yLOC)))+Math.abs((I_xloc-xLOC)));
+                                //System.out.println(New_Score+" <"+OG_MAN);
+                                if (New_Score <OG_MAN){
+                                    //CHANging location
+                                    Change = true;
+                                    tempUnit.set_xloc(xLOC);
+                                    tempUnit.set_yloc(yLOC);
+                                    System.out.println("This way"+z);
+                                    break;
+                                }
                             }
                         }
-                            if (Change == false){
-                                for (int a=0; a<potential.length; a++){
-                                    int newxLOC = potential[a][1];
-                                    int newyLOC = potential[a][0];
-                                    if (this.Obstaclearray[newyLOC][newxLOC] != "obstacle"){
-                                        tempUnit.set_xloc(newxLOC);
-                                        tempUnit.set_yloc(newyLOC);
-                                        break;
-                                    }
-                                    
-
-                                }
-                                
+                    }    
+                    if (Change == false){
+                        for (int a=0; a<potential.length; a++){
+                            int newxLOC = potential[a][1];
+                            int newyLOC = potential[a][0];
+                            if (this.Obstaclearray[newyLOC][newxLOC] != "obstacle"){
+                                tempUnit.set_xloc(newxLOC);
+                                tempUnit.set_yloc(newyLOC);
+                                break;
                             }
-                         
+                                
+                        }
+                                
                     }
+                         
+                    
                     //2) Mark New arrivals
                     if ((tempUnit.get_yloc() == I_yloc)&&(tempUnit.get_xloc() == I_xloc)){
                         //set status to 
@@ -873,38 +1064,43 @@ public class CityRescueImpl implements CityRescue {
                     }
             //int count = 0 ;
             //System.out.println(++count);
-            }
+            
             }
         }
         //System.out.println(tempUnit.get_unit_type());
-        // 3) process on scene work 
-        // 4) resolve completed incidents by ascending unit id 
-        
-        //throw new UnsupportedOperationException("Not implemented yet");
     }
-
+    /**
+     * This method is used to make a string of the current state of dispatch screen outputting the required amount of:
+     * Ticks, STations, Units, Incidents and Obstacles
+     * It will then output all the different objects of class Incident in ascending ID order
+     * Then it will do the same for units
+     * @return REPORT
+     *  the string created is then returned 
+     */
     @Override
     public String getStatus() {
-        /**
-         * It Creates a large string which  
-         * contains the number of specific objects in the simulation
-         * 
-         */
+        
 
         String StatusString = "TICK=" + this.ticks +"\n STATIONS="+ this.current_station_num +" UNITS="+ this.current_unit_num + " INCIDENTS="+ this.current_incident_num+ " OBSTACLES="+this.current_obstacle_num ;
-        String IncidentString = "INCIDENTS\n ";
-        for (int x = 0 ; x<Incidentarray.length;x++){
-            if (this.Incidentarray[x] != null){
-                String TEMP = Incidentarray[x].incidentview();
-                IncidentString = IncidentString + "\n"+ TEMP;
+        String IncidentString = "INCIDENTS";
+        int [] INCIDENTLIST = getIncidentIds();
+        for (int c = 0; c<INCIDENTLIST.length;c++){
+            for (int x = 0 ; x<Incidentarray.length;x++){
+                if (this.Incidentarray[x] != null && this.Incidentarray[x].getincidentid() ==INCIDENTLIST[c]){
+                    String TEMP = Incidentarray[x].incidentview();
+                    IncidentString = IncidentString + "\n"+ TEMP;
+                }
             }
         }
         String UnitStrings = "UNITS";
-        for (int i = 0; i<this.Unitarray.length;i++) {
-            if (this.Unitarray[i] !=(null)) {
-                UnitStrings = UnitStrings + "\n" + Unitarray[i].unitview();
-            }
-        } 
+        int [] UNITLIST = getUnitIds();
+        for (int c = 0; c<UNITLIST.length;c++){
+            for (int i = 0; i<this.Unitarray.length;i++) {
+                if (this.Unitarray[i] !=(null) && this.Unitarray[i].get_unit_id() ==UNITLIST[c]) {
+                    UnitStrings = UnitStrings + "\n" + Unitarray[i].unitview();
+                }
+            } 
+        }
         //throw new UnsupportedOperationException("Not implemented yet");
         String REPORT = StatusString+"\n"+ IncidentString+"\n"+UnitStrings;
         return (REPORT);

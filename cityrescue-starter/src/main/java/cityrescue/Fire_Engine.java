@@ -5,7 +5,7 @@ import cityrescue.enums.UnitStatus;
 /**
  * Fire engine class is a subclass of unit 
  * that services incident objects of type fire
- * The constructur uses the abstract classes 
+ * The constructor uses the abstract classes 
  * Unit Set methods to give default values to
  * the Fire engines attributes which are
  * the attributes outlined in the Unit
@@ -14,6 +14,18 @@ import cityrescue.enums.UnitStatus;
  * 
  */
 class Fire_engine extends Unit{
+/**
+* The constructor uses the abstract classes 
+ * Unit Set methods to give default values to
+ * the Fire engines attributes which are
+ * the attributes outlined in the Unit
+ * abstract class other than the 
+ * attributes returned by overriden methods.
+ * 
+ * @param Stationid The Id is given to be set as an attribute
+ * that stores which Station the Unit(a fire engine) created is stationed
+ * 
+ */
     public Fire_engine(int Stationid){
         SetUnitID(-1);
         set_xloc(-1);

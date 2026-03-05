@@ -16,9 +16,6 @@ public class CityRescueExceptionTests {
         sim.initialise(10, 10);
     }
 
-    // =========================
-    // 1. initialise
-    // =========================
 
     @Test
     void initialise_invalidWidth() {
@@ -34,9 +31,7 @@ public class CityRescueExceptionTests {
         });
     }
 
-    // =========================
-    // 3. addObstacle
-    // =========================
+ 
 
     @Test
     void addObstacle_outOfBounds() {
@@ -45,9 +40,7 @@ public class CityRescueExceptionTests {
         });
     }
 
-    // =========================
-    // 4. removeObstacle
-    // =========================
+ 
 
     @Test
     void removeObstacle_outOfBounds() {
@@ -74,9 +67,7 @@ public class CityRescueExceptionTests {
         });
     }
 
-    // =========================
-    // 6. removeStation
-    // =========================
+
 
     @Test
     void removeStation_invalidId() {
@@ -96,9 +87,7 @@ public class CityRescueExceptionTests {
         });
     }
 
-    // =========================
-    // 7. setStationCapacity
-    // =========================
+
 
     @Test
     void setStationCapacity_invalidId() {
@@ -116,9 +105,7 @@ public class CityRescueExceptionTests {
         });
     }
 
-    // =========================
-    // 9. addUnit
-    // =========================
+
 
     @Test
     void addUnit_invalidStation() {
@@ -148,9 +135,7 @@ public class CityRescueExceptionTests {
         });
     }
 
-    // =========================
-    // 10. decommissionUnit
-    // =========================
+
 
     @Test
     void decommissionUnit_invalidId() {
@@ -172,9 +157,7 @@ public class CityRescueExceptionTests {
         });
     }
 
-    // =========================
-    // 11. transferUnit
-    // =========================
+   
 
     @Test
     void transferUnit_invalidUnit() {
@@ -199,9 +182,7 @@ public class CityRescueExceptionTests {
         });
     }
 
-    // =========================
-    // 12. setUnitOutOfService
-    // =========================
+    
 
     @Test
     void setUnitOutOfService_invalidId() {
@@ -210,9 +191,7 @@ public class CityRescueExceptionTests {
         });
     }
 
-    // =========================
-    // 15. reportIncident
-    // =========================
+    
 
     @Test
     void reportIncident_invalidSeverity() {
@@ -228,9 +207,7 @@ public class CityRescueExceptionTests {
         });
     }
 
-    // =========================
-    // 16. cancelIncident
-    // =========================
+  
 
     @Test
     void cancelIncident_invalidId() {
@@ -239,9 +216,7 @@ public class CityRescueExceptionTests {
         });
     }
 
-    // =========================
-    // 17. escalateIncident
-    // =========================
+   
 
     @Test
     void escalateIncident_invalidId() {
@@ -259,9 +234,7 @@ public class CityRescueExceptionTests {
         });
     }
 
-    // =========================
-    // 19. viewIncident
-    // =========================
+    
 
     @Test
     void viewIncident_invalidId() {
@@ -270,9 +243,6 @@ public class CityRescueExceptionTests {
         });
     }
 
-    // =========================
-    // 14. viewUnit
-    // =========================
 
     @Test
     void viewUnit_invalidId() {

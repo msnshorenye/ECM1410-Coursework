@@ -24,6 +24,22 @@ public class Incident {
     private int IncidentID;
     private int severity;
     private int Unitid;
+    /**
+     * Incident constructor sets status 
+     * to a default value of Reported as the base 
+     * enum status as That is the start of the incident
+     * lifecycle Unit id is set for a default value of zero
+     * and using a set method will be set in dispatch.
+     * 
+     * @param x parameter is passed in 
+     * to set the x coordinate attribute position of the station object
+     * @param y parameter is passed in 
+     * to set the y coordinate attribute position of the station object
+     * @param Type The Type enum is passed in to determine what type of Incident
+     * should be instatiated. (This matches with a subclass of unit)
+     * @param severity The severity level of the specific incident is passed in
+     * and is set as the severity attribute 
+     */
     
     public Incident(int x, int y, IncidentType Type, int severity ){
         this.x = x;

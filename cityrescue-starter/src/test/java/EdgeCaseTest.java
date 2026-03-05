@@ -15,7 +15,7 @@ public class EdgeCaseTest {
     }
 
     @Test
-    void wills_testicle() throws Exception {
+    void multi_unit_test() throws Exception {
         int s = cr.addStation("A", 0, 0);
         int u1 = cr.addUnit(s, UnitType.POLICE_CAR);
         String unitstring = cr.viewUnit(u1);
@@ -63,7 +63,7 @@ public class EdgeCaseTest {
     }
     @Test
     void test_unit_max_capacity() throws Exception {
-        System.out.println("HHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+        //System.out.println("HHHHHHHHHHHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
         int s = cr.addStation("A", 0, 0);
         cr.addStation("B", 1, 1);
         for (int i=0 ;i<50;i++){
@@ -83,6 +83,11 @@ public class EdgeCaseTest {
         System.out.println(cr.viewUnit(51));
         cr.cancelIncident(a);
         System.out.println(cr.getStatus());
+        System.out.println(cr.getUnitIds());
+        int [] unittestlist = cr.getUnitIds();
+        for (int x = 0; x< cr.getUnitIds().length; x++){
+            System.out.println(unittestlist[x]);
+        }
     }
     @Test
     void test_last_first_legal_move()throws Exception{
