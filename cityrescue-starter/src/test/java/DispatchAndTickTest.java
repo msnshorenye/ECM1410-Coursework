@@ -5,7 +5,7 @@ import cityrescue.*;
 import cityrescue.enums.*;
 import cityrescue.exceptions.*;
 
-public class PublicDispatchAndTickTest {
+public class DispatchAndTickTest {
 
     private CityRescue cr;
 

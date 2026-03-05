@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="PublicMultipleUnitsAndIncidentsTest" time="0.051" tests="5" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="MultipleUnitsAndIncidentsTest" time="0.045" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="session.topDirectory" value="/workspaces/ECM1410-Coursework/cityrescue-starter"/>
     <property name="sun.boot.library.path" value="/usr/local/sdkman/candidates/java/25.0.2-open/lib"/>
-    <property name="sun.java.command" value="/workspaces/ECM1410-Coursework/cityrescue-starter/target/surefire/surefirebooter-20260305025243592_3.jar /workspaces/ECM1410-Coursework/cityrescue-starter/target/surefire 2026-03-05T02-52-43_399-jvmRun1 surefire-20260305025243592_1tmp surefire_0-20260305025243592_2tmp"/>
+    <property name="sun.java.command" value="/workspaces/ECM1410-Coursework/cityrescue-starter/target/surefire/surefirebooter-20260305050449736_3.jar /workspaces/ECM1410-Coursework/cityrescue-starter/target/surefire 2026-03-05T05-04-49_575-jvmRun1 surefire-20260305050449736_1tmp surefire_0-20260305050449736_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/workspaces/ECM1410-Coursework/cityrescue-starter/target/test-classes:/workspaces/ECM1410-Coursework/cityrescue-starter/target/classes:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/home/codespace/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/codespace/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/home/codespace/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/home/codespace/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/home/codespace/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -27,7 +27,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/workspaces/ECM1410-Coursework/cityrescue-starter/target/surefire/surefirebooter-20260305025243592_3.jar"/>
+    <property name="surefire.real.class.path" value="/workspaces/ECM1410-Coursework/cityrescue-starter/target/surefire/surefirebooter-20260305050449736_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="25.0.2+10-69"/>
     <property name="user.name" value="codespace"/>
@@ -54,9 +54,8 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="tick_movesMultipleUnitsIndependently" classname="PublicMultipleUnitsAndIncidentsTest" time="0.015">
-    <system-out><![CDATA[[[null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null]]
-U#1 TYPE=AMBULANCE HOME=1LOC=(0,0) STATUS=EN_ROUTE INCIDENT=1
+  <testcase name="tick_movesMultipleUnitsIndependently" classname="MultipleUnitsAndIncidentsTest" time="0.006">
+    <system-out><![CDATA[U#1 TYPE=AMBULANCE HOME=1LOC=(0,0) STATUS=EN_ROUTE INCIDENT=1
 U#2 TYPE=POLICE_CAR HOME=2LOC=(5,5) STATUS=EN_ROUTE INCIDENT=2
 This way0
 This way0
@@ -72,15 +71,13 @@ U#1 TYPE=AMBULANCE HOME=1LOC=(0,1) STATUS=AT_SCENE INCIDENT=1
 U#2 TYPE=POLICE_CAR HOME=2LOC=(5,6) STATUS=AT_SCENE INCIDENT=2
 ]]></system-out>
   </testcase>
-  <testcase name="getIds_areSorted_andNoZerosAtEnd" classname="PublicMultipleUnitsAndIncidentsTest" time="0.002">
-    <system-out><![CDATA[[[null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null]]
-[I@710f4dc7
-[I@1ff4931d
+  <testcase name="getIds_areSorted_andNoZerosAtEnd" classname="MultipleUnitsAndIncidentsTest" time="0.0">
+    <system-out><![CDATA[[I@4f6ee6e4
+[I@4466af20
 ]]></system-out>
   </testcase>
-  <testcase name="addMultipleUnits_ofDifferentTypes" classname="PublicMultipleUnitsAndIncidentsTest" time="0.011">
-    <system-out><![CDATA[[[null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null]]
-TICK=0
+  <testcase name="addMultipleUnits_ofDifferentTypes" classname="MultipleUnitsAndIncidentsTest" time="0.019">
+    <system-out><![CDATA[TICK=0
  STATIONS=2 UNITS=3 INCIDENTS=0 OBSTACLES=0
 INCIDENTS
 UNITS
@@ -98,12 +95,6 @@ U#3 TYPE=POLICE_CAR HOME=2LOC=(5,5) STATUS=IDLE INCIDENT=-1
 U#1 TYPE=AMBULANCE HOME=1LOC=(0,0) STATUS=IDLE INCIDENT=-1 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000001
 ]]></system-out>
   </testcase>
-  <testcase name="reportMultipleIncidents_ofDifferentTypes" classname="PublicMultipleUnitsAndIncidentsTest" time="0.009">
-    <system-out><![CDATA[[[null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null]]
-]]></system-out>
-  </testcase>
-  <testcase name="dispatch_assignsCorrectUnitTypes" classname="PublicMultipleUnitsAndIncidentsTest" time="0.005">
-    <system-out><![CDATA[[[null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null]]
-]]></system-out>
-  </testcase>
+  <testcase name="reportMultipleIncidents_ofDifferentTypes" classname="MultipleUnitsAndIncidentsTest" time="0.002"/>
+  <testcase name="dispatch_assignsCorrectUnitTypes" classname="MultipleUnitsAndIncidentsTest" time="0.006"/>
 </testsuite>

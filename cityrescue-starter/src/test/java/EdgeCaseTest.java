@@ -85,9 +85,9 @@ public class EdgeCaseTest {
         System.out.println(cr.getStatus());
         System.out.println(cr.getUnitIds());
         int [] unittestlist = cr.getUnitIds();
-        for (int x = 0; x< cr.getUnitIds().length; x++){
-            System.out.println(unittestlist[x]);
-        }
+        // for (int x = 0; x< cr.getUnitIds().length; x++){
+        //     System.out.println(unittestlist[x]);
+        // }
     }
     @Test
     void test_last_first_legal_move()throws Exception{

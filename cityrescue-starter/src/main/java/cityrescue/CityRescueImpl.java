@@ -17,6 +17,7 @@ import java.lang.Math;
  *
  * This is the main class that implements the CityRescue interface
  * with all the methods and exception throws stated in the contract.
+ * Arrays for all objects (and obstacles) stored in arrays mirroring the grid
  * 
  * 
  */
@@ -115,6 +116,7 @@ public class CityRescueImpl implements CityRescue {
      * that the obstacle string is placed in.
      * @param y This parameter is the integer y coordinate for the 2d obstacle array 
      * that the obstacle string is placed in.
+     * @throws InvalidLocationException if coordinates given are out of bound
      * 
      */
     @Override
@@ -128,6 +130,7 @@ public class CityRescueImpl implements CityRescue {
     /**
      * removeObstacle takes x and y values (if in the size of the grid) 
      * and sets the string empty this works as 
+     * @throws InvalidLocationException if the obstacle coordinates are out of the grid.
      */
     @Override
     public void removeObstacle(int x, int y) throws InvalidLocationException {
@@ -146,6 +149,8 @@ public class CityRescueImpl implements CityRescue {
      * @param y y position to be set for station to instantiated at
      * @return It returns the Id given to the instantiated station method or just an int 
      * if it cannot be created for any reason
+     * @throws InvalidNameException throws if name string is empty
+     * @throws InvalidLocationException throws if station coordinates are invalid and outside of grid coordinates
      * 
      * 
      */
@@ -180,6 +185,8 @@ public class CityRescueImpl implements CityRescue {
      * then that position is set to null in the station list.
      * If any unit is found linked to the Station an exception is thrown.
      * @param stationId integer which represents the unique id of the station object which needs to be removed.
+     * @throws IDNotRecognisedException throws when the Station Id given does not exist with an available station object.
+     * @throws IllegalStateException throws when there is a unit in the station being removed.
      * 
      */
     @Override
@@ -228,8 +235,13 @@ public class CityRescueImpl implements CityRescue {
      * then gets its attributes and sets the parameter maxUnits equal
      * to the Station chosen max capacity.
      * 
-     * @param stationId the station 
-     * @param maxUnits 
+     * @param stationId the station id integer given for the station 
+     * that needs to have its max capacity attribute set to maxUnits
+     * @param maxUnits the amount of units the station maxium 
+     * is to be set to.
+     * @throws IDNotRecognisedException throws when station id given does not exist.
+     * @throws InvalidCapacityException  throws when Station currently has more units than  max capacity given
+     * 
      */
     @Override
     public void setStationCapacity(int stationId, int maxUnits) throws IDNotRecognisedException, InvalidCapacityException {
@@ -306,6 +318,10 @@ public class CityRescueImpl implements CityRescue {
      * 
      * 
      * @return returns the Id of the newly made Unit (or an int if unit was not made)
+     * @throws IDNotRecognisedException throws if Station id given is not a station that exists
+     * @throws InvalidUnitException throws if Unit type given is a null value
+     * @throws IllegalStateException throws if Station added is already full
+     * 
      */
     @Override
     public int addUnit(int stationId, UnitType type) throws IDNotRecognisedException, InvalidUnitException, IllegalStateException {
@@ -461,6 +477,8 @@ public class CityRescueImpl implements CityRescue {
      * @param unitId integer unique identifier for a specific unitId
      * @param newStationId integer unique that should if valid 
      * be set to give the selected unit a new station at that id.
+     * @throws IllegalStateException - to transfer status has to be idle if not errors
+     * @throws IDNotRecognisedException - Cannot find unit with unit id passed therefore must not exist
      */
 
     @Override
@@ -482,8 +500,8 @@ public class CityRescueImpl implements CityRescue {
             if (this.Unitarray[a] != null){
                 Unit TransferUnit = this.Unitarray[a];
                 if (TransferUnit.get_unit_id() == unitId){
-                    if (TransferUnit.get_status() == UnitStatus.EN_ROUTE || TransferUnit.get_status() == UnitStatus.AT_SCENE){
-                        throw new IllegalStateException("Unit is not IDLE or OutofService");
+                    if (TransferUnit.get_status() != UnitStatus.IDLE ){
+                        throw new IllegalStateException("Unit is not IDLE therefore cannot be transferred to another station");
                     }
                 }
             }
@@ -506,7 +524,9 @@ public class CityRescueImpl implements CityRescue {
      * THen it checks boolean of input if true it will find Unit object then check if status is IDLE if is it willchange status to out of service
      * if not it will through exception as is already of type trying to be set to
      * and vice versa for false
-    */
+     * @throws IDNotRecognisedException - Cannot find id of unit given therefore must throw exception
+     * @throws IllegalStateException - State given is not of expected type to convert from out of service to idle and v
+ce versa    */
     @Override
     public void setUnitOutOfService(int unitId, boolean outOfService) throws IDNotRecognisedException, IllegalStateException {
         boolean isin = false;
@@ -576,7 +596,11 @@ public class CityRescueImpl implements CityRescue {
      * @param unitId is used to locate incident in UNitarray
      * Method will check if unitid is valid else throwing error
      * If it is valid unit method unitview is used to obtain the string of all attributes 
-     * @return UnitStrings will return this string      */
+     * @return UnitStrings will return this string      
+     * @throws IDNotRecognisedException - cannot find id passed must not exist therefore error
+     * 
+     * */
+    
     @Override
     public String viewUnit(int unitId) throws IDNotRecognisedException {
         String UnitStrings = "";
@@ -605,7 +629,11 @@ public class CityRescueImpl implements CityRescue {
      * Max_Incidents is used to compare with current incident number if they are same then limit has been reached and new incident is not allowed to be made and error is thrown
      * 
      * if it passes all the throws then it will find an empty space on Incidentarray and willcreate a new object in location it will then increment incident_num and incident_id and pass incident id to location
-     */
+     * @throws InvalidSeverityException - severity passed is 
+utside of bounds 1-5 must ensure valid data entered
+     * @throws InvalidLocationException - means location selected is out of bounds or already occupied 
+     * @throws CapacityExceededException - cant add more than max capacity of incidents so error thrown
+     *      */
     @Override
     public int reportIncident(IncidentType type, int severity, int x, int y) throws InvalidSeverityException, InvalidLocationException {
         if (MAX_INCIDENTS == current_incident_num){
@@ -652,7 +680,11 @@ public class CityRescueImpl implements CityRescue {
      * @param incidentId
      * is usedd to find incednt to be cancelled
      * 
-     * Has no returns as all updates made to incidentarray and targeted object on there     */
+     * Has no returns as all updates made to incidentarray and targeted object on there     
+     * @throws IDNotRecognisedException - id was not found in array so valid id not entered
+     * @throws IllegalStateException - Was an incorrect type as cancel incedent epects either REPORTED or DISPATCHED
+     */
+
     @Override
     public void cancelIncident(int incidentId) throws IDNotRecognisedException, IllegalStateException {
         boolean Isin = false;
@@ -664,7 +696,7 @@ public class CityRescueImpl implements CityRescue {
             }
         }
         if (Isin == false){
-            throw new IDNotRecognisedException("Incident 1with this id is not found");
+            throw new IDNotRecognisedException("Incident with this id is not found");
         }
         // TODO: implement
         for (int x = 0; x<this.Incidentarray.length; x++){
@@ -713,6 +745,9 @@ public class CityRescueImpl implements CityRescue {
      * Used to locate correct incident to update
      * @param newSeverity 
      * Is the new value used to update severity
+     * @throws IDNotRecognisedException  - incident is not found in unitarray a
+d des not exist of id     * @throws InvalidSeverityException - seveertiy is out of bounds given 1-5
+     * @throws IllegalStateException - incident is already resolved / cancelled so not valid to be escalated 
 
      *    */
     @Override
@@ -728,7 +763,7 @@ public class CityRescueImpl implements CityRescue {
              } }
         }
         if (Isin == false){
-            throw new IDNotRecognisedException("Incident 2with this id is not found");
+            throw new IDNotRecognisedException("Incident with this id is not found");
         }
         if (newSeverity<1 || newSeverity>5){
             throw new InvalidSeverityException("New severerity is not valid");
@@ -769,7 +804,7 @@ public class CityRescueImpl implements CityRescue {
      * 
      * If it is found it will call the incident method incidentview which will return the string off all key attributes of objct which the method then returns
      * If the incident with matching id is not found it will throw an except on    
-     * @param incidentid
+     * @param incidentId
      * This parameter is required to allow method to identify specific variable searching for 
      * @return (currentIncidentViewed.incidentview())
      * This will return a string about the requested id

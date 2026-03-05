@@ -17,7 +17,6 @@ abstract class Unit {
     private int WORK;
     private int UnitID =-1;
     private int Stationid =-1;
-    //public abstract boolean canHandle(IncidentType type);
     public abstract int get_unit_ticks(); // will be overiden in subclasses to specific tick time
     public abstract UnitType get_unit_type(); // will be overiden in subclasses to specific type
 

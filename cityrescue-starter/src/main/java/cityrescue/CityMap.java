@@ -1,6 +1,9 @@
 
 package cityrescue;
 import java.util.Arrays;
+/**
+ * City map creates a grid using constructor and parameters width and height
+ */
 public class CityMap {
     private int width;
     private int height;
@@ -38,7 +41,7 @@ public class CityMap {
     }
     public String[][] newcreategrid(){
         this.grid = new String[this.height][this.width];
-        System.out.println(Arrays.deepToString(this.grid));
+        //System.out.println(Arrays.deepToString(this.grid));
         return this.grid;
         }
     

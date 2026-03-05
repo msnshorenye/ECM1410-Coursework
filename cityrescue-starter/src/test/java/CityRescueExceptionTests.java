@@ -140,7 +140,7 @@ public class CityRescueExceptionTests {
     @Test
     void decommissionUnit_invalidId() {
         assertThrows(IDNotRecognisedException.class, () -> {
-            sim.decommissionUnit(999);
+            sim.decommissionUnit(45);
         });
     }
 
@@ -162,7 +162,7 @@ public class CityRescueExceptionTests {
     @Test
     void transferUnit_invalidUnit() {
         assertThrows(IDNotRecognisedException.class, () -> {
-            sim.transferUnit(999, 1);
+            sim.transferUnit(58, 1);
         });
     }
 
@@ -187,7 +187,7 @@ public class CityRescueExceptionTests {
     @Test
     void setUnitOutOfService_invalidId() {
         assertThrows(IDNotRecognisedException.class, () -> {
-            sim.setUnitOutOfService(999, true);
+            sim.setUnitOutOfService(67, true);
         });
     }
 
@@ -212,7 +212,7 @@ public class CityRescueExceptionTests {
     @Test
     void cancelIncident_invalidId() {
         assertThrows(IDNotRecognisedException.class, () -> {
-            sim.cancelIncident(999);
+            sim.cancelIncident(45);
         });
     }
 
@@ -221,7 +221,7 @@ public class CityRescueExceptionTests {
     @Test
     void escalateIncident_invalidId() {
         assertThrows(IDNotRecognisedException.class, () -> {
-            sim.escalateIncident(999, 3);
+            sim.escalateIncident(53, 3);
         });
     }
 
@@ -230,7 +230,7 @@ public class CityRescueExceptionTests {
         int iid = sim.reportIncident(IncidentType.FIRE, 3, 2, 2);
 
         assertThrows(InvalidSeverityException.class, () -> {
-            sim.escalateIncident(iid, 99);
+            sim.escalateIncident(iid, 100);
         });
     }
 
@@ -239,7 +239,7 @@ public class CityRescueExceptionTests {
     @Test
     void viewIncident_invalidId() {
         assertThrows(IDNotRecognisedException.class, () -> {
-            sim.viewIncident(999);
+            sim.viewIncident(45);
         });
     }
 
@@ -247,7 +247,7 @@ public class CityRescueExceptionTests {
     @Test
     void viewUnit_invalidId() {
         assertThrows(IDNotRecognisedException.class, () -> {
-            sim.viewUnit(999);
+            sim.viewUnit(45);
         });
     }
 }

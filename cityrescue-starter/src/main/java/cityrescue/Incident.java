@@ -92,6 +92,7 @@ public class Incident {
     }
     /**
      * Set method for the incident Id so that they can be assigned on incident report
+     * @param newid id set unique integer id 
      * @return the Incident Id that has been newly set.
      */
     public int setincidentid(int newid){

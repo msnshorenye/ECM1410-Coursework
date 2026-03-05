@@ -1,8 +1,8 @@
+MultipleUnitsAndIncidentsTest.class
 EdgeCaseTest.class
 CityRescueExceptionTests.class
 PublicBasicsTest.class
-PublicDispatchAndTickTest.class
+DispatchAndTickTest.class
 PublicOutputFormatTest.class
 PublicDispatchTest.class
-PublicMultipleUnitsAndIncidentsTest.class
 PublicTickLifecycleTest.class
